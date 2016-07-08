@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'views')));
  *******************/
  app.get('/', function(req, res) {
    res.redirect('/index.html');
+   //res.redirect('/test.html');
  });
 
 /*******************
