@@ -6,19 +6,12 @@ angular
 	])
 	.component('phoneList', {
 		templateUrl: 'app/phone-list/phone-list.template.html',
-		controller: function PhoneListController() {
-			this.phones = [
-				{
-					name : 'Nexus S',
-					snippet: 'Fast just got faster with Nexus S'
-				}, {
-					name : 'Motorola', 
-					snippet: 'Fast just got faster with Motorola'
-				}, {
-					name : 'Tablet',
-					snippet: 'Motorola Tablet'
-				}
-			];
+		controller: function PhoneListController($http) {
+			var self = this;
+			self.orderProp = 'age';
+
+			$http.get('/app/data/phones.json').then(function(res) {
+				self.phones = res.data;
+			});
 		}
 	});
-

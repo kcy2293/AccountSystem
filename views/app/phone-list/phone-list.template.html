@@ -1,13 +1,28 @@
 <div layout='row'>
 	<div flex="20">
-		Search: <input ng-model='$ctrl.query' />
+		<md-input-container>
+			<label>Search: </label>
+			<input ng-model='$ctrl.query' /></p>
+		</md-input-container>
+		<md-input-container>
+			<label>Sort By: </label>
+			<md-select ng-model="$ctrl.orderProp">
+				<md-option value="name">Alphabetical</md-option>
+				<md-option value="age">Newest</md-option>
+			</md-select>
+		</md-input-container>
 	</div>
 	<div flex="80">
-		<ul> 
-			<li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query"> 
-				<span>{{phone.name}}</span> 
-				<p>{{phone.snippet}}</p> 
-			</li> 
-		</ul>
+		<md-card ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+			<md-card-title>
+				<md-card-title-media style="margin-right: 20px;">
+					<div class="md-media-lg card-media"><img ng-src="{{phone.imageUrl}}"></div>
+        </md-card-title-media>
+				<md-card-title-text>
+					<span class="md-headline">{{phone.name}}</span>
+					<span class="md-subhead">{{phone.snippet}}</span>
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
 	</div>
 </div>
