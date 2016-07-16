@@ -1,13 +1,11 @@
 'use strict';
 
-angular.module('myApp', [
-	'phoneList'
-]);
+angular.
+  module('myApp', [
+    'ngMaterial'
+  ]);
 
 /*
-angular.module('myApp', [
-  'ngMaterial'
-]);
 angular.module('myApp', [
   'ngRoute', 'ngMaterial'
 ]).config(function($stateProvider, $routeProvider) {
@@ -20,4 +18,12 @@ angular.module('myApp', [
 }).run(function() {
 
 });
+*/
+
+/*
+angular.module('myApp', [
+	'ngRoute',
+	'phoneList',
+	'phoneDetail'
+]);
 */
