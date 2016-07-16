@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('myApp', [
+	.module('phoneList', [
 		'ngMaterial'
 	])
 	.component('phoneList', {
