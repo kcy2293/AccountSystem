@@ -2,7 +2,8 @@
 
 angular.
   module('myApp', [
-    'ngMaterial'
+    'ngMaterial',
+    'settingItem'
   ]);
 
 /*

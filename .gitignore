@@ -1,5 +1,6 @@
-# node_modules
+# vendor_modules
 node_modules
+bower_components
 
 # Windows image file caches
 Thumbs.db
