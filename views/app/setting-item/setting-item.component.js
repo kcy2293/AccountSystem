@@ -8,7 +8,7 @@ angular
       controller: settingItem
   });
 
-function settingItem($scope, $mdDialog) {
+function settingItem($scope, $mdDialog, $http) {
   var self = this;
 
   self.selected = [];
@@ -35,6 +35,11 @@ function settingItem($scope, $mdDialog) {
       templateUrl: 'app/setting-item/add-collaborplace-dialog.html',
     }).then(function(data) {
       self.collaborPlace.push(data);
+      //$http.post('/setting/items', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}})
+      $http.post('/setting/items', data, {headers: {'Content-Type': 'application/json;charset=utf-8;'}})
+        .then(function(res) {
+          console.log(res);
+        });
     });
   }
 
