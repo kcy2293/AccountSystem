@@ -27,19 +27,20 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 /*******************
  * routing
  *******************/
-var settingRouter = require('./routes/setting.api');
+var settingRouter = require('./routes/setting/setting.router');
 
 app.get('/', function(req, res) {
   res.redirect('/index.html');
   //res.redirect('/test.html');
 });
 
-app.use('/setting', settingRouter);
+app.use('/api/setting', settingRouter);
 
 /*******************
  * database
  *******************/
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var config = require('./config');
 mongoose.connect(config.db.uri, config.db.options, function(err) {
   if (err) {
