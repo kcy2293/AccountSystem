@@ -30,14 +30,16 @@
       <table md-table md-row-select multiple ng-model="$ctrl.selected">
         <thead md-head>
           <tr md-row>
-            <th md-column><span>협력업체명</span></th>
-            <th md-column><span>커미션</span></th>
+            <th md-column><span>행사장소</span></th>
+            <th md-column><span>협력여부</span></th>
+            <th md-column><span>커미션(만원)</span></th>
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row md-select="place" md-select-id="name" md-auto-select ng-repeat="place in $ctrl.collaborPlace">
-            <td md-cell>{{place.name}}</td>
-            <td md-cell>{{place.commission}}</td>
+          <tr md-row md-select="loc" md-select-id="name" md-auto-select ng-repeat="loc in $ctrl.decoLoc">
+            <td md-cell>{{loc.name}}</td>
+            <td md-cell>{{loc.isCollabor}}</td>
+            <td md-cell>{{loc.commission}}</td>
           </tr>
         </tbody>
       </table>

@@ -4,12 +4,19 @@
       <h2 class="md-title">협력업체 추가</h2>
       <div layout="row" class="input-row layout-row">
         <md-input-container flex="" class="flex">
-          <label>업체명</label>
+          <label>행사장소</label>
           <input ng-model="data.name">
         </md-input-container>
         <md-input-container flex="" class="flex">
+          <label>협력여부</label>
+          <md-select ng-model="data.isCollabor">
+            <md-option value=true>예</md-option>
+            <md-option value=false>아니오</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
           <label>커미션(단위:만원)</label>
-          <input name="calories" type="number" min="0" max="999" ng-model="data.commission" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required">
+          <input name="calories" type="number" min="0" max="20" ng-model="data.commission" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required">
         </md-input-container>
       </div>
 

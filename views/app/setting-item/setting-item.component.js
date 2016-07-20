@@ -8,23 +8,22 @@ angular
       controller: settingItem
   });
 
-function settingItem($scope, $mdDialog, $http) {
+function settingItem($scope, $mdDialog, $http, $q) {
   var self = this;
 
   self.selected = [];
   self.addItem = addItem;
   self.removeItem = removeItem;
   self.editItem = editItem;
-  self.collaborPlace = [
-    {
-      name: '이원',
-      commission: 10
-    },
-    {
-      name: '라페스타',
-      commission: 5
-    }
-  ];
+  self.collaborPlace = [];
+
+  getDecoLoc();
+
+  function getDecoLoc() {
+    $http.get('/api/setting/decoLoc').then(function(res) {
+      self.decoLoc = res.data;
+    });
+  }
 
   function addItem(event) {
     $mdDialog.show({
@@ -34,21 +33,24 @@ function settingItem($scope, $mdDialog, $http) {
       targetEvent: event,
       templateUrl: 'app/setting-item/add-collaborplace-dialog.html',
     }).then(function(data) {
-      self.collaborPlace.push(data);
-      //$http.post('/setting/items', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}})
-      $http.post('/setting/items', data, {headers: {'Content-Type': 'application/json;charset=utf-8;'}})
+      data.group = "decoLoc";
+      $http.post('/api/setting/decoLoc', data)
         .then(function(res) {
-          console.log(res);
+          getDecoLoc();
         });
     });
   }
 
   function removeItem() {
+    var promises = [];
     for (var i = 0, len = self.selected.length ; i < len ; i++) {
-      var index = _.findIndex(self.collaborPlace, self.selected[i]);
-      self.collaborPlace.splice(index, 1);
+      promises.push($http.delete('/api/setting/decoLoc/' + self.selected[i]._id));
     }
-    self.selected = [];
+
+    $q.all(promises).then(function(results) {
+      getDecoLoc();
+      self.selected = [];
+    });
   }
 
   function editItem() {
@@ -62,9 +64,10 @@ function settingItem($scope, $mdDialog, $http) {
       },
       templateUrl: 'app/setting-item/add-collaborplace-dialog.html',
     }).then(function(data) {
-      self.selected = [];
-      //var index = _.findIndex(self.collaborPlace, data);
-      //self.collaborPlace[index] = data;
+      $http.put('/api/setting/decoLoc/' + data._id, data)
+        .then(function(res) {
+          self.selected = [];
+        });
     });
   }
 }
@@ -75,8 +78,8 @@ function addCollaborPlaceController($scope, $mdDialog) {
     $mdDialog.cancel();
   };
   $scope.addItem = function() {
-    if(Object.keys($scope.data).length === 0){
-      alert('내용을 입력해주세요');
+    if(Object.keys($scope.data).length !== 3){
+      alert('내용을 전부 채워주세요');
     } else {
       $mdDialog.hide($scope.data);
     }
@@ -89,10 +92,6 @@ function editCollaborPlaceController($scope, $mdDialog, params) {
     $mdDialog.cancel();
   };
   $scope.addItem = function() {
-    if(Object.keys($scope.data).length === 0){
-      alert('내용을 입력해주세요');
-    } else {
-      $mdDialog.hide($scope.data);
-    }
+    $mdDialog.hide($scope.data);
   };
 }
