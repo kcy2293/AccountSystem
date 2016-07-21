@@ -14,6 +14,7 @@ function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
 	item.name = req.body.name;
+	item.isCollabor = req.body.isCollabor;
 	item.commission = req.body.commission;
 	item.sell = req.body.sell;
 
@@ -41,6 +42,7 @@ function update(req, res) {
 		if (err) res.send(err);
 
 		item.name = req.body.name;
+		item.isCollabor = req.body.isCollabor;
 		item.commission = req.body.commission;
 		item.sell = req.body.sell;
 

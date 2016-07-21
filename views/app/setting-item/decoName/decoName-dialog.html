@@ -1,0 +1,22 @@
+<md-dialog aria-label="decoNameDialog" ng-cloak>
+  <form>
+    <md-dialog-content class="md-dialog-content">
+      <h2 class="md-title">컨셉종류 관리</h2>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>컨셉명</label>
+          <input ng-model="data.name">
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>이미지명</label>
+          <input ng-model="data.imgName">
+        </md-input-container>
+      </div>
+
+      <md-dialog-actions>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>
+      </md-dialog-actions>
+    </md-dialog-content>
+  </form>
+</md-dialog>

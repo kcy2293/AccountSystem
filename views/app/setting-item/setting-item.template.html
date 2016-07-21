@@ -1,79 +1,12 @@
 <div layout-margin>
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length">
-      <div class="md-toolbar-tools">
-        <span>협력업체관리</span>
-        <span flex></span>
-        <md-button class="md-raised"
-                   ng-click="$ctrl.addItem($event);"
-                   aria-label="Add Item">추가
-        </md-button>
-      </div>
-    </md-toolbar>
-
-    <md-toolbar class="md-table-toolbar alternate" ng-show="$ctrl.selected.length">
-      <div class="md-toolbar-tools">
-        <span>{{$ctrl.selected.length}}개 선택</span>
-        <span flex></span>
-        <md-button class="md-raised"
-                   ng-click="$ctrl.editItem();"
-                   aria-label="Edit Item">수정
-        </md-button>
-        <md-button class="md-raised"
-                   ng-click="$ctrl.removeItem();"
-                   aria-label="Remove Item">삭제
-        </md-button>
-      </div>
-    </md-toolbar>
-
-    <md-table-container>
-      <table md-table md-row-select multiple ng-model="$ctrl.selected">
-        <thead md-head>
-          <tr md-row>
-            <th md-column><span>행사장소</span></th>
-            <th md-column><span>협력여부</span></th>
-            <th md-column><span>커미션(만원)</span></th>
-          </tr>
-        </thead>
-        <tbody md-body>
-          <tr md-row md-select="loc" md-select-id="name" md-auto-select ng-repeat="loc in $ctrl.decoLoc">
-            <td md-cell>{{loc.name}}</td>
-            <td md-cell>{{loc.isCollabor}}</td>
-            <td md-cell>{{loc.commission}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </md-table-container>
-  </md-card>
-  <!--
-  <section>
-    <md-toolbar class="md-warn md-hue-3">
-      <div class="md-toolbar-tools md-whiteframe-z1 setting-tool-box">
-        <h3>협력업체관리</h3>
-        <span flex></span>
-        <md-button class="md-raised"
-                   ng-click="$ctrl.addItem();"
-                   aria-label="Add Item">추가
-        </md-button>
-        <md-button class="md-raised"
-                   ng-click="$ctrl.removeItem();"
-                   aria-label="Remove Item">삭제
-        </md-button>
-      </div>
-      <mdt-table selectable-rows="true"
-                 selected-row-callback="$ctrl.selectRows(rows);"
-                 sortable-columns="true">
-        <mdt-header-row>
-          <mdt-column align-rule="left">협력업체명</mdt-column>
-          <mdt-column align-rule="left">커미션</mdt-column>
-        </mdt-header-row>
-        <mdt-row ng-repeat="cp in $ctrl.collaborPlace"
-                 table-row-id="cp.id">
-          <mdt-cell editable-field="smallEditDialog">{{cp.name}}</mdt-cell>
-          <mdt-cell editable-field="smallEditDialog">{{cp.commission}}</mdt-cell>
-        </mdt-row>
-      </mdt-table>
-    </md-toolbar>
-  </section>
--->
+  <deco-Loc></deco-Loc>
+  <deco-Type></deco-Type>
+  <deco-Name></deco-Name>
+  <deco-Fruit></deco-Fruit>
+  <deco-Rcake></deco-Rcake>
+  <deco-Photo></deco-Photo>
+  <opt-Dress></opt-Dress>
+  <opt-Mc></opt-Mc>
+  <opt-Snap></opt-Snap>
+  <opt-Other></opt-Other>
 </div>
