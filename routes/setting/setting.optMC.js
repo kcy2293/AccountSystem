@@ -1,5 +1,5 @@
 var setting = require('./setting.schema');
-var groupName = "decoLoc";
+var groupName = "optMC";
 
 module.exports = {
 	url: groupName,
@@ -14,8 +14,8 @@ function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
 	item.name = req.body.name;
-	item.isCollabor = req.body.isCollabor;
 	item.commission = req.body.commission;
+	item.sell = req.body.sell;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -24,28 +24,25 @@ function create(req, res) {
 		});
 	});
 }
-
 function getAll(req, res) {
 	setting.find({group: groupName}, function(err, items) {
 		if (err) res.send(err);
 		res.json(items);
 	});
 }
-
 function getOne(req, res) {
 	setting.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
 		res.json(item);
 	});
 }
-
 function update(req, res) {
 	setting.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
 
 		item.name = req.body.name;
-		item.isCollabor = req.body.isCollabor;
 		item.commission = req.body.commission;
+		item.sell = req.body.sell;
 
 		item.save(function(err) {
 			if (err) res.send(err);
@@ -55,7 +52,6 @@ function update(req, res) {
 		});
 	});
 }
-
 function deleteOne(req, res) {
 	setting.remove({
 		_id: req.params.id

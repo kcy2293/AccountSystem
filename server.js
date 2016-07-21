@@ -14,7 +14,7 @@ var http = require('http');
  * setup express
  *******************/
 var app = express();
-var port = '3000';
+var port = '5000';
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 
