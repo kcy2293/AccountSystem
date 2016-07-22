@@ -9,7 +9,14 @@ var settingSchema = new Schema({
 	imgName: String,
 	buy: Number,
 	sell: Number,
-	repair: Number
+	repair: Number,
+	items: String,
+	decoType: String,
+	decoFruit: String,
+	decoRcake: String,
+	role: String,
+	caseType: String,
+	pay: Number
 });
 
 module.exports = mg.model('setting', settingSchema);

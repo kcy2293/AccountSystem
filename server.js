@@ -27,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 /*******************
  * routing
  *******************/
+var userRouter = require('./routes/users/users.router');
+var reservRouter = require('./routes/reservation/reserv.router');
 var settingRouter = require('./routes/setting/setting.router');
 
 app.get('/', function(req, res) {
@@ -34,6 +36,8 @@ app.get('/', function(req, res) {
   //res.redirect('/test.html');
 });
 
+app.use('/api/users', userRouter);
+app.use('/api/reservation', reservRouter);
 app.use('/api/setting', settingRouter);
 
 /*******************

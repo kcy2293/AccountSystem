@@ -13,7 +13,9 @@ var models = [
 	require('./setting.optDress'),
 	require('./setting.optMC'),
 	require('./setting.optSnap'),
-	require('./setting.optOther')
+	require('./setting.optOther'),
+	require('./setting.menuTable'),
+	require('./setting.pay')
 ];
 
 for (i in models) {
