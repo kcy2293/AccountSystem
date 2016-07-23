@@ -10,6 +10,7 @@ html, body {
 ***********/
 md-sidenav {
 	background-color: rgb(255,255,255) !important;
+	width: 270px;
 }
 /*
 .menu {
@@ -43,11 +44,21 @@ md-list-item > button {
 /**********
  contents
 ***********/
-md-content {
+.site-content-box {
+	/*
 	padding: 5px 40px 0 40px;
+	*/
+}
+.setting-tool-box {
+	font-size: 16px;
+	height: 45px;
+	max-height: 45px;
 }
 
-.box-container {
-	border-right: 4px;
-	margin-bottom: 16px;
+md-input-container {
+	min-width: 120px !important;
+}
+
+.package-dialog md-input-container {
+	margin: 5px 0;
 }

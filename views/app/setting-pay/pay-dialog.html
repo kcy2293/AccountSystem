@@ -1,0 +1,33 @@
+<md-dialog aria-label="dialog" ng-cloak>
+  <form>
+    <md-dialog-content class="md-dialog-content package-dialog">
+      <h2 class="md-title">페이 설정</h2>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>직급</label>
+          <md-select ng-model="data.rank">
+            <md-option ng-repeat="item in ranks"
+                       value="{{item}}">
+              {{item}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>역할</label>
+          <input ng-model="data.role"></input>
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>페이(단위:만원)</label>
+          <input name="pay" type="number" min="0" max="100" ng-model="data.pay" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" />
+        </md-input-container>
+      </div>
+
+      <md-dialog-actions>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>
+      </md-dialog-actions>
+    </md-dialog-content>
+  </form>
+</md-dialog>

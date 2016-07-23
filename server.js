@@ -14,21 +14,44 @@ var http = require('http');
  * setup express
  *******************/
 var app = express();
-var port = '3000';
+var port = '5000';
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(favicon(path.join(__dirname, 'views', 'favicon.ico')));
+//app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 /*******************
  * routing
  *******************/
- app.get('/', function(req, res) {
-   res.redirect('/index.html');
-   //res.redirect('/test.html');
- });
+var userRouter = require('./routes/users/users.router');
+var reservRouter = require('./routes/reservation/reserv.router');
+var settingRouter = require('./routes/setting/setting.router');
+
+app.get('/', function(req, res) {
+  res.redirect('/index.html');
+  //res.redirect('/test.html');
+});
+
+app.use('/api/users', userRouter);
+app.use('/api/reservation', reservRouter);
+app.use('/api/setting', settingRouter);
+
+/*******************
+ * database
+ *******************/
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+var config = require('./config');
+mongoose.connect(config.db.uri, config.db.options, function(err) {
+  if (err) {
+    console.log('mongodb err : '+ err);
+    throw err;
+  }
+});
 
 /*******************
  * http server open

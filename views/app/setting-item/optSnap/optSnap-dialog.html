@@ -1,0 +1,33 @@
+<md-dialog aria-label="optSnapDialog" ng-cloak>
+  <form>
+    <md-dialog-content class="md-dialog-content">
+      <h2 class="md-title">스냅 종류 관리</h2>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>스냅명</label>
+          <input ng-model="data.name">
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>협력여부</label>
+          <md-select ng-model="data.isCollabor">
+            <md-option value=true>예</md-option>
+            <md-option value=false>아니오</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>커미션(단위:만원)</label>
+          <input name="commission" type="number" min="0" max="20" ng-model="data.commission" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required">
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>판매가(단위:만원)</label>
+          <input name="sell" type="number" min="0" max="20" ng-model="data.sell" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required">
+        </md-input-container>
+      </div>
+
+      <md-dialog-actions>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>
+      </md-dialog-actions>
+    </md-dialog-content>
+  </form>
+</md-dialog>

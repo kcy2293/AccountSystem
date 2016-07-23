@@ -1,0 +1,59 @@
+<md-dialog aria-label="dialog" ng-cloak>
+  <form>
+    <md-dialog-content class="md-dialog-content package-dialog">
+      <h2 class="md-title">패키지 메뉴 설정</h2>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>패키지명</label>
+          <input ng-model="data.name"></input>
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>장식구분</label>
+          <md-select ng-model="data.decoType">
+            <md-option ng-repeat="item in settings.decoType"
+                       value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>생과일종류</label>
+          <md-select ng-model="data.decoFruit">
+            <md-option ng-repeat="item in settings.decoFruit"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>떡케익종류</label>
+          <md-select ng-model="data.decoRcake">
+            <md-option ng-repeat="item in settings.decoRcake"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>추가옵션</label>
+          <input ng-model="data.other">
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row layout-row">
+        <md-input-container flex="" class="flex">
+          <label>판매가(단위:만원)</label>
+          <input name="sell" type="number" min="0" max="100" ng-model="data.sell" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" />
+        </md-input-container>
+      </div>
+
+      <md-dialog-actions>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>
+      </md-dialog-actions>
+    </md-dialog-content>
+  </form>
+</md-dialog>

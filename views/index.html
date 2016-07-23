@@ -4,7 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>웹 정산 시스템</title>
   <link rel="stylesheet" href="angular-material/angular-material.min.css">
-  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="angular-material-data-table/dist/md-data-table.min.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
   <!--
 
@@ -17,6 +18,11 @@
                 md-component-id="left"
                 ng-click="sc.toggleSidenav();"
                 class="md-whiteframe-4dp">
+      <header class="nav-header" style="padding: 2px">
+          <img src="img/logo2.png" style="width: 100%;">
+          <div style="width: 100%; text-align: center; font-size: 20px;">예약서 및 정산시스템</div>
+      </header>
+      <md-content>
       <md-list>
         <md-list-item ng-repeat="menu in sc.menus">
           <md-button ng-click="sc.selectMenu(menu);"
@@ -25,46 +31,63 @@
           </md-button>
         </md-list-item>
       </md-list>
+    </md-content>
     </md-sidenav>
 
     <div layout="column" tabindex="-1" flex class="layout-column flex">
-      <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar">
+      <md-toolbar class="md-whiteframe-4dp site-content-toolbar">
         <div class="md-toolbar-tools">
           <md-button hide-gt-sm class="menu" ng-click="sc.toggleSidenav();" aria-label="show side navigation">
             <md-icon md-svg-icon="img/svg/menu.svg"></md-icon>
           </md-button>
-          <h3>예약서 및 정산 시스템</h3>
+          <h3>{{sc.selected.name}}</h3>
         </div>
       </md-toolbar>
 
-      <md-content md-scroll-y layout="column" flex class="layout-column flex">
-        <section class="box-container md-whiteframe-z1">
-          <md-toolbar class="md-primary">
-            <div class="md-toolbar-tools">
-              <h2>예약구분 설정</h2>
-            </div>
-          </md-toolbar>
-          <md-chips ng-model="sc.reservStatus">
-          </md-chips>
+
+      <md-content layout="column" flex class='site-content-box'>
+        <div ng-view></div>
       </md-content>
     </div>
   </div>
 
+  <script type='text/javascript' src="jquery/dist/jquery.min.js"></script>
   <script type='text/javascript' src="angular/angular.min.js"></script>
   <script type='text/javascript' src="angular-animate/angular-animate.min.js"></script>
   <script type='text/javascript' src="angular-aria/angular-aria.min.js"></script>
   <script type='text/javascript' src="angular-route/angular-route.min.js"></script>
   <script type='text/javascript' src="angular-material/angular-material.min.js"></script>
+  <script type='text/javascript' src="underscore/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js"></script>
+  <script type='text/javascript' src="angular-material-data-table/dist/md-data-table.min.js"></script>
   <script type='text/javascript' src="app.module.js"></script>
   <script type='text/javascript' src="app.sidenav.js"></script>
-  <!--
   <script type='text/javascript' src="app.config.js"></script>
-  <script type='text/javascript' src="/app/phone-list/phone-list.module.js"></script>
-  <script type='text/javascript' src="/app/phone-list/phone-list.component.js"></script>
-  <script type='text/javascript' src="/app/phone-detail/phone-detail.module.js"></script>
-  <script type='text/javascript' src="/app/phone-detail/phone-detail.component.js"></script>
-  <script type='text/javascript' src="app/sidenav/sidenav.module.js"></script>
-  <script type='text/javascript' src="app/sidenav/sidenav.component.js"></script>
-  -->
+  <script type='text/javascript' src="app/setting-menuTable/setting-menuTable.module.js"></script>
+  <script type='text/javascript' src="app/setting-menuTable/setting-menuTable.component.js"></script>
+  <script type='text/javascript' src="app/setting-pay/setting-pay.module.js"></script>
+  <script type='text/javascript' src="app/setting-pay/setting-pay.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/setting-item.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/setting-item.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoLoc/decoLoc.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoLoc/decoLoc.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoType/decoType.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoType/decoType.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoName/decoName.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoName/decoName.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoFruit/decoFruit.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoFruit/decoFruit.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoRcake/decoRcake.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoRcake/decoRcake.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoPhoto/decoPhoto.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/decoPhoto/decoPhoto.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/optDress/optDress.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/optDress/optDress.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/optMC/optMC.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/optMC/optMC.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/optSnap/optSnap.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/optSnap/optSnap.component.js"></script>
+  <script type='text/javascript' src="app/setting-item/optOther/optOther.module.js"></script>
+  <script type='text/javascript' src="app/setting-item/optOther/optOther.component.js"></script>
 </body>
 </html>
