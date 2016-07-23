@@ -13,11 +13,12 @@ module.exports = {
 function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
-	item.items = req.body.name;
+	item.name = req.body.name;
 	item.sell = req.body.sell;
 	item.decoType = req.body.decoType;
 	item.decoFruit = req.body.decoFruit;
 	item.decoRcake = req.body.decoRcake;
+	item.other = req.body.other;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -42,11 +43,12 @@ function update(req, res) {
 	setting.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
 
-		item.items = req.body.name;
+		item.name = req.body.name;
 		item.sell = req.body.sell;
 		item.decoType = req.body.decoType;
 		item.decoFruit = req.body.decoFruit;
 		item.decoRcake = req.body.decoRcake;
+		item.other = req.body.other;
 
 		item.save(function(err) {
 			if (err) res.send(err);

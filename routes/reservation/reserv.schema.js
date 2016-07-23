@@ -26,4 +26,4 @@ var reservSchema = new Schema({
 	balance: Number
 });
 
-module.exports = mg.model('reservation', settingSchema);
+module.exports = mg.model('reservation', reservSchema);

@@ -10,12 +10,12 @@ var settingSchema = new Schema({
 	buy: Number,
 	sell: Number,
 	repair: Number,
-	items: String,
 	decoType: String,
 	decoFruit: String,
 	decoRcake: String,
+	other: String,
+	rank: String,
 	role: String,
-	caseType: String,
 	pay: Number
 });
 

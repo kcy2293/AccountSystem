@@ -13,8 +13,8 @@ module.exports = {
 function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
+	item.rank = req.body.rank;
 	item.role = req.body.role;
-	item.caseType = req.body.caseType;
 	item.pay = req.body.pay;
 
 	item.save(function(err) {
@@ -39,8 +39,8 @@ function getOne(req, res) {
 function update(req, res) {
 	setting.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
+		item.rank = req.body.rank;
 		item.role = req.body.role;
-		item.caseType = req.body.caseType;
 		item.pay = req.body.pay;
 
 		item.save(function(err) {
