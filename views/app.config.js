@@ -6,6 +6,8 @@ angular.
     function config($locationProvider, $routeProvider) {
       //$locationProvider.hashPrefix('!');
 
+      var thisYear = new Date().getFullYear();
+
       $routeProvider.
         when('/setting/1/', {
           template: '<setting-item></setting-item>'
@@ -16,9 +18,15 @@ angular.
         when('/setting/3/', {
           template: '<setting-pay></setting-pay>'
         }).
-        when('/phones/:phoneId', {
-          template: '<phone-detail></phone-detail>'
+        when('/reservation/', {
+          redirectTo: '/reservation/' + thisYear
         }).
-        otherwise('/setting/3/');
+        when('/reservation/:year', {
+          template: '<reservation></reservatio>'
+        }).
+        when('/reserv-create/', {
+          template: '<reserv-create></reserv-create>'
+        }).
+        otherwise('/reserv-create/');
     }
   ]);

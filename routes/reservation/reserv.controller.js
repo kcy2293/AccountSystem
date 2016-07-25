@@ -18,6 +18,7 @@ function create(req, res) {
 	}
 	item.babyName = req.body.babyName;
 	item.babyType = req.body.babyType;
+	item.menuTable = req.body.menuTable;
 	item.decoRcake = req.body.decoRcake;
 	item.decoPhoto = req.body.decoPhoto;
 	item.optDress = req.body.optDress;
@@ -26,7 +27,7 @@ function create(req, res) {
 	item.optOther = req.body.optOther;
 	item.comment = req.body.commenct;
 	item.manager = req.body.manager;
-	item.caseType = req.body.caseType;
+	item.role = req.body.role;
 	item.deposit = req.body.deposit;
 	item.balance = req.body.balance;
 
@@ -61,6 +62,7 @@ function update(req, res) {
 		}
 		item.babyName = req.body.babyName;
 		item.babyType = req.body.babyType;
+		item.menuTable = req.body.menuTable;
 		item.decoRcake = req.body.decoRcake;
 		item.decoPhoto = req.body.decoPhoto;
 		item.optDress = req.body.optDress;
@@ -69,7 +71,7 @@ function update(req, res) {
 		item.optOther = req.body.optOther;
 		item.comment = req.body.commenct;
 		item.manager = req.body.manager;
-		item.caseType = req.body.caseType;
+		item.role = req.body.role;
 		item.deposit = req.body.deposit;
 		item.balance = req.body.balance;
 

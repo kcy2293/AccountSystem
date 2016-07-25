@@ -9,7 +9,7 @@ var reservSchema = new Schema({
 	babyName: String,
 	babyType: String,
 	phoneNum: String,
-	menuName: String,
+	menuTable: String,
 	decoType: String,
 	decoName: String,
 	decoFruit: Array,
@@ -21,7 +21,7 @@ var reservSchema = new Schema({
 	optOther: Array,
 	comment: String,
 	manager: Array,
-	caseType: Array,
+	role: Array,
 	deposit: Number,
 	balance: Number
 });
