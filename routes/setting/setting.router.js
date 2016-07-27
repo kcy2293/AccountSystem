@@ -12,6 +12,7 @@ var models = [
 	require('./setting.decoPhoto'),
 	require('./setting.optDress'),
 	require('./setting.optMC'),
+	require('./setting.optMovie'),
 	require('./setting.optSnap'),
 	require('./setting.optOther'),
 	require('./setting.menuTable'),
