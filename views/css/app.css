@@ -64,7 +64,7 @@ md-input-container {
 }
 
 /*************
- reservation
+ reserv-create
 **************/
 .doc-content {
 	margin: 16px;
@@ -86,5 +86,7 @@ md-input-container {
 	right: 5%;
 }
 
-@media (max-width: 600px) {
-}
+/*************
+ reserv-list
+**************/
+

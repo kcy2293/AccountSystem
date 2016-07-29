@@ -13,6 +13,7 @@ var settingSchema = new Schema({
 	decoType: String,
 	decoFruit: String,
 	decoRcake: String,
+	optDress: String,
 	other: String,
 	rank: String,
 	role: String,

@@ -18,7 +18,7 @@ function create(req, res) {
 	item.decoType = req.body.decoType;
 	item.decoFruit = req.body.decoFruit;
 	item.decoRcake = req.body.decoRcake;
-	item.other = req.body.other;
+	item.optDress = req.body.optDress;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -48,7 +48,7 @@ function update(req, res) {
 		item.decoType = req.body.decoType;
 		item.decoFruit = req.body.decoFruit;
 		item.decoRcake = req.body.decoRcake;
-		item.other = req.body.other;
+		item.optDress = req.body.optDress;
 
 		item.save(function(err) {
 			if (err) res.send(err);

@@ -22,11 +22,11 @@ angular.
           redirectTo: '/reservation/' + thisYear
         }).
         when('/reservation/:year', {
-          template: '<reservation></reservatio>'
+          template: '<reserv-list></reserv-list>'
         }).
         when('/reserv-create/', {
           template: '<reserv-create></reserv-create>'
         }).
-        otherwise('/reserv-create/');
+        otherwise('/reservation/');
     }
   ]);

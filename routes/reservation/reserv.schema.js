@@ -6,6 +6,7 @@ var reservSchema = new Schema({
 	decoLoc: String,
 	decoDate: Date,
 	decoYear: Number,
+	decoTime: Date,
 	babyName: String,
 	babyType: String,
 	phoneNum: String,
@@ -16,14 +17,16 @@ var reservSchema = new Schema({
 	decoRcake: Array,
 	decoPhoto: String,
 	optDress: Array,
-	optMC: String,
+	optMC: Array,
+	optMovie: String,
 	optSnap: String,
 	optOther: Array,
 	comment: String,
 	manager: Array,
 	role: Array,
 	deposit: Number,
-	balance: Number
+	balance: Number,
+	sellList: Schema.Types.Mixed
 });
 
 module.exports = mg.model('reservation', reservSchema);

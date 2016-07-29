@@ -10,6 +10,10 @@ function SidenavController($mdSidenav, $location) {
   var self = this;
 
   self.menus = [
+		{
+      'name': '예약서 리스트',
+      'route': '/reservation/'
+		},
     {
       'name': '예약서 입력',
       'route': '/reserv-create/'
