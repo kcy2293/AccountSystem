@@ -12,6 +12,7 @@ function create(req, res) {
 	var item = new reservation();
 	item.status = req.body.status;
 	item.decoLoc = req.body.decoLoc;
+	item.decoLoc2 = req.body.decoLoc2;
 	item.decoDate = new Date(req.body.decoDate);
 	item.decoYear = item.decoDate.getFullYear();
 	item.decoTime = new Date(req.body.decoTime);
@@ -38,7 +39,7 @@ function create(req, res) {
 		if (err) res.send(err);
 		else {
 			res.json({
-				type: 0, 
+				type: 0,
 				message: "생성완료"
 			});
 		}

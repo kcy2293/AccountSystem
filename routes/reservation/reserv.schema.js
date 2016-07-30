@@ -4,6 +4,7 @@ var Schema = mg.Schema;
 var reservSchema = new Schema({
 	status: String,
 	decoLoc: String,
+	decoLoc2: String,
 	decoDate: Date,
 	decoYear: Number,
 	decoTime: Date,

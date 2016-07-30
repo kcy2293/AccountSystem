@@ -11,4 +11,7 @@ router.route('/')
 router.route('/:year')
 			.get(reserv.getAll);
 
+router.route('/:year/:id')
+			.get(reserv.getOne);
+
 module.exports = router;

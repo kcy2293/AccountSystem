@@ -1,20 +1,21 @@
 <div layout="row" layout-padding>
-	<div style="width:100%" class="md-whiteframe-z1">
+	<div flex class="md-whiteframe-z1">
 		<md-toolbar class="md-warn">
 			<div class="md-toolbar-tools">
-				<h2 class="md-flex">2016</h2>
+				<h2 class="md-flex">{{$ctrl.year}}</h2>
 			</div>
 		</md-toolbar>
 		<md-content>
 			<md-list>
-				<md-subheader class="md-no-sticky">예약서 리스트</md-subheader>
-				<md-list-item class="md-3-line">
-					<md-icon md-svg-icon='/img/ic_done_white_24px.svg'></md-icon>
-					<div class="md-list-item-text" >
-						<h3>[파티]12월 20일(일) 11시반</h3>
-						<h3>소리엘 왕자</h3>
-						<h4>(용산 기와 한정식)</h4>
+				<md-list-item class="md-3-line" ng-repeat="item in $ctrl.list" ng-click="$ctrl.listClicked($index)">
+					<img ng-src="/img/status-{{item.status}}.png" class="md-avatar" alt="{{item.status}}" />
+					<div class="md-list-item-text">
+						<h3>{{item.decoName}} {{item.day}}</h3>
+						<h4>{{item.babyName}} {{item.babyType}}</h4>
+						<p ng-show="item.decoLoc2">({{item.decoLoc2}})</p>
+						<p ng-hide="item.decoLoc2">({{item.decoLoc}})</p>
 					</div>
+					<md-divider inset></md-divider>
 				</md-list-item>
 			</md-list>
 		</md-content>

@@ -14,7 +14,7 @@
           </md-select>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>장소</label>
+          <label>장소종류</label>
           <md-select ng-model="$ctrl.reserv.decoLoc">
             <md-option ng-repeat="item in $ctrl.settings.decoLoc"
                       value="{{item.name}}">
@@ -22,6 +22,10 @@
             </md-option>
           </md-select>
         </md-input-container>
+        <md-input-container class="md-block" ng-if="$ctrl.reserv.decoLoc =='출장'">
+  				<label>출장장소</label>
+  				<input ng-model="$ctrl.reserv.decoLoc2">
+  			</md-input-container>
         <div>
           <mdp-date-picker mdp-format="YYYY-MM-DD dddd" mdp-placeholder="행사일" ng-model="$ctrl.reserv.decoDate"></mdp-date-picker>
           <mdp-time-picker mdp-placeholder="행사시간" ng-model="$ctrl.reserv.decoTime"></mdp-time-picker>
@@ -38,7 +42,7 @@
           </md-select>
         </md-input-container>
         <md-input-container class="md-block">
-  				<label>휴대폰 번호</label>
+  				<label>연락처</label>
   				<input ng-model="$ctrl.reserv.phoneNum">
   			</md-input-container>
   		</div>
@@ -207,8 +211,8 @@
   		<div layout="column">
         <md-input-container class="md-block">
           <label>예약금(단위:만원)</label>
-          <input name="deposit" type="number" min="0" max="100" 
-									ng-change="$ctrl.depositChange()" 
+          <input name="deposit" type="number" min="0" max="100"
+									ng-change="$ctrl.depositChange()"
 									ng-model="$ctrl.reserv.deposit" class="ng-pristine">
         </md-input-container>
         <md-input-container class="md-block">

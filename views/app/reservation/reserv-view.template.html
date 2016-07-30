@@ -1,0 +1,38 @@
+<div layout="row" layout-padding>
+	<div flex class="md-whiteframe-z1">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">
+            [{{$ctrl.reserv.status}}] {{$ctrl.reserv.decoName}} {{$ctrl.reserv.day}}
+            {{$ctrl.reserv.babyName}} {{$ctrl.reserv.babyType}}
+						<span ng-show="$ctrl.reserv.decoLoc2"><{{$ctrl.reserv.decoLoc2}}></span>
+						<span ng-hide="$ctrl.reserv.decoLoc2"><{{$ctrl.reserv.decoLoc}}></span>
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+					* 행사장소 : <span ng-show="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc2}}></span>
+					<span ng-hide="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc}}</span><br/>
+        </p>
+        <p>* 행사일 : {{$ctrl.reserv.day}}</p>
+        <p>* 아가이름 : {{$ctrl.reserv.babyName}}</p>
+        <p>* 연락처 : {{$ctrl.reserv.phoneNum}}<br/>
+        <p>* 장식명 : {{$ctrl.reserv.decoType}}</p>
+        <p>* 컨셉명 : {{$ctrl.reserv.decoName}}</p>
+        <p>* 포토테이블 : {{$ctrl.reserv.decoPhoto}}</p>
+        <p>* 과일 : {{$ctrl.reserv.decoFruit}}</p>
+        <p>* 떡 : {{$ctrl.reserv.decoRcake}}</p>
+        <p>* 돌복 : {{$ctrl.reserv.optDress}}</p>
+        <p>* 사회 : {{$ctrl.reserv.optMC}}</p>
+        <p>* 성장동영상 : {{$ctrl.reserv.optMovie}}</p>
+        <p>* 스냅 : {{$ctrl.reserv.optSnap}}</p>
+        <p>* 예약금 : {{$ctrl.reserv.deposit}}</p>
+        <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
+        <p>* 특이사항 : {{$ctrl.reserv.comment}}</p>
+      </md-card-content>
+      <img ng-src="/img/trd_01.jpg" class="md-card-image" style="width: 50%;" alt="화접도자주">
+    </md-card>
+  </div>
+</div>

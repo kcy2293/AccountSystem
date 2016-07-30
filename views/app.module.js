@@ -9,5 +9,6 @@ angular.
     'settingMenuTable',
     'settingPay',
     'reserv-create',
-		'reserv-list'
+		'reserv-list',
+    'reserv-view'
   ]);

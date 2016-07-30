@@ -7,7 +7,7 @@ angular
     controller: reservController
   });
 
-function reservController($scope, $http) {
+function reservController($scope, $http, $mdToast) {
   var self = this;
 	initReserv();
 
@@ -54,6 +54,16 @@ function reservController($scope, $http) {
 	self.save = save;
 
 	/****************
+    예약서 정보 초기화
+	 ****************/
+	function initReserv() {
+		self.reserv = {
+			deposit : 5,
+			balance : 0
+		};
+	}
+
+	/****************
 	 패키지 선택시
 	 ****************/
 	function menuTableChange() {
@@ -91,15 +101,8 @@ function reservController($scope, $http) {
 		calcBalance();
 	}
 
-	function initReserv() {
-		self.reserv = {
-			deposit : 5,
-			balance : 0
-		};
-	}
-
 	/****************
-		잔금 계산 
+		잔금 계산
 	 ****************/
 	function calcBalance() {
 		var calcKeys = ["menuTable", "decoFruit", "decoRcake"];
@@ -178,7 +181,6 @@ function reservController($scope, $http) {
 		return item[incomeKey];
 	}
 
-
 	/****************
 	 저장버튼 클릭시
 	 ****************/
@@ -193,6 +195,7 @@ function reservController($scope, $http) {
 		$http.post('/api/reservation/', self.reserv).then(function(res) {
 			if (res.status == 200) {
 				initReserv();
+        $mdToast.showSimple('예약서가 저장되었습니다.');
 			}
 		});
 	}

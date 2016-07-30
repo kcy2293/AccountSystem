@@ -24,6 +24,9 @@ angular.
         when('/reservation/:year', {
           template: '<reserv-list></reserv-list>'
         }).
+        when('/reservation/:year/:id', {
+          template: '<reserv-view></reserv-view>'
+        }).
         when('/reserv-create/', {
           template: '<reserv-create></reserv-create>'
         }).
