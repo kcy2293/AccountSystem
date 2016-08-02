@@ -10,5 +10,6 @@ angular.
     'settingPay',
     'reserv-create',
 		'reserv-list',
-    'reserv-view'
+    'reserv-view',
+    'reserv-update'
   ]);

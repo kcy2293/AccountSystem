@@ -12,6 +12,8 @@ router.route('/:year')
 			.get(reserv.getAll);
 
 router.route('/:year/:id')
-			.get(reserv.getOne);
+			.get(reserv.getOne)
+			.put(reserv.update)
+			.delete(reserv.delete);
 
 module.exports = router;

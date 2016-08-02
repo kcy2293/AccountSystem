@@ -90,3 +90,9 @@ md-input-container {
  reserv-list
 **************/
 
+/*************
+ reserv-view
+**************/
+.reserv-view md-card-title {
+	padding: 0px 10px 10px 10px;
+}

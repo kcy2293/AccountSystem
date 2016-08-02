@@ -30,6 +30,9 @@ angular.
         when('/reserv-create/', {
           template: '<reserv-create></reserv-create>'
         }).
+        when('/reserv-update/:year/:id', {
+          template: '<reserv-update></reserv-update>'
+        }).
         otherwise('/reservation/');
     }
   ]);

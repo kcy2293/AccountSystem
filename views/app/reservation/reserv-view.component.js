@@ -20,5 +20,19 @@ function reservViewController($scope, $http, $location) {
     console.log(self.reserv);
   });
 
+  self.update = update;
+  self.delete = deleteOne;
+
+  function update() {
+    $location.url('/reserv-update/' + self.year + '/' + id);
+  }
+
+  function deleteOne() {
+    $http.delete('/api/reservation/' + year + '/' + id).then(function(res) {
+      if (res.status == 200) {
+        $location.url('/reservation/' + year + '/');
+      }
+    });
+  }
 
 }

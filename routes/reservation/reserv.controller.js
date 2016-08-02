@@ -18,6 +18,7 @@ function create(req, res) {
 	item.decoTime = new Date(req.body.decoTime);
 	item.babyName = req.body.babyName;
 	item.babyType = req.body.babyType;
+	item.phoneNum = req.body.phoneNum;
 	item.menuTable = req.body.menuTable;
 	item.decoName = req.body.decoName;
 	item.decoFruit = req.body.decoFruit;
@@ -60,20 +61,23 @@ function getOne(req, res) {
 function update(req, res) {
 	reservation.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
-
 		item.status = req.body.status;
 		item.decoLoc = req.body.decoLoc;
-		if (req.body.date) {
-			item.decoDate = new Date(req.body.date);
-			item.decoYear = item.decoDate.getFullYear();
-		}
+		item.decoLoc2 = req.body.decoLoc2;
+		item.decoDate = new Date(req.body.decoDate);
+		item.decoYear = item.decoDate.getFullYear();
+		item.decoTime = new Date(req.body.decoTime);
 		item.babyName = req.body.babyName;
 		item.babyType = req.body.babyType;
+		item.phoneNum = req.body.phoneNum;
 		item.menuTable = req.body.menuTable;
+		item.decoName = req.body.decoName;
+		item.decoFruit = req.body.decoFruit;
 		item.decoRcake = req.body.decoRcake;
 		item.decoPhoto = req.body.decoPhoto;
 		item.optDress = req.body.optDress;
 		item.optMC = req.body.optMC;
+		item.optMovie = req.body.optMovie;
 		item.optSnap = req.body.optSnap;
 		item.optOther = req.body.optOther;
 		item.comment = req.body.commenct;
@@ -81,11 +85,13 @@ function update(req, res) {
 		item.role = req.body.role;
 		item.deposit = req.body.deposit;
 		item.balance = req.body.balance;
+		item.sellList = req.body.sellList;
 
 		item.save(function(err) {
 			if (err) res.send(err);
 			res.json({
-				message: "update!"
+				type: 0,
+				message: "수정완료"
 			});
 		});
 	});
@@ -96,7 +102,7 @@ function deleteOne(req, res) {
 	}, function(err, item) {
 		if (err) res.send(err);
 		res.json({
-			message: "deleted!"
+			message: "삭제완료"
 		});
 	});
 }

@@ -1,6 +1,10 @@
 <div layout="row" layout-padding>
 	<div flex class="md-whiteframe-z1">
-    <md-card>
+    <md-card class="reserv-view">
+			<md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-click="$ctrl.update()">수정</md-button>
+        <md-button class="md-raised md-warn" ng-click="$ctrl.delete()">삭제</md-button>
+      </md-card-actions>
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">
