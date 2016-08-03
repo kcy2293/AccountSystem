@@ -1,0 +1,230 @@
+<div layout-gt-md="row">
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+  		<md-subheader class="md-primary"><h2>기본정보</h2></md-subheader>
+  		<div layout="column">
+        <md-input-container class="md-block">
+          <label>진행상태</label>
+          <md-select ng-model="$ctrl.reserv.status">
+            <md-option value="미정" selected>미정</md-option>
+            <md-option value="예약확인중">예약확인중</md-option>
+						<md-option value="예약완료">예약완료</md-option>
+            <md-option value="예약취소">예약취소</md-option>
+            <md-option value="행사종료">행사종료</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>장소종류</label>
+          <md-select ng-model="$ctrl.reserv.decoLoc">
+            <md-option ng-repeat="item in $ctrl.settings.decoLoc"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block" ng-if="$ctrl.reserv.decoLoc =='출장'">
+  				<label>출장장소</label>
+  				<input ng-model="$ctrl.reserv.decoLoc2">
+  			</md-input-container>
+        <div>
+          <mdp-date-picker mdp-format="YYYY-MM-DD dddd" mdp-placeholder="행사일" ng-model="$ctrl.reserv.decoDate"></mdp-date-picker>
+          <mdp-time-picker mdp-placeholder="행사시간" ng-model="$ctrl.reserv.decoTime"></mdp-time-picker>
+        </div>
+        <md-input-container class="md-block">
+  				<label>아가 이름</label>
+  				<input ng-model="$ctrl.reserv.babyName">
+  			</md-input-container>
+        <md-input-container class="md-block">
+          <label>성별</label>
+          <md-select ng-model="$ctrl.reserv.babyType">
+            <md-option value="남">남</md-option>
+            <md-option value="여">여</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+  				<label>연락처</label>
+  				<input ng-model="$ctrl.reserv.phoneNum">
+  			</md-input-container>
+  		</div>
+  	</md-content>
+  </div>
+
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+  		<md-subheader class="md-primary"><h2>장식정보</h2></md-subheader>
+  		<div layout="column">
+        <md-input-container class="md-block">
+          <label>선택 패키지</label>
+          <md-select ng-model="$ctrl.reserv.menuTable"
+											ng-change="$ctrl.menuTableChange()">
+            <md-option ng-repeat="item in $ctrl.settings.menuTable"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>장식 종류</label>
+          <md-select ng-model="$ctrl.reserv.decoType">
+            <md-option ng-repeat="item in $ctrl.settings.decoType"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>컨셉 종류</label>
+          <md-select ng-model="$ctrl.reserv.decoName">
+            <md-option ng-repeat="item in $ctrl.settings.decoName"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>생과일 종류</label>
+          <md-select multiple ng-model="$ctrl.reserv.decoFruit" ng-change='$ctrl.decoFruitChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.decoFruit"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>떡케익 종류</label>
+          <md-select multiple ng-model="$ctrl.reserv.decoRcake" ng-change='$ctrl.decoRcakeChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.decoRcake"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+  		</div>
+  	</md-content>
+  </div>
+
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+  		<md-subheader class="md-primary"><h2>옵션정보</h2></md-subheader>
+  		<div layout="column">
+        <md-input-container class="md-block">
+          <label>포토테이블 종류</label>
+          <md-select ng-model="$ctrl.reserv.decoPhoto" ng-change='$ctrl.decoPhotoChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.decoPhoto"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>돌복/드레스 종류</label>
+          <md-select multiple ng-model="$ctrl.reserv.optDress" ng-change='$ctrl.optDressChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.optDress"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>행사 사회 종류</label>
+          <md-select multiple ng-model="$ctrl.reserv.optMC" ng-change='$ctrl.optMCChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.optMC"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>성장동영상</label>
+          <md-select multiple ng-model="$ctrl.reserv.optMovie" ng-change='$ctrl.optMovieChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.optMovie"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>스냅 종류</label>
+          <md-select ng-model="$ctrl.reserv.optSnap">
+            <md-option ng-repeat="item in $ctrl.settings.optSnap"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>기타 추가 옵션</label>
+          <md-select multiple ng-model="$ctrl.reserv.optOther" ng-change='$ctrl.optOtherChange()'>
+            <md-option ng-repeat="item in $ctrl.settings.optOther"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+  		</div>
+  	</md-content>
+  </div>
+
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+    	<md-subheader class="md-primary"><h2>특이사항</h2></md-subheader>
+    	<md-content layout-padding>
+    		<div layout="column">
+          <md-input-container class="md-block">
+            <label>특이사항</label>
+            <textarea ng-model="$ctrl.reserv.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          </md-input-container>
+    		</div>
+    	</md-content>
+    </md-content>
+  </div>
+
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+  		<md-subheader class="md-primary"><h2>담당자 배정</h2></md-subheader>
+  		<div layout="column">
+        <md-input-container class="md-block">
+          <label>담당자</label>
+          <md-select ng-model="$ctrl.reserv.manager">
+            <md-option ng-repeat="item in $ctrl.users"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>역할</label>
+          <md-select ng-model="$ctrl.reserv.role">
+            <md-option ng-repeat="item in $ctrl.role"
+                      value="{{item}}">
+              {{item}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+  		</div>
+  	</md-content>
+  </div>
+
+  <div class="doc-content md-whiteframe-z1" flex-gt-md>
+  	<md-content layout-padding>
+  		<md-subheader class="md-primary"><h2>금액정보</h2></md-subheader>
+  		<div layout="column">
+        <md-input-container class="md-block">
+          <label>예약금(단위:만원)</label>
+          <input name="deposit" type="number" min="0" max="100"
+									ng-change="$ctrl.depositChange()"
+									ng-model="$ctrl.reserv.deposit" class="ng-pristine">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>잔금(단위:만원)</label>
+          <input name="balance" type="number" min="0" max="100" ng-model="$ctrl.reserv.balance" class="ng-pristine">
+        </md-input-container>
+  		</div>
+  	</md-content>
+  </div>
+</div>
+
+<md-button class="md-fab md-primary reserv-save" aria-label="save" ng-click="$ctrl.save()">
+  <md-tooltip md-direction="top">저장</md-tooltip>
+  <md-icon md-svg-src="img/svg/ic_done_white_24px.svg"></md-icon>
+</md-button>

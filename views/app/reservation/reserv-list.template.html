@@ -1,0 +1,23 @@
+<div layout="row" layout-padding>
+	<div flex class="md-whiteframe-z1">
+		<md-toolbar class="md-warn">
+			<div class="md-toolbar-tools">
+				<h2 class="md-flex">{{$ctrl.year}}</h2>
+			</div>
+		</md-toolbar>
+		<md-content>
+			<md-list>
+				<md-list-item class="md-3-line" ng-repeat="item in $ctrl.list" ng-click="$ctrl.listClicked($index)">
+					<img ng-src="/img/status-{{item.status}}.png" class="md-avatar" alt="{{item.status}}" />
+					<div class="md-list-item-text">
+						<h3>{{item.decoName}} {{item.day}}</h3>
+						<h4>{{item.babyName}} {{item.babyType}}</h4>
+						<p ng-show="item.decoLoc2">({{item.decoLoc2}})</p>
+						<p ng-hide="item.decoLoc2">({{item.decoLoc}})</p>
+					</div>
+					<md-divider inset></md-divider>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</div>
+</div>

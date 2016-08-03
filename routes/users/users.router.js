@@ -24,7 +24,7 @@ router.route('/').get(function(req, res) {
 			isManager: false
 		},
 		{
-			name: "송희진",
+			name: "송희경",
 			rank: "가족실장",
 			isManager: true
 		},

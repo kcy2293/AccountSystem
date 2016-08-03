@@ -39,9 +39,13 @@
           </md-select>
         </md-input-container>
         <md-input-container flex="" class="flex">
-          <label>추가옵션</label>
-          <input ng-model="data.other">
-        </md-input-container>
+          <label>드레스종류</label>
+          <md-select ng-model="data.optDress">
+            <md-option ng-repeat="item in settings.optDress"
+                      value="{{item.name}}">
+              {{item.name}}
+            </md-option>
+          </md-select>
       </div>
       <div layout="row" class="input-row layout-row">
         <md-input-container flex="" class="flex">

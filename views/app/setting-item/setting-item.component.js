@@ -3,7 +3,7 @@ angular
   .module('settingItem', [
     'md.data.table',
     'decoLoc', 'decoType', 'decoName', 'decoFruit', 'decoRcake', 'decoPhoto',
-    'optDress', 'optMC', 'optSnap', 'optOther'
+    'optDress', 'optMC', 'optMovie', 'optSnap', 'optOther'
   ])
   .component('settingItem', {
       templateUrl: 'app/setting-item/setting-item.template.html',

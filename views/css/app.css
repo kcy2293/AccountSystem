@@ -62,3 +62,37 @@ md-input-container {
 .package-dialog md-input-container {
 	margin: 5px 0;
 }
+
+/*************
+ reserv-create
+**************/
+.doc-content {
+	margin: 16px;
+	padding: 0;
+}
+
+.doc-content .md-subheader .md-subheader-inner {
+	padding: 0;
+}
+
+.doc-content md-input-container {
+	margin-top: 0px;
+	min-width: 120px !important;
+}
+
+.reserv-save {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+}
+
+/*************
+ reserv-list
+**************/
+
+/*************
+ reserv-view
+**************/
+.reserv-view md-card-title {
+	padding: 0px 10px 10px 10px;
+}
