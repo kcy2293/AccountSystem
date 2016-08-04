@@ -4,7 +4,6 @@ html, body {
 	margin: 0px;
 	padding: 0px;
 }
-
 /**********
  Side nav
 ***********/
@@ -12,13 +11,6 @@ md-sidenav {
 	background-color: rgb(255,255,255) !important;
 	width: 270px;
 }
-/*
-.menu {
-	background-color: transparent;
-	border: none;
-	margin: 0;
-}
-*/
 md-list-item > button {
 	width: 100%;
 	text-align: left !important;
@@ -26,7 +18,6 @@ md-list-item > button {
 .md-button.selected {
 	color: #03a9f4;
 }
-
 /**********
  Top toolbar
 ***********/
@@ -35,32 +26,40 @@ md-list-item > button {
 	color: #202020 !important;
 	z-index: 3;
 }
-
 .md-toolbar-tools .md-button md-icon {
 	color: #666 !important;
 	fill: #666 !important;
 }
-
 /**********
  contents
 ***********/
-.site-content-box {
-	/*
-	padding: 5px 40px 0 40px;
-	*/
-}
 .setting-tool-box {
 	font-size: 16px;
 	height: 45px;
 	max-height: 45px;
 }
-
 md-input-container {
 	min-width: 120px !important;
 }
-
 .package-dialog md-input-container {
 	margin: 5px 0;
+}
+/**************
+ 예약서항목설정
+***************/
+table.md-table.md-row-select td.md-cell:first-child, table.md-table.md-row-select th.md-column:first-child {
+	padding: 0 0 0 12px;
+}
+md-checkbox .md-container {
+	width: 15px;
+	height: 15px;
+}
+md-checkbox .md-icon {
+	width: 15px;
+	height: 15px;
+}
+table.md-table thead.md-head>tr.md-row {
+	height: 40px;
 }
 
 /*************
@@ -70,26 +69,18 @@ md-input-container {
 	margin: 16px;
 	padding: 0;
 }
-
 .doc-content .md-subheader .md-subheader-inner {
 	padding: 0;
 }
-
 .doc-content md-input-container {
 	margin-top: 0px;
 	min-width: 120px !important;
 }
-
 .reserv-save {
 	position: fixed;
 	bottom: 5%;
 	right: 5%;
 }
-
-/*************
- reserv-list
-**************/
-
 /*************
  reserv-view
 **************/
