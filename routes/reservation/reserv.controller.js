@@ -13,6 +13,7 @@ function create(req, res) {
 	var now = new Date();
 	item.createDate = now;
 	item.updateDate = now;
+	item.company = req.body.company;
 	item.status = req.body.status;
 	item.decoLoc = req.body.decoLoc;
 	item.decoLoc2 = req.body.decoLoc2;
@@ -65,6 +66,7 @@ function update(req, res) {
 	reservation.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
 		item.updateDate = new Date();
+		item.company = req.body.company;
 		item.status = req.body.status;
 		item.decoLoc = req.body.decoLoc;
 		item.decoLoc2 = req.body.decoLoc2;

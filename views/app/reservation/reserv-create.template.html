@@ -4,6 +4,13 @@
   		<md-subheader class="md-primary"><h2>기본정보</h2></md-subheader>
   		<div layout="column">
         <md-input-container class="md-block">
+          <label>담당사업자</label>
+          <md-select ng-model="$ctrl.reserv.company">
+            <md-option value="루이비스베베" selected>루이비스베베</md-option>
+            <md-option value="파티리움">파티리움</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
           <label>진행상태</label>
           <md-select ng-model="$ctrl.reserv.status">
             <md-option value="미정" selected>미정</md-option>
