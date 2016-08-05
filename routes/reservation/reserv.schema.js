@@ -2,6 +2,8 @@ var mg = require('mongoose');
 var Schema = mg.Schema;
 
 var reservSchema = new Schema({
+	createDate: Date,
+	updateDate: Date,
 	status: String,
 	decoLoc: String,
 	decoLoc2: String,
