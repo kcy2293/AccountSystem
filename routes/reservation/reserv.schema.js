@@ -17,6 +17,7 @@ var reservSchema = new Schema({
 	menuTable: String,
 	decoType: String,
 	decoName: String,
+	decoImage: String,
 	decoFruit: Array,
 	decoRcake: Array,
 	decoPhoto: String,

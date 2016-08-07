@@ -24,7 +24,9 @@ function create(req, res) {
 	item.babyType = req.body.babyType;
 	item.phoneNum = req.body.phoneNum;
 	item.menuTable = req.body.menuTable;
+	item.decoType = req.body.decoType;
 	item.decoName = req.body.decoName;
+	item.decoImage = req.body.decoImage;
 	item.decoFruit = req.body.decoFruit;
 	item.decoRcake = req.body.decoRcake;
 	item.decoPhoto = req.body.decoPhoto;
@@ -33,7 +35,7 @@ function create(req, res) {
 	item.optMovie = req.body.optMovie;
 	item.optSnap = req.body.optSnap;
 	item.optOther = req.body.optOther;
-	item.comment = req.body.commenct;
+	item.comment = req.body.comment;
 	item.manager = req.body.manager;
 	item.role = req.body.role;
 	item.deposit = req.body.deposit;
@@ -77,7 +79,9 @@ function update(req, res) {
 		item.babyType = req.body.babyType;
 		item.phoneNum = req.body.phoneNum;
 		item.menuTable = req.body.menuTable;
+		item.decoType = req.body.decoType;
 		item.decoName = req.body.decoName;
+		item.decoImage = req.body.decoImage;
 		item.decoFruit = req.body.decoFruit;
 		item.decoRcake = req.body.decoRcake;
 		item.decoPhoto = req.body.decoPhoto;
@@ -86,7 +90,7 @@ function update(req, res) {
 		item.optMovie = req.body.optMovie;
 		item.optSnap = req.body.optSnap;
 		item.optOther = req.body.optOther;
-		item.comment = req.body.commenct;
+		item.comment = req.body.comment;
 		item.manager = req.body.manager;
 		item.role = req.body.role;
 		item.deposit = req.body.deposit;

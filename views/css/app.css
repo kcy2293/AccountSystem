@@ -38,9 +38,11 @@ md-list-item > button {
 	height: 45px;
 	max-height: 45px;
 }
+/*
 md-input-container {
 	min-width: 120px !important;
 }
+*/
 .package-dialog md-input-container {
 	margin: 5px 0;
 }
@@ -82,8 +84,31 @@ table.md-table thead.md-head>tr.md-row {
 	right: 5%;
 }
 /*************
+ reserv-list
+**************/
+.reserv-list .md-toolbar-tools {
+	padding-top: 20px;
+}
+.reserv-list .md-input-container {
+	margin: 0px;
+	padding: 0px;
+}
+.reserv-list md-input-container {
+	width: 150px !important;
+}
+.reserv-list input {
+	color: white;
+}
+.reserv-list input::-webkit-input-placeholder {
+	color: white;
+}
+
+/*************
  reserv-view
 **************/
 .reserv-view md-card-title {
 	padding: 0px 10px 10px 10px;
+}
+.reserv-view-img {
+	padding: 0 20px;
 }

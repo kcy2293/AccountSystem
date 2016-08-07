@@ -17,7 +17,6 @@ function reservViewController($scope, $http, $location) {
     self.reserv = res.data;
     self.reserv.decoDate = new Date(self.reserv.decoDate);
     self.reserv.day = moment(self.reserv.decoDate).format('M/DD(dd) h:mm');
-    console.log(self.reserv);
   });
 
   self.update = update;

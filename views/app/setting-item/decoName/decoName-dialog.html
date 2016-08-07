@@ -1,16 +1,19 @@
 <md-dialog aria-label="decoNameDialog" ng-cloak>
-  <form>
+  <form name="testForm">
     <md-dialog-content class="md-dialog-content">
       <h2 class="md-title">컨셉종류 관리</h2>
       <div layout="column">
-        <md-input-container flex="" class="flex">
-          <label>컨셉명</label>
-          <input ng-model="data.name">
-        </md-input-container>
+          <md-input-container flex="" class="flex">
+            <label>컨셉명</label>
+            <input ng-model="data.name">
+          </md-input-container>
+          <lf-ng-md-file-input lf-files="files" accept="image/*" lf-maxcount="1" preview></lf-ng-md-file-input>
+        <!--
         <md-input-container flex="" class="flex">
           <label>이미지명</label>
           <input ng-model="data.imgName">
         </md-input-container>
+      -->
       </div>
 
       <md-dialog-actions>

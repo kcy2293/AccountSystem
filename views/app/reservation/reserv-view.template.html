@@ -36,7 +36,9 @@
         <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
         <p>* 특이사항 : {{$ctrl.reserv.comment}}</p>
       </md-card-content>
-      <img ng-src="/img/trd_01.jpg" class="md-card-image" style="width: 50%;" alt="화접도자주">
+			<div class='reserv-view-img'>
+	      <img ng-src="/img/decoImages/{{$ctrl.reserv.decoImage}}" class="md-card-image">
+			</div>
     </md-card>
   </div>
 </div>

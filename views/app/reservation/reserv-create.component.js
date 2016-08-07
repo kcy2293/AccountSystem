@@ -13,7 +13,6 @@ function reservController($scope, $http, $mdToast) {
 
   $http.get('/api/setting/').then(function(res) {
     self.settings = res.data;
-		console.log(res.data);
 
     var pays = self.settings.pay;
 		if (pays) {
@@ -43,6 +42,7 @@ function reservController($scope, $http, $mdToast) {
   //window.DEBUG = self;
 
 	self.menuTableChange = menuTableChange;
+  self.decoNameChange = decoNameChange;
 	self.decoFruitChange = decoFruitChange;
 	self.decoRcakeChange = decoRcakeChange;
 	self.decoPhotoChange = decoPhotoChange;
@@ -75,7 +75,12 @@ function reservController($scope, $http, $mdToast) {
 
 		calcBalance();
 	}
-
+  function decoNameChange() {
+		var item = _.findWhere(self.settings.decoName, {name: self.reserv.decoName});
+    if (item.imgName) {
+      self.reserv.decoImage = item.imgName;
+    }
+  }
 	function decoFruitChange() {
 		calcBalance();
 	}

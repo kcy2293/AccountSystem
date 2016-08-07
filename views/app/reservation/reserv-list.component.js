@@ -18,9 +18,10 @@ function reservListController($scope, $http, $location) {
       self.list[i].docoDate = new Date(self.list[i].decoDate);
       self.list[i].day = moment(self.list[i].decoDate).format('M/DD(dd) h:mm');
     }
+    self.list.reverse();
   });
 
-  self.listClicked = function(index) {
-    $location.url('/reservation/' + self.year + '/' + self.list[index]._id);
+  self.listClicked = function(id) {
+    $location.url('/reservation/' + self.year + '/' + id);
   }
 }

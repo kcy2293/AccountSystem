@@ -9,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
+var multer = require('multer');
 
 /*******************
  * setup express
@@ -39,6 +40,38 @@ app.get('/', function(req, res) {
 app.use('/api/users', userRouter);
 app.use('/api/reservation', reservRouter);
 app.use('/api/setting', settingRouter);
+
+/*******************
+ * upload file
+ *******************/
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'views/img/decoImages')
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
+
+var upload = multer({
+  storage: storage
+}).array('files[]');
+ /*
+var uploadDecoImage = multer({
+  dest: 'views/img/decoImages'
+});
+*/
+app.post('/decoImage', function(req, res) {
+  upload(req, res, function(err) {
+    if (err) {
+      res.json(err);
+      return;
+    }
+    res.json({
+			message: "uploaded!"
+		});
+  })
+});
 
 /*******************
  * database
