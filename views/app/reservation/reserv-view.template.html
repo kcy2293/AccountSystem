@@ -1,4 +1,4 @@
-<div layout-gt-md="row" layout-padding>
+<div layout-padding>
 	<div flex class="md-whiteframe-z1">
     <md-card class="reserv-view">
 			<md-card-actions layout="row" layout-align="end center">
@@ -41,7 +41,32 @@
 			</div>
     </md-card>
   </div>
-	<div flex class="md-whiteframe-z1">
+	<div flex class="md-whiteframe-z1 reserv-view-consult">
 		<h2>상담내역</h2>
+		<div layout="column">
+			<md-list class="md-whiteframe-1dp">
+				<md-list-item class="md-2-line">
+					<div class="md-list-item-text">
+            <h3>2016.8.5.(화)</h3>
+            <p>최종상담 완료
+							민트플라워1단 신청
+							몇시에 와야 하는지 문의하셔서 스냅시간 맞춰 오시라고함</p>
+          </div>
+					<md-icon md-svg-icon="/img/svg/ic_create_black_24px.svg" ng-click="" aria-label="수정" style="margin-right:10px;"></md-icon>
+					<md-icon md-svg-icon="/img/svg/ic_delete_black_24px.svg" ng-click="" aria-label="삭제"></md-icon>
+				</md-list-item>
+			</md-list>
+			<div layout-gt-md="row" class="consult-form">
+				<div flex="85">
+					<md-input-container>
+		        <label>상담 내용 추가</label>
+		        <input ng-model="user.title">
+		      </md-input-container>
+				</div>
+				<div flex="15">
+					<md-button class="md-raised md-primary">추가</md-button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
