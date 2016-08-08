@@ -1,4 +1,4 @@
-<div layout="row" layout-padding>
+<div layout-gt-md="row" layout-padding>
 	<div flex class="md-whiteframe-z1">
     <md-card class="reserv-view">
 			<md-card-actions layout="row" layout-align="end center">
@@ -34,11 +34,14 @@
         <p>* 스냅 : {{$ctrl.reserv.optSnap}}</p>
         <p>* 예약금 : {{$ctrl.reserv.deposit}}</p>
         <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
-        <p>* 특이사항 : {{$ctrl.reserv.comment}}</p>
+        <pre>* 특이사항 : <br>{{$ctrl.reserv.comment}}</pre>
       </md-card-content>
 			<div class='reserv-view-img'>
 	      <img ng-src="/img/decoImages/{{$ctrl.reserv.decoImage}}" class="md-card-image">
 			</div>
     </md-card>
   </div>
+	<div flex class="md-whiteframe-z1">
+		<h2>상담내역</h2>
+	</div>
 </div>
