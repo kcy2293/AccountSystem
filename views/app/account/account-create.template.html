@@ -1,0 +1,85 @@
+<div layout-padding ng-clock>
+  <div class="md-whiteframe-z1 account-create-header">
+    <h2>
+      <md-button class="md-icon-button" aria-label="Prev">
+        <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
+      </md-button>
+      8/1(월) ~ 8/7(일)
+      <md-button class="md-icon-button next" aria-label="Next">
+        <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
+      </md-button>
+    </h2>
+  </div>
+  <div class="md-whiteframe-z1">
+    <!--
+    <md-tabs md-dynamic-height md-border-bottom>
+    -->
+    <div style="text-align:center;">
+      <h2>주간 예약서 목록</h2>
+    </div>
+    <md-tabs md-border-bottom>
+      <md-tab label="8/20(토)최여준">
+        <md-content class="md-padding">
+          <p>
+  					* 행사장소 : <span ng-show="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc2}}></span>
+  					<span ng-hide="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc}}</span><br/>
+          </p>
+          <p>* 행사일 : {{$ctrl.reserv.day}}</p>
+          <p>* 아가이름 : {{$ctrl.reserv.babyName}}</p>
+          <p>* 연락처 : {{$ctrl.reserv.phoneNum}}<br/>
+          <p>* 장식명 : {{$ctrl.reserv.decoType}}</p>
+          <p>* 컨셉명 : {{$ctrl.reserv.decoName}}</p>
+          <p>* 포토테이블 : {{$ctrl.reserv.decoPhoto}}</p>
+          <p>* 과일 : {{$ctrl.reserv.decoFruit}}</p>
+          <p>* 떡 : {{$ctrl.reserv.decoRcake}}</p>
+          <p>* 돌복 : {{$ctrl.reserv.optDress}}</p>
+          <p>* 사회 : {{$ctrl.reserv.optMC}}</p>
+          <p>* 성장동영상 : {{$ctrl.reserv.optMovie}}</p>
+          <p>* 스냅 : {{$ctrl.reserv.optSnap}}</p>
+          <p>* 예약금 : {{$ctrl.reserv.deposit}}</p>
+          <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
+        </md-content>
+      </md-tab>
+      <md-tab label="9/24(토)난아가">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+      <md-tab label="8/20(토)김주원">
+      </md-tab>
+    </md-tabs>
+  </div>
+  <div class='account-create-middle'>
+    <md-button class="md-raised md-warn">정산내역 산출하기</md-button>
+  </div>
+  <div class='account-create-body'>
+    <div style="text-align: center;">
+      <h2>정산내역</h2>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+</div>
+<md-button class="md-fab md-primary reserv-save" aria-label="save" ng-click="$ctrl.save()">
+  <md-tooltip md-direction="top">주간 정산내역 확정</md-tooltip>
+  <md-icon md-svg-src="img/svg/ic_done_white_24px.svg"></md-icon>
+</md-button>

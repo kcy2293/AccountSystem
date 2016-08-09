@@ -102,7 +102,6 @@ table.md-table thead.md-head>tr.md-row {
 .reserv-list input::-webkit-input-placeholder {
 	color: white;
 }
-
 /*************
  reserv-view
 **************/
@@ -121,6 +120,23 @@ table.md-table thead.md-head>tr.md-row {
 .reserv-view-consult md-input-container,
 .reserv-view-consult input {
 	width: 100%;
+}
+/*************
+ account-create
+**************/
+.account-create-header {
+	text-align: center;
+}
+.account-create-header .next > md-icon {
+		transform: rotate(180deg);
+}
+.account-create-middle {
+	padding: 20px 0;
+	text-align: center;
+}
+.account-create-body {
+	background-color: #0C2238;
+	color: white;
 }
 
 /******** Media Query *************/

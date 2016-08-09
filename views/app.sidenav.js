@@ -13,12 +13,10 @@ function SidenavController($mdSidenav, $location) {
 		{
       'name': '예약서 리스트',
       'route': '/reservation/'
-		},
-    {
+		},{
       'name': '예약서 입력',
       'route': '/reserv-create/'
-    },
-    {
+    },{
       'name': '예약서 항목 설정',
       'route': '/setting/1/'
     },{
@@ -27,6 +25,9 @@ function SidenavController($mdSidenav, $location) {
     },{
       'name': '페이 설정',
       'route': '/setting/3/'
+    },{
+      'name': '정산서 작성',
+      'route': '/account-create/'
     }
   ];
   self.selected = self.menus[0];

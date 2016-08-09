@@ -11,5 +11,6 @@ angular.
     'reserv-create',
 		'reserv-list',
     'reserv-view',
-    'reserv-update'
+    'reserv-update',
+    'account-create'
   ]);
