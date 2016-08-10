@@ -43,6 +43,12 @@ angular.
     }
   ]);
 
+angular.
+  module('myApp').
+	factory('moment', function($window) {
+		return $window.moment;
+	});
+
 function getLastWeekPeriod() {
 	var now = new Date();
 	now.setHours(0);
