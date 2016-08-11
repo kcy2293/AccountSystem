@@ -1,11 +1,11 @@
 <div layout-padding ng-clock>
   <div class="md-whiteframe-z1 account-create-header">
     <h2>
-      <md-button class="md-icon-button" aria-label="Prev">
+      <md-button class="md-icon-button" ng-click="$ctrl.changePrevDate()" aria-label="Prev">
         <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
       </md-button>
       8/1(월) ~ 8/7(일)
-      <md-button class="md-icon-button next" aria-label="Next">
+      <md-button class="md-icon-button next" ng-click="$ctrl.changeNextDate()" aria-label="Next">
         <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
       </md-button>
     </h2>
@@ -18,47 +18,27 @@
       <h2>주간 예약서 목록</h2>
     </div>
     <md-tabs md-border-bottom>
-      <md-tab label="8/20(토)최여준">
+      <md-tab label="{{item.day}}{{item.babyName}}" ng-repeat="item in $ctrl.list">
         <md-content class="md-padding">
           <p>
-  					* 행사장소 : <span ng-show="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc2}}></span>
-  					<span ng-hide="$ctrl.reserv.decoLoc2">{{$ctrl.reserv.decoLoc}}</span><br/>
+  					* 행사장소 : <span ng-show="item.decoLoc2">{{item.decoLoc2}}</span>
+  					<span ng-hide="item.decoLoc2">{{item.decoLoc}}</span><br/>
           </p>
-          <p>* 행사일 : {{$ctrl.reserv.day}}</p>
-          <p>* 아가이름 : {{$ctrl.reserv.babyName}}</p>
-          <p>* 연락처 : {{$ctrl.reserv.phoneNum}}<br/>
-          <p>* 장식명 : {{$ctrl.reserv.decoType}}</p>
-          <p>* 컨셉명 : {{$ctrl.reserv.decoName}}</p>
-          <p>* 포토테이블 : {{$ctrl.reserv.decoPhoto}}</p>
-          <p>* 과일 : {{$ctrl.reserv.decoFruit}}</p>
-          <p>* 떡 : {{$ctrl.reserv.decoRcake}}</p>
-          <p>* 돌복 : {{$ctrl.reserv.optDress}}</p>
-          <p>* 사회 : {{$ctrl.reserv.optMC}}</p>
-          <p>* 성장동영상 : {{$ctrl.reserv.optMovie}}</p>
-          <p>* 스냅 : {{$ctrl.reserv.optSnap}}</p>
-          <p>* 예약금 : {{$ctrl.reserv.deposit}}</p>
-          <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
+          <p>* 행사일 : {{item.day}}</p>
+          <p>* 아가이름 : {{item.babyName}}</p>
+          <p>* 연락처 : {{item.phoneNum}}<br/>
+          <p>* 장식명 : {{item.decoType}}</p>
+          <p>* 컨셉명 : {{item.decoName}}</p>
+          <p>* 포토테이블 : {{item.decoPhoto}}</p>
+          <p>* 과일 : {{item.decoFruit}}</p>
+          <p>* 떡 : {{item.decoRcake}}</p>
+          <p>* 돌복 : {{item.optDress}}</p>
+          <p>* 사회 : {{item.optMC}}</p>
+          <p>* 성장동영상 : {{item.optMovie}}</p>
+          <p>* 스냅 : {{item.optSnap}}</p>
+          <p>* 예약금 : {{item.deposit}}</p>
+          <p>* 잔금 : {{item.balance}}</p>
         </md-content>
-      </md-tab>
-      <md-tab label="9/24(토)난아가">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
-      </md-tab>
-      <md-tab label="8/20(토)김주원">
       </md-tab>
     </md-tabs>
   </div>

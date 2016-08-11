@@ -4,9 +4,7 @@ var reserv = require('./reserv.controller');
 
 router.route('/')
 			.post(reserv.create)
-			.get(function(req, res) {
-				res.redirect((new Date()).getFullYear());
-			});
+			.get(reserv.getRange);
 
 router.route('/:year')
 			.get(reserv.getAll);

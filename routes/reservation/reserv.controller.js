@@ -4,6 +4,7 @@ module.exports = {
 	create: create,
 	getAll: getAll,
 	getOne: getOne,
+	getRange: getRange,
 	update: update,
 	delete: deleteOne,
 	updateConsult: updateConsult
@@ -63,6 +64,18 @@ function getOne(req, res) {
 	reservation.findById(req.params.id, function (err, item) {
 		if (err) res.send(err);
 		res.json(item);
+	});
+}
+function getRange(req, res) {
+	console.log('from : ' + new Date(req.query.from) + ' , to : ' + new Date(req.query.to));
+	reservation.find({
+		decoDate: {
+			$gte: new Date(req.query.from),
+			$lt: new Date(req.query.to)
+		}
+	}, function(err, items) {
+		if (err) res.send(err);
+		res.json(items);
 	});
 }
 function update(req, res) {

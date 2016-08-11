@@ -34,9 +34,9 @@ angular.
           template: '<reserv-update></reserv-update>'
         }).
         when('/account-create/', {
-          redirectTo: '/account-create/' + thisYear + '/' + getLastWeekPeriod()
+          redirectTo: '/account-create/' + getLastAccountDate()
         }).
-        when('/account-create/:year/:period', {
+        when('/account-create/:date', {
           template: '<account-create></account-create>'
         }).
         otherwise('/reservation/');
@@ -49,7 +49,7 @@ angular.
 		return $window.moment;
 	});
 
-function getLastWeekPeriod() {
+function getLastAccountDate() {
 	var now = new Date();
 	now.setHours(0);
 	now.setMinutes(0);
@@ -57,14 +57,15 @@ function getLastWeekPeriod() {
 	now.setMilliseconds(0);
 
 	var nowDay = now.getDay();
-	var startSub = (nowDay == 0) ? 13 : nowDay + 6;
-	var endSub = (nowDay == 0) ? 6 : nowDay - 1;
-	var startDate = subDays(now, startSub);
+	//var startSub = (nowDay == 0) ? 13 : nowDay + 6;
+	var endSub = (nowDay == 0) ? 7 : nowDay;
+	//var startDate = subDays(now, startSub);
 	var endDate = subDays(now, endSub);
 
 	var period = '';
-	period += padLeft(startDate.getMonth() + 1);
-	period += padLeft(startDate.getDate());
+	//period += padLeft(startDate.getMonth() + 1);
+	//period += padLeft(startDate.getDate());
+	period += endDate.getFullYear();
 	period += padLeft(endDate.getMonth() + 1);
 	period += padLeft(endDate.getDate());
 
