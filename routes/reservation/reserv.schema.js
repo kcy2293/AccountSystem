@@ -31,7 +31,8 @@ var reservSchema = new Schema({
 	role: Array,
 	deposit: Number,
 	balance: Number,
-	sellList: Schema.Types.Mixed
+	sellList: Schema.Types.Mixed,
+	consultList: [Schema.Types.Mixed]
 });
 
 module.exports = mg.model('reservation', reservSchema);

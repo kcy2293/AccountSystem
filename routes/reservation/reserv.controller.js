@@ -5,7 +5,8 @@ module.exports = {
 	getAll: getAll,
 	getOne: getOne,
 	update: update,
-	delete: deleteOne
+	delete: deleteOne,
+	updateConsult: updateConsult
 };
 
 function create(req, res) {
@@ -113,6 +114,20 @@ function deleteOne(req, res) {
 		if (err) res.send(err);
 		res.json({
 			message: "삭제완료"
+		});
+	});
+}
+
+function updateConsult(req, res) {
+	reservation.findById(req.params.id, function (err, item) {
+		if (err) res.send(err);
+		item.consultList = req.body;
+		item.save(function(err) {
+			if (err) res.send(err);
+			res.json({
+				type: 0,
+				message: "수정완료"
+			});
 		});
 	});
 }

@@ -58,12 +58,14 @@
 			<div layout-gt-md="row" class="consult-form">
 				<div flex="85">
 					<md-input-container class="md-block">
-		        <label>상담 내용 추가</label>
+		        <label ng-hide="$ctrl.updateIndex > -1">상담 내용 추가</label>
+		        <label ng-show="$ctrl.updateIndex > -1">상담 내용 수정</label>
 						<textarea ng-model="$ctrl.consultContent" md-maxlength="1000" rows="20" md-select-on-focus></textarea>
 					</md-input-container>
 				</div>
 				<div flex="15">
-					<md-button ng-disabled="!($ctrl.consultContent)" ng-click="$ctrl.addConsult()"class="md-raised md-primary">추가</md-button>
+					<md-button ng-hide="$ctrl.updateIndex > -1" ng-disabled="!($ctrl.consultContent)" ng-click="$ctrl.addConsult()"class="md-raised md-primary">추가</md-button>
+					<md-button ng-show="$ctrl.updateIndex > -1" ng-click="$ctrl.clickedConsultUpdate()" class="md-raised md-warn">수정</md-button>
 				</div>
 			</div>
 		</div>

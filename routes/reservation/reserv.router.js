@@ -16,4 +16,7 @@ router.route('/:year/:id')
 			.put(reserv.update)
 			.delete(reserv.delete);
 
+router.route('/:year/:id/consulting')
+			.put(reserv.updateConsult);
+
 module.exports = router;
