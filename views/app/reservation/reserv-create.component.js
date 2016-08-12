@@ -41,6 +41,7 @@ function reservController($scope, $http, $mdToast) {
 
   //window.DEBUG = self;
 
+	self.companyChange = companyChange;
 	self.menuTableChange = menuTableChange;
   self.decoNameChange = decoNameChange;
 	self.decoFruitChange = decoFruitChange;
@@ -61,6 +62,17 @@ function reservController($scope, $http, $mdToast) {
 			deposit : 5,
 			balance : 0
 		};
+	}
+	/****************************
+	 담당사업자 변경시 잔금 반영
+	 ***************************/
+	function companyChange() {
+		if (self.reserv.company == "파티리움") {
+			self.reserv.deposit = 10;
+		} else {
+			self.reserv.deposit = 5;
+		}
+		calcBalance();
 	}
 
 	/****************

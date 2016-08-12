@@ -5,7 +5,8 @@
   		<div layout="column">
         <md-input-container class="md-block">
           <label>담당사업자</label>
-          <md-select ng-model="$ctrl.reserv.company">
+          <md-select ng-model="$ctrl.reserv.company" 
+											ng-change="$ctrl.companyChange()">
             <md-option value="루이비스베베" selected>루이비스베베</md-option>
             <md-option value="파티리움">파티리움</md-option>
           </md-select>
