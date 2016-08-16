@@ -18,6 +18,7 @@ var settingSchema = new Schema({
 	rank: String,
 	role: String,
 	pay: Number,
+	optDiscount: String,
 	item: String,
 	disPrice: Number
 });
