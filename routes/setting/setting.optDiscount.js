@@ -1,5 +1,5 @@
 var setting = require('./setting.schema');
-var groupName = "decoType";
+var groupName = "optDiscount";
 
 module.exports = {
 	url: groupName,
@@ -14,8 +14,8 @@ function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
 	item.name = req.body.name;
-	item.buy = req.body.buy;
-	item.repair = req.body.repair;
+	item.item = req.body.item;
+	item.disPrice = req.body.disPrice;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -41,8 +41,8 @@ function update(req, res) {
 		if (err) res.send(err);
 
 		item.name = req.body.name;
-		item.buy = req.body.buy;
-		item.repair = req.body.repair;
+		item.item = req.body.item;
+		item.disPrice = req.body.disPrice;
 
 		item.save(function(err) {
 			if (err) res.send(err);

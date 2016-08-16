@@ -7,6 +7,14 @@
           <label>장식구분명</label>
           <input ng-model="data.name">
         </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>판매가(단위:만원)</label>
+          <input name="sell" type="number" min="0" max="20" ng-model="data.sell" class="ng-pristine ng-untouched md-input">
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>소품수리비(단위:만원)</label>
+          <input name="repair" type="number" min="0" max="20" ng-model="data.buy" class="ng-pristine ng-untouched md-input">
+        </md-input-container>
       </div>
 
       <md-dialog-actions>
@@ -17,62 +25,3 @@
   </form>
 </md-dialog>
 
-  <!--
-<md-dialog add-item-dialog="" role="dialog" tabindex="-1" aria-describedby="dialog_45" class="md-transition-in" aria-label="Add Dessert ...">
-  <md-dialog-content class="md-dialog-content" id="dialog_45">
-
-    <h2 class="md-title">Add Dessert</h2>
-
-
-    <form name="item.form" ng-submit="ctrl.addItem()" class="ng-pristine ng-invalid ng-invalid-required ng-valid-min ng-valid-max" style="">
-      <div layout="row" class="input-row layout-row">
-        <md-input-container flex="" class="flex">
-          <label for="input_37">Name</label>
-          <input name="name" ng-model="dessert.name" md-maxlength="20" required="" class="ng-pristine ng-untouched md-input ng-invalid ng-invalid-required" id="input_37" aria-required="true" aria-invalid="true" ng-trim="false">
-        <div class="md-errors-spacer"><div class="md-char-counter">0/20</div></div></md-input-container>
-        <md-input-container flex="" class="flex">
-          <label for="input_38">Calories</label>
-          <input name="calories" type="number" min="0" max="999" ng-model="dessert.calories.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_38" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-      </div>
-      <h3 class="md-subhead">Macronutrients</h3>
-      <div layout="row" class="input-row layout-row">
-        <md-input-container flex="" class="flex">
-          <label for="input_39">Fat (g)</label>
-          <input name="fat" type="number" min="0" max="99" ng-model="dessert.fat.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_39" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-        <md-input-container flex="" class="flex">
-          <label for="input_40">Carbs (g)</label>
-          <input name="carbs" type="number" min="0" max="99" ng-model="dessert.carbs.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_40" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-        <md-input-container flex="" class="flex">
-          <label for="input_41">Protein (g)</label>
-          <input name="protein" type="number" min="0" max="99" ng-model="dessert.protein.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_41" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-      </div>
-      <h3 class="md-subhead">Micronutrients</h3>
-      <div layout="row" class="input-row layout-row">
-        <md-input-container flex="" class="flex">
-          <label for="input_42">Sodium (mg)</label>
-          <input name="sodium" type="number" min="0" max="9999" ng-model="dessert.sodium.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_42" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-        <md-input-container flex="" class="flex">
-          <label for="input_43">Calcium (%)</label>
-          <input name="calcium" type="number" min="0" max="99" ng-model="dessert.calcium.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_43" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-        <md-input-container flex="" class="flex">
-          <label for="input_44">Iron (%)</label>
-          <input name="iron" type="number" min="0" max="99" ng-model="dessert.iron.value" required="" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" id="input_44" aria-required="true" aria-invalid="true">
-        <div class="md-errors-spacer"></div></md-input-container>
-      </div>
-    </form>
-
-  </md-dialog-content>
-
-  <div class="md-actions">
-    <button class="md-primary md-button md-ink-ripple" type="button" ng-transclude="" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid" aria-label="Add Item" aria-disabled="true" disabled="disabled"><span>Add Item</span></button>
-    <button class="md-primary md-button md-ink-ripple" type="button" ng-transclude="" ng-click="ctrl.cancel()" aria-label="Cancel"><span>Cancel</span></button>
-  </div>
-
-<div class="md-dialog-focus-trap" tabindex="0"></div></md-dialog>
--->

@@ -17,7 +17,9 @@ var settingSchema = new Schema({
 	other: String,
 	rank: String,
 	role: String,
-	pay: Number
+	pay: Number,
+	item: String,
+	disPrice: Number
 });
 
 module.exports = mg.model('setting', settingSchema);

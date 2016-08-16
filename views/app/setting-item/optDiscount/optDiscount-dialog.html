@@ -1,0 +1,35 @@
+<md-dialog aria-label="optOtherDialog" ng-cloak>
+  <form>
+    <md-dialog-content class="md-dialog-content">
+      <h2 class="md-title">할인 옵션</h2>
+      <div layout="column">
+        <md-input-container flex="" class="flex">
+          <label>할인옵션명</label>
+          <input ng-model="data.name">
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>할인항목</label>
+          <md-select ng-model="data.item">
+            <md-option value='decoLoc'>행사장소</md-option>
+            <md-option value='decoType'>장식종류</md-option>
+            <md-option value='decoFruit'>생과일</md-option>
+            <md-option value='decoRcake'>떡케익</md-option>
+            <md-option value='optDress'>돌복/드레스</md-option>
+            <md-option value='optMC'>행사사회</md-option>
+            <md-option value='optMovie'>성장동영상</md-option>
+            <md-option value='optOther'>기타</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="" class="flex">
+          <label>할인가(단위:만원)</label>
+          <input name="sell" type="number" min="0" max="20" ng-model="data.disPrice" class="ng-pristine ng-untouched md-input">
+        </md-input-container>
+      </div>
+
+      <md-dialog-actions>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
+        <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>
+      </md-dialog-actions>
+    </md-dialog-content>
+  </form>
+</md-dialog>
