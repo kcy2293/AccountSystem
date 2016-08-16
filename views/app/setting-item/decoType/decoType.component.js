@@ -79,11 +79,7 @@ function adddecoTypeController($scope, $mdDialog) {
     $mdDialog.cancel();
   };
   $scope.addItem = function() {
-    if(Object.keys($scope.data).length !== 1){
-      alert('내용을 전부 채워주세요');
-    } else {
-      $mdDialog.hide($scope.data);
-    }
+		$mdDialog.hide($scope.data);
   };
 }
 

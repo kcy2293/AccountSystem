@@ -176,8 +176,17 @@
   <div class="doc-content md-whiteframe-z1" flex-gt-md>
   	<md-content layout-padding>
     	<md-subheader class="md-primary"><h2>특이사항</h2></md-subheader>
-    	<md-content layout-padding>
-    		<div layout="column">
+				<md-content layout-padding>
+					<div layout="column">
+					<md-input-container class="md-block">
+						<label>할인 옵션</label>
+						<md-select multiple ng-model="$ctrl.reserv.optDiscount" ng-change='$ctrl.optDiscountChange()'>
+							<md-option ng-repeat="item in $ctrl.settings.optDiscount"
+												value="{{item.name}}">
+								{{item.name}}
+							</md-option>
+          </md-select>
+					</md-input-container>
           <md-input-container class="md-block">
             <label>특이사항</label>
             <textarea ng-model="$ctrl.reserv.comment" md-maxlength="250" rows="10" md-select-on-focus></textarea>

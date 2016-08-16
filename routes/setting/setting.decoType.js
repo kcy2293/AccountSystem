@@ -14,7 +14,7 @@ function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
 	item.name = req.body.name;
-	item.buy = req.body.buy;
+	item.sell = req.body.sell;
 	item.repair = req.body.repair;
 
 	item.save(function(err) {
@@ -41,7 +41,7 @@ function update(req, res) {
 		if (err) res.send(err);
 
 		item.name = req.body.name;
-		item.buy = req.body.buy;
+		item.sell = req.body.sell;
 		item.repair = req.body.repair;
 
 		item.save(function(err) {

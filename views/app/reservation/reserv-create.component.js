@@ -51,6 +51,7 @@ function reservController($scope, $http, $mdToast) {
 	self.optMCChange = optMCChange;
 	self.optMovieChange = optMovieChange;
 	self.optOtherChange = optOtherChange;
+	self.optDiscountChange = optDiscountChange;
 	self.depositChange = depositChange;
 	self.save = save;
 
@@ -82,8 +83,8 @@ function reservController($scope, $http, $mdToast) {
 		var item = _.findWhere(self.settings.menuTable, {name: self.reserv.menuTable});
 		self.reserv.decoType = item.decoType;
 		self.reserv.decoFruit = [item.decoFruit];
-		self.reserv.decoRcake = [item.decoRcake];
-		self.reserv.optDress = [item.optDress];
+		self.reserv.decoRcake = (item.decoRcake).split(',');
+		self.reserv.optDiscount = (item.optDiscount).split(',');
 
 		calcBalance();
 	}
@@ -114,6 +115,9 @@ function reservController($scope, $http, $mdToast) {
 	function optOtherChange() {
 		calcBalance();
 	}
+	function optDiscountChange() {
+		calcBalance();
+	}
 	function depositChange() {
 		calcBalance();
 	}
@@ -122,14 +126,13 @@ function reservController($scope, $http, $mdToast) {
 		잔금 계산
 	 ****************/
 	function calcBalance() {
-		var calcKeys = ["menuTable", "decoFruit", "decoRcake"];
 		self.reserv.sellList = {};
 
 		var key;
-		// menuTable
-		key = self.reserv.menuTable;
+		// decoType
+		key = self.reserv.decoType;
 		if (key) {
-			self.reserv.sellList[key] = getIncomeData("menuTable", key, "sell");
+			self.reserv.sellList[key] = getIncomeData("decoType", key, "sell");
 		}
 
 		// decoFruit
@@ -183,6 +186,14 @@ function reservController($scope, $http, $mdToast) {
 		if (key) {
 			key.forEach(function(e) {
 				self.reserv.sellList[e] = getIncomeData("optOther", e, "sell");
+			});
+		}
+
+		//optOther
+		key = self.reserv.optDiscount;
+		if (key) {
+			key.forEach(function(e) {
+				self.reserv.sellList[e] = getIncomeData("optDiscount", e, "disPrice") * (-1);
 			});
 		}
 
