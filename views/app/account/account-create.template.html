@@ -4,7 +4,7 @@
       <md-button class="md-icon-button" ng-click="$ctrl.changePrevDate()" aria-label="Prev">
         <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
       </md-button>
-      8/1(월) ~ 8/7(일)
+			{{::$ctrl.period}}
       <md-button class="md-icon-button next" ng-click="$ctrl.changeNextDate()" aria-label="Next">
         <md-icon md-svg-icon="md-tabs-arrow" aria-hidden="true"></md-icon>
       </md-button>
@@ -36,6 +36,8 @@
           <p>* 사회 : {{item.optMC}}</p>
           <p>* 성장동영상 : {{item.optMovie}}</p>
           <p>* 스냅 : {{item.optSnap}}</p>
+					<p>* 기타추가옵션 : {{item.optOther}}</p>
+					<p>* 출장비 : {{item.optOutgoingFee}}</p>
           <p>* 예약금 : {{item.deposit}}</p>
           <p>* 잔금 : {{item.balance}}</p>
         </md-content>

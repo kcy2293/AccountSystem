@@ -32,6 +32,7 @@
           <th md-column><span>할인명</span></th>
           <th md-column><span>할인항목</span></th>
           <th md-column><span>할인가<br>(만원)</span></th>
+          <th md-column><span>지출차감<br>(만원)</span></th>
         </tr>
       </thead>
       <tbody md-body>
@@ -39,6 +40,7 @@
           <td md-cell>{{item.name}}</td>
           <td md-cell>{{$ctrl.itemList[item.item]}}</td>
           <td md-cell>{{item.disPrice}}</td>
+          <td md-cell>{{item.repair}}</td>
         </tr>
       </tbody>
     </table>

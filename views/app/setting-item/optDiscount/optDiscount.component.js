@@ -44,6 +44,7 @@ function optDiscountController($scope, $mdDialog, $http, $q) {
       templateUrl: 'app/setting-item/optDiscount/optDiscount-dialog.html',
     }).then(function(data) {
       data.group = "optDiscount";
+			if (!data.repair) data.repair = 0;
       $http.post('/api/setting/optDiscount', data)
         .then(function(res) {
           getDiscount();

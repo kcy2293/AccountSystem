@@ -42,6 +42,7 @@ function reservController($scope, $http, $mdToast) {
   //window.DEBUG = self;
 
 	self.companyChange = companyChange;
+	self.decoLocChange = decoLocChange;
 	self.menuTableChange = menuTableChange;
   self.decoNameChange = decoNameChange;
 	self.decoFruitChange = decoFruitChange;
@@ -51,9 +52,18 @@ function reservController($scope, $http, $mdToast) {
 	self.optMCChange = optMCChange;
 	self.optMovieChange = optMovieChange;
 	self.optOtherChange = optOtherChange;
+	self.optOutgoingFeeChange = optOutgoingFeeChange;
 	self.optDiscountChange = optDiscountChange;
 	self.depositChange = depositChange;
 	self.save = save;
+
+	self.getJsonLen = function(json) {
+		if (json) {
+			return Object.keys(json).length;
+		} else {
+			return 0;
+		}
+	};
 
 	/****************
     예약서 정보 초기화
@@ -73,12 +83,15 @@ function reservController($scope, $http, $mdToast) {
 		} else {
 			self.reserv.deposit = 5;
 		}
-		calcBalance();
+		calc();
 	}
 
 	/****************
 	 패키지 선택시
 	 ****************/
+	function decoLocChange() {
+		calc();
+	}
 	function menuTableChange() {
 		var item = _.findWhere(self.settings.menuTable, {name: self.reserv.menuTable});
 		self.reserv.decoType = item.decoType;
@@ -86,7 +99,7 @@ function reservController($scope, $http, $mdToast) {
 		self.reserv.decoRcake = (item.decoRcake).split(',');
 		self.reserv.optDiscount = (item.optDiscount).split(',');
 
-		calcBalance();
+		calc();
 	}
   function decoNameChange() {
 		var item = _.findWhere(self.settings.decoName, {name: self.reserv.decoName});
@@ -95,51 +108,73 @@ function reservController($scope, $http, $mdToast) {
     }
   }
 	function decoFruitChange() {
-		calcBalance();
+		calc();
 	}
 	function decoRcakeChange() {
-		calcBalance();
+		calc();
 	}
 	function decoPhotoChange() {
-		calcBalance();
+		calc();
 	}
 	function optDressChange() {
-		calcBalance();
+		calc();
 	}
 	function optMCChange() {
-		calcBalance();
+		calc();
 	}
 	function optMovieChange() {
-		calcBalance();
+		calc();
 	}
 	function optOtherChange() {
-		calcBalance();
+		calc();
 	}
 	function optDiscountChange() {
-		calcBalance();
+		calc();
+	}
+	function optOutgoingFeeChange(){
+		calc();
 	}
 	function depositChange() {
-		calcBalance();
+		calc();
 	}
 
 	/****************
 		잔금 계산
 	 ****************/
-	function calcBalance() {
+	function calc() {
 		self.reserv.sellList = {};
+		self.reserv.feeList = {};
 
-		var key;
+		var key, sell, fee, totalSell = 0, totalFee = 0;
+
+		// decoLoc
+		key = self.reserv.decoLoc;
+		if (key) {
+			fee = getSettingData("decoLoc", key, "commission");
+			self.reserv.feeList[key] = fee;
+			totalFee += fee;
+		}
 		// decoType
 		key = self.reserv.decoType;
 		if (key) {
-			self.reserv.sellList[key] = getIncomeData("decoType", key, "sell");
+			sell = getSettingData("decoType", key, "sell");
+			fee = getSettingData("decoType", key, "repair");
+			self.reserv.sellList[key] = sell;
+			self.reserv.feeList[key] = fee;
+			totalSell += sell;
+			totalFee += fee;
 		}
 
 		// decoFruit
 		key = self.reserv.decoFruit;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("decoFruit", e, "sell");
+				sell = getSettingData("decoFruit", e, "sell");
+				fee = getSettingData("decoFruit", e, "buy");
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
@@ -147,21 +182,33 @@ function reservController($scope, $http, $mdToast) {
 		key = self.reserv.decoRcake;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("decoRcake", e, "sell");
+				sell = getSettingData("decoRcake", e, "sell");
+				fee = getSettingData("decoRcake", e, "buy");
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
 		//decoPhoto
 		key = self.reserv.decoPhoto;
 		if (key) {
-			self.reserv.sellList[key] = getIncomeData("decoPhoto", key, "sell");
+			sell = getSettingData("decoPhoto", key, "sell");
+			self.reserv.sellList[key] = sell;
+			totalSell += sell;
 		}
 
 		//optDress
 		key = self.reserv.optDress;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("optDress", e, "sell");
+				sell = getSettingData("optDress", e, "sell");
+				fee = getSettingData("optDress", e, "repair");
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
@@ -169,42 +216,75 @@ function reservController($scope, $http, $mdToast) {
 		key = self.reserv.optMC;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("optMC", e, "sell");
+				sell = getSettingData("optMC", e, "sell");
+				fee = getSettingData("optMC", e, "commission");
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
 		//optMovie
 		key = self.reserv.optMovie;
 		if (key) {
-			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("optMovie", e, "sell");
-			});
+			sell = getSettingData("optMovie", key, "sell");
+			fee = getSettingData("optMovie", key, "commission");
+			self.reserv.sellList[key] = sell;
+			self.reserv.feeList[key] = fee;
+			totalSell += sell;
+			totalFee += fee;
 		}
 
 		//optOther
 		key = self.reserv.optOther;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("optOther", e, "sell");
+				sell = getSettingData("optOther", e, "sell");
+				fee = getSettingData("optOther", e, "buy");
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
-		//optOther
+		//optDiscount
 		key = self.reserv.optDiscount;
 		if (key) {
 			key.forEach(function(e) {
-				self.reserv.sellList[e] = getIncomeData("optDiscount", e, "disPrice") * (-1);
+				sell = getSettingData("optDiscount", e, "disPrice") * (-1);
+				fee = getSettingData("optDiscount", e, "repair") * (-1);
+				self.reserv.sellList[e] = sell;
+				self.reserv.feeList[e] = fee;
+				totalSell += sell;
+				totalFee += fee;
 			});
 		}
 
+		//optOutgoingFee
+		if (self.reserv.optOutgoingFee) {
+			self.reserv.sellList['출장비'] = self.reserv.optOutgoingFee;
+			totalSell += self.reserv.optOutgoingFee;
+		}
+
+		// 잔금 및 예약금 계산 
 		self.reserv.balance = 0;
 		for (var key in (self.reserv.sellList)) {
 			self.reserv.balance += self.reserv.sellList[key];
 		}
 		self.reserv.balance -= self.reserv.deposit;
+
+		// 총판매금, 총지출금 정리
+		if (totalSell != 0) {
+			self.reserv.sellList['총판매금'] = totalSell.toFixed(1);
+		}
+		if (totalFee != 0) {
+			self.reserv.feeList['총지출금'] = totalFee.toFixed(1);
+		}
 	}
 
-	function getIncomeData(settingKey, itemKey, incomeKey) {
+	function getSettingData(settingKey, itemKey, incomeKey) {
 		var item = _.findWhere(self.settings[settingKey], {name: itemKey});
 		return item[incomeKey];
 	}

@@ -16,6 +16,7 @@ function create(req, res) {
 	item.name = req.body.name;
 	item.item = req.body.item;
 	item.disPrice = req.body.disPrice;
+	item.repair = req.body.repair;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -43,6 +44,7 @@ function update(req, res) {
 		item.name = req.body.name;
 		item.item = req.body.item;
 		item.disPrice = req.body.disPrice;
+		item.repair = req.body.repair;
 
 		item.save(function(err) {
 			if (err) res.send(err);

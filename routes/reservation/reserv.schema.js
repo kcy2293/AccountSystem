@@ -26,12 +26,15 @@ var reservSchema = new Schema({
 	optMovie: String,
 	optSnap: String,
 	optOther: Array,
+	optDiscount: Array,
+	optOutgoingFee: Number,
 	comment: String,
 	manager: Array,
 	role: Array,
 	deposit: Number,
 	balance: Number,
 	sellList: Schema.Types.Mixed,
+	feeList: Schema.Types.Mixed,
 	consultList: [Schema.Types.Mixed]
 });
 

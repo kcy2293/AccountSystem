@@ -26,12 +26,14 @@
         <p>* 장식명 : {{$ctrl.reserv.decoType}}</p>
         <p>* 컨셉명 : {{$ctrl.reserv.decoName}}</p>
         <p>* 포토테이블 : {{$ctrl.reserv.decoPhoto}}</p>
-        <p>* 과일 : {{$ctrl.reserv.decoFruit}}</p>
-        <p>* 떡 : {{$ctrl.reserv.decoRcake}}</p>
-        <p>* 돌복 : {{$ctrl.reserv.optDress}}</p>
-        <p>* 사회 : {{$ctrl.reserv.optMC}}</p>
+        <p>* 과일 : {{$ctrl.reserv.decoFruit.toString()}}</p>
+        <p>* 떡 : {{$ctrl.reserv.decoRcake.toString()}}</p>
+        <p>* 돌복 : {{$ctrl.reserv.optDress.toString()}}</p>
+        <p>* 사회 : {{$ctrl.reserv.optMC.toString()}}</p>
         <p>* 성장동영상 : {{$ctrl.reserv.optMovie}}</p>
         <p>* 스냅 : {{$ctrl.reserv.optSnap}}</p>
+        <p>* 기타추가옵션 : {{$ctrl.reserv.optOther.toString()}}</p>
+				<p>* 출장비 : {{$ctrl.reserv.optOutgoingFee}}</p>
         <p>* 예약금 : {{$ctrl.reserv.deposit}}</p>
         <p>* 잔금 : {{$ctrl.reserv.balance}}</p>
         <pre>* 특이사항 : <br>{{$ctrl.reserv.comment}}</pre>

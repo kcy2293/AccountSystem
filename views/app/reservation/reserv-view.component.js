@@ -28,7 +28,7 @@ function reservViewController($scope, $http, $location, $mdToast, moment) {
 	self.clickedConsultUpdate = clickedConsultUpdate;
 
   function update() {
-    $location.url('/reserv-update/' + self.year + '/' + id);
+    $location.url('/reserv-update/' + year + '/' + id);
   }
 
   function deleteOne() {

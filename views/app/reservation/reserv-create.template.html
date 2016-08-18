@@ -23,7 +23,7 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label>장소종류</label>
-          <md-select ng-model="$ctrl.reserv.decoLoc">
+          <md-select ng-model="$ctrl.reserv.decoLoc" ng-change="$ctrl.decoLocChange()">
             <md-option ng-repeat="item in $ctrl.settings.decoLoc"
                       value="{{item.name}}">
               {{item.name}}
@@ -144,7 +144,7 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label>성장동영상</label>
-          <md-select multiple ng-model="$ctrl.reserv.optMovie" ng-change='$ctrl.optMovieChange()'>
+          <md-select ng-model="$ctrl.reserv.optMovie" ng-change='$ctrl.optMovieChange()'>
             <md-option ng-repeat="item in $ctrl.settings.optMovie"
                       value="{{item.name}}">
               {{item.name}}
@@ -186,6 +186,13 @@
 								{{item.name}}
 							</md-option>
           </md-select>
+					</md-input-container>
+					<md-input-container class="md-block">
+            <label>출장비</label>
+						<!--
+						<input type="number" ng-blur="$ctrl.optOutgoingFeeChange()" ng-model="$ctrl.reserv.optOutgoingFee" class="ng-pristine ng-untouched">
+						-->
+						<input type="number" ng-change="$ctrl.optOutgoingFeeChange()" ng-model="$ctrl.reserv.optOutgoingFee" class="ng-pristine ng-untouched">
 					</md-input-container>
           <md-input-container class="md-block">
             <label>특이사항</label>
@@ -236,6 +243,31 @@
           <label>잔금(단위:만원)</label>
           <input name="balance" type="number" min="0" max="100" ng-model="$ctrl.reserv.balance" class="ng-pristine">
         </md-input-container>
+				<div ng-if='$ctrl.getJsonLen($ctrl.reserv.sellList) > 0'>
+					<table class="sellList">
+						<tr>
+							<th>항목명</th>
+							<th>판매금</th>
+						</tr>
+						<tr ng-repeat="(key,value) in $ctrl.reserv.sellList">
+							<td>{{key}}</td>
+							<td>{{value}}</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<div ng-if='$ctrl.getJsonLen($ctrl.reserv.feeList) > 0'>
+					<table class="sellList">
+						<tr>
+							<th>항목명</th>
+							<th>지출금</th>
+						</tr>
+						<tr ng-repeat="(key,value) in $ctrl.reserv.feeList">
+							<td>{{key}}</td>
+							<td>{{value}}</td>
+						</tr>
+					</table>
+				</div>
   		</div>
   	</md-content>
   </div>

@@ -37,12 +37,15 @@ function create(req, res) {
 	item.optMovie = req.body.optMovie;
 	item.optSnap = req.body.optSnap;
 	item.optOther = req.body.optOther;
+	item.optDiscount = req.body.optDiscount;
+	item.optOutgoingFee = req.body.optOutgoingFee;
 	item.comment = req.body.comment;
 	item.manager = req.body.manager;
 	item.role = req.body.role;
 	item.deposit = req.body.deposit;
 	item.balance = req.body.balance;
 	item.sellList = req.body.sellList;
+	item.feeList = req.body.feeList;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -104,12 +107,14 @@ function update(req, res) {
 		item.optMovie = req.body.optMovie;
 		item.optSnap = req.body.optSnap;
 		item.optOther = req.body.optOther;
+		item.optDiscount = req.body.optDiscount;
 		item.comment = req.body.comment;
 		item.manager = req.body.manager;
 		item.role = req.body.role;
 		item.deposit = req.body.deposit;
 		item.balance = req.body.balance;
 		item.sellList = req.body.sellList;
+		item.feeList = req.body.feeList;
 
 		item.save(function(err) {
 			if (err) res.send(err);
