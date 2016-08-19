@@ -154,7 +154,23 @@ table.md-table thead.md-head>tr.md-row {
 	color: white;
 }
 
-/******** Media Query *************/
+.account-create-body table,
+.account-create-body th,
+.account-create-body td {
+	border: 1px solid white;
+	text-align: center;
+	font-size: 13px;
+}
+.account-create-body table {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	width: 100%;
+}
+.account-create-body th {
+	background-color: #eee;
+}
+
+/******************** Media Query *************************/
 /*************
  reserv-view
 **************/

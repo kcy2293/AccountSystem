@@ -59,7 +59,7 @@ function reservController($scope, $http, $mdToast) {
 
 	self.getJsonLen = function(json) {
 		if (json) {
-			return Object.keys(json).length;
+			return Object.items(json).length;
 		} else {
 			return 0;
 		}
@@ -142,33 +142,217 @@ function reservController($scope, $http, $mdToast) {
 		잔금 계산
 	 ****************/
 	function calc() {
-		self.reserv.sellList = {};
-		self.reserv.feeList = {};
+		self.reserv.priceList = [];
+		self.reserv.sellList = [];
+		self.reserv.feeList = [];
 
-		var key, sell, fee, totalSell = 0, totalFee = 0;
+		/* example
+			{
+				group: "decoFruit",
+				item: "생과일3종",
+				sell: 3,
+				fee: 2
+			}
+		*/
 
+		var group, item, sell, fee, totalSell = 0, totalFee = 0;
 		// decoLoc
-		key = self.reserv.decoLoc;
-		if (key) {
-			fee = getSettingData("decoLoc", key, "commission");
-			self.reserv.feeList[key] = fee;
+		item = self.reserv.decoLoc;
+		if (item) {
+			group = "decoLoc";
+			fee = getSettingData(group, item, "commission");
+			self.reserv.priceList.push({
+				group: group,
+				item: item,
+				fee: fee
+			});
 			totalFee += fee;
 		}
 		// decoType
-		key = self.reserv.decoType;
-		if (key) {
-			sell = getSettingData("decoType", key, "sell");
-			fee = getSettingData("decoType", key, "repair");
-			self.reserv.sellList[key] = sell;
-			self.reserv.feeList[key] = fee;
+		item = self.reserv.decoType;
+		if (item) {
+			group = "decoType";
+			sell = getSettingData(group, item, "sell");
+			fee = getSettingData(group, item, "repair");
+			self.reserv.priceList.push({
+				group: group,
+				item: item,
+				sell: sell,
+				fee: fee
+			});
+			totalSell += sell;
+			totalFee += fee;
+		}
+		// decoFruit
+		item = self.reserv.decoFruit;
+		if (item) {
+			group = "decoFruit";
+			item.forEach(function(e) {
+				sell = getSettingData(group, e, "sell");
+				fee = getSettingData(group, e, "buy");
+				self.reserv.priceList.push({
+					group: group,
+					item: e,
+					sell: sell,
+					fee: fee
+				});
+				totalSell += sell;
+				totalFee += fee;
+			});
+		}
+		//decoRcake
+		item = self.reserv.decoRcake;
+		if (item) {
+			group = "decoRcake";
+			item.forEach(function(e) {
+				sell = getSettingData(group, e, "sell");
+				fee = getSettingData(group, e, "buy");
+				self.reserv.priceList.push({
+					group: group,
+					item: e,
+					sell: sell,
+					fee: fee
+				});
+				totalSell += sell;
+				totalFee += fee;
+			});
+		}
+		//decoPhoto
+		item = self.reserv.decoPhoto;
+		if (item) {
+			group = "decoPhoto";
+			sell = getSettingData(group, item, "sell");
+			self.reserv.priceList.push({
+				group: group,
+				item: item,
+				sell: sell
+			});
+			totalSell += sell;
+		}
+		//optDress
+		item = self.reserv.optDress;
+		if (item) {
+			group = "optDress";
+			item.forEach(function(e) {
+				sell = getSettingData(group, e, "sell");
+				fee = getSettingData(group, e, "repair");
+				self.reserv.priceList.push({
+					group: group,
+					item: e,
+					sell: sell,
+					fee: fee
+				});
+				totalSell += sell;
+				totalFee += fee;
+			});
+		}
+		//optMC
+		item = self.reserv.optMC;
+		if (item) {
+			group = "optMC";
+			item.forEach(function(e) {
+				sell = getSettingData(group,  e, "sell");
+				fee = getSettingData(group,  e, "commission");
+				self.reserv.priceList.push({
+					group: group,
+					item: e,
+					sell: sell,
+					fee: fee
+				});
+				totalSell += sell;
+				totalFee += fee;
+			});
+		}
+		//optMovie
+		item = self.reserv.optMovie;
+		if (item) {
+			group = "optMovie";
+			sell = getSettingData(group, item, "sell");
+			fee = getSettingData(group, item, "commission");
+			self.reserv.priceList.push({
+				group: group,
+				item: item,
+				sell: sell,
+				fee: fee
+			});
+			totalSell += sell;
+			totalFee += fee;
+		}
+		//optOther
+		item = self.reserv.optOther;
+		if (item) {
+			group = "optOther";
+			item.forEach(function(e) {
+				sell = getSettingData(group, e, "sell");
+				fee = getSettingData(group, e, "buy");
+				self.reserv.priceList.push({
+					group: group,
+					item: e,
+					sell: sell,
+					fee: fee
+				});
+				totalSell += sell;
+				totalFee += fee;
+			});
+		}
+		//optOutgoingFee
+		if (self.reserv.optOutgoingFee) {
+			self.reserv.priceList.push({
+				group: "optOutgoingFee",
+				item: "출장비",
+				sell: self.reserv.optOutgoingFee
+			});
+			totalSell += self.reserv.optOutgoingFee;
+		}
+		// 잔금 및 예약금 계산 
+		self.reserv.balance = 0;
+		for (var item in (self.reserv.sellList)) {
+			self.reserv.balance += item.sell;
+		}
+		self.reserv.balance -= self.reserv.deposit;
+
+		// 총판매금, 총지출금 정리
+		if (totalSell != 0) {
+			self.reserv.priceList.push({
+				group: "income",
+				item: "총수익",
+				sell: totalSell.toFixed(1)
+			});
+			self.reserv.priceList.push({
+				group: "expense",
+				item: "총지출",
+				fee: totalFee.toFixed(1)
+			});
+		}
+
+		/*
+		self.reserv.sellList = {};
+		self.reserv.feeList = {};
+
+		var item, sell, fee, totalSell = 0, totalFee = 0;
+
+		// decoLoc
+		item = self.reserv.decoLoc;
+		if (item) {
+			fee = getSettingData("decoLoc", item, "commission");
+			self.reserv.feeList[item] = fee;
+			totalFee += fee;
+		}
+		// decoType
+		item = self.reserv.decoType;
+		if (item) {
+			sell = getSettingData("decoType", item, "sell");
+			fee = getSettingData("decoType", item, "repair");
+			self.reserv.sellList[item] = sell;
+			self.reserv.feeList[item] = fee;
 			totalSell += sell;
 			totalFee += fee;
 		}
 
 		// decoFruit
-		key = self.reserv.decoFruit;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.decoFruit;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("decoFruit", e, "sell");
 				fee = getSettingData("decoFruit", e, "buy");
 				self.reserv.sellList[e] = sell;
@@ -179,9 +363,9 @@ function reservController($scope, $http, $mdToast) {
 		}
 
 		//decoRcake
-		key = self.reserv.decoRcake;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.decoRcake;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("decoRcake", e, "sell");
 				fee = getSettingData("decoRcake", e, "buy");
 				self.reserv.sellList[e] = sell;
@@ -192,17 +376,17 @@ function reservController($scope, $http, $mdToast) {
 		}
 
 		//decoPhoto
-		key = self.reserv.decoPhoto;
-		if (key) {
-			sell = getSettingData("decoPhoto", key, "sell");
-			self.reserv.sellList[key] = sell;
+		item = self.reserv.decoPhoto;
+		if (item) {
+			sell = getSettingData("decoPhoto", item, "sell");
+			self.reserv.sellList[item] = sell;
 			totalSell += sell;
 		}
 
 		//optDress
-		key = self.reserv.optDress;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.optDress;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("optDress", e, "sell");
 				fee = getSettingData("optDress", e, "repair");
 				self.reserv.sellList[e] = sell;
@@ -213,9 +397,9 @@ function reservController($scope, $http, $mdToast) {
 		}
 
 		//optMC
-		key = self.reserv.optMC;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.optMC;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("optMC", e, "sell");
 				fee = getSettingData("optMC", e, "commission");
 				self.reserv.sellList[e] = sell;
@@ -226,20 +410,20 @@ function reservController($scope, $http, $mdToast) {
 		}
 
 		//optMovie
-		key = self.reserv.optMovie;
-		if (key) {
-			sell = getSettingData("optMovie", key, "sell");
-			fee = getSettingData("optMovie", key, "commission");
-			self.reserv.sellList[key] = sell;
-			self.reserv.feeList[key] = fee;
+		item = self.reserv.optMovie;
+		if (item) {
+			sell = getSettingData("optMovie", item, "sell");
+			fee = getSettingData("optMovie", item, "commission");
+			self.reserv.sellList[item] = sell;
+			self.reserv.feeList[item] = fee;
 			totalSell += sell;
 			totalFee += fee;
 		}
 
 		//optOther
-		key = self.reserv.optOther;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.optOther;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("optOther", e, "sell");
 				fee = getSettingData("optOther", e, "buy");
 				self.reserv.sellList[e] = sell;
@@ -250,9 +434,9 @@ function reservController($scope, $http, $mdToast) {
 		}
 
 		//optDiscount
-		key = self.reserv.optDiscount;
-		if (key) {
-			key.forEach(function(e) {
+		item = self.reserv.optDiscount;
+		if (item) {
+			item.forEach(function(e) {
 				sell = getSettingData("optDiscount", e, "disPrice") * (-1);
 				fee = getSettingData("optDiscount", e, "repair") * (-1);
 				self.reserv.sellList[e] = sell;
@@ -270,8 +454,8 @@ function reservController($scope, $http, $mdToast) {
 
 		// 잔금 및 예약금 계산 
 		self.reserv.balance = 0;
-		for (var key in (self.reserv.sellList)) {
-			self.reserv.balance += self.reserv.sellList[key];
+		for (var item in (self.reserv.sellList)) {
+			self.reserv.balance += self.reserv.sellList[item];
 		}
 		self.reserv.balance -= self.reserv.deposit;
 
@@ -282,6 +466,7 @@ function reservController($scope, $http, $mdToast) {
 		if (totalFee != 0) {
 			self.reserv.feeList['총지출금'] = totalFee.toFixed(1);
 		}
+		*/
 	}
 
 	function getSettingData(settingKey, itemKey, incomeKey) {

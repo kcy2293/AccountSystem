@@ -45,20 +45,44 @@
     </md-tabs>
   </div>
   <div class='account-create-middle'>
-    <md-button class="md-raised md-warn">정산내역 산출하기</md-button>
+    <md-button ng-click="$ctrl.calc()" class="md-raised md-warn">정산내역 산출하기</md-button>
   </div>
   <div class='account-create-body'>
     <div style="text-align: center;">
       <h2>정산내역</h2>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+		<div layout-gt-xs="row">
+			<div flex layout-padding>
+				<table>
+					<tr>
+						<th colspan="2">수익내역</th>
+					</tr>
+					<tr>
+						<td>test1</td>
+						<td>12</td>
+					</tr>
+					<tr>
+						<td>test2</td>
+						<td>34</td>
+					</tr>
+				</table>
+			</div>
+			<div flex layout-padding>
+				<table>
+					<tr>
+						<th colspan="2">지출내역</th>
+					</tr>
+					<tr>
+						<td>test1</td>
+						<td>12</td>
+					</tr>
+					<tr>
+						<td>test2</td>
+						<td>34</td>
+					</tr>
+				</table>
+			</div>
+		</div>
   </div>
 </div>
 <md-button class="md-fab md-primary reserv-save" aria-label="save" ng-click="$ctrl.save()">

@@ -52,6 +52,7 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 	 ***********************/
 	self.changePrevDate = changePrevDate;
 	self.changeNextDate = changeNextDate;
+	self.calc = calc;
 
 	function changePrevDate() {
 		var prevDateStr = new moment(dateStr).subtract(7, 'days').format('YYYYMMDD');
@@ -60,5 +61,13 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 	function changeNextDate() {
 		var nextDateStr = new moment(dateStr).add(7, 'days').format('YYYYMMDD');
 		$location.url('/account-create/'+ nextDateStr);
+	}
+	function calc() {
+		if (self.list.length < 1) {
+			$mdToast.showSimple("정산내역을 산출한 예약서가 존재하지 않습니다.");
+		}
+
+		self.account.incomeList = {};
+		self.account.outcomeList = {};
 	}
 }
