@@ -33,8 +33,7 @@ var reservSchema = new Schema({
 	role: Array,
 	deposit: Number,
 	balance: Number,
-	sellList: Schema.Types.Mixed,
-	feeList: Schema.Types.Mixed,
+	priceList: [Schema.Types.Mixed],
 	consultList: [Schema.Types.Mixed]
 });
 

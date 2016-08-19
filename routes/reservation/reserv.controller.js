@@ -44,8 +44,7 @@ function create(req, res) {
 	item.role = req.body.role;
 	item.deposit = req.body.deposit;
 	item.balance = req.body.balance;
-	item.sellList = req.body.sellList;
-	item.feeList = req.body.feeList;
+	item.priceList = req.body.priceList;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -113,8 +112,7 @@ function update(req, res) {
 		item.role = req.body.role;
 		item.deposit = req.body.deposit;
 		item.balance = req.body.balance;
-		item.sellList = req.body.sellList;
-		item.feeList = req.body.feeList;
+		item.priceList = req.body.priceList;
 
 		item.save(function(err) {
 			if (err) res.send(err);

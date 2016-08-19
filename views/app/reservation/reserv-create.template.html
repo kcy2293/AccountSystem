@@ -243,8 +243,8 @@
           <label>잔금(단위:만원)</label>
           <input name="balance" type="number" min="0" max="100" ng-model="$ctrl.reserv.balance" class="ng-pristine">
         </md-input-container>
-				<div layout="row" layout-gt-md="column">
-					<div flex ng-if='$ctrl.reserv.priceList.length > 0'>
+				<div layout-sm="row" layout-md="row">
+					<div flex ng-if='$ctrl.reserv.priceList.length > 0' style="padding: 5px;">
 						<table class="sellList">
 							<tr>
 								<th colspan="2">판매금내역</th>
@@ -255,7 +255,7 @@
 							</tr>
 						</table>
 					</div>
-					<div flex ng-if='$ctrl.reserv.priceList.length > 0'>
+					<div flex ng-if='$ctrl.reserv.priceList.length > 0' style="padding: 5px;">
 						<table class="sellList">
 							<tr>
 								<th colspan="2">지출금내역</th>
