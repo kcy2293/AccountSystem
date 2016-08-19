@@ -11,35 +11,40 @@
     </h2>
   </div>
   <div class="md-whiteframe-z1">
-    <!--
-    <md-tabs md-dynamic-height md-border-bottom>
-    -->
     <div style="text-align:center;">
       <h2>주간 예약서 목록</h2>
     </div>
-    <md-tabs md-border-bottom>
-      <md-tab label="{{item.day}}{{item.babyName}}" ng-repeat="item in $ctrl.list">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="({{item.status}}){{item.day}}{{item.babyName}}" ng-repeat="item in $ctrl.list">
         <md-content class="md-padding">
           <p>
-  					* 행사장소 : <span ng-show="item.decoLoc2">{{item.decoLoc2}}</span>
-  					<span ng-hide="item.decoLoc2">{{item.decoLoc}}</span><br/>
-          </p>
-          <p>* 행사일 : {{item.day}}</p>
-          <p>* 아가이름 : {{item.babyName}}</p>
-          <p>* 연락처 : {{item.phoneNum}}<br/>
-          <p>* 장식명 : {{item.decoType}}</p>
-          <p>* 컨셉명 : {{item.decoName}}</p>
-          <p>* 포토테이블 : {{item.decoPhoto}}</p>
-          <p>* 과일 : {{item.decoFruit}}</p>
-          <p>* 떡 : {{item.decoRcake}}</p>
-          <p>* 돌복 : {{item.optDress}}</p>
-          <p>* 사회 : {{item.optMC}}</p>
-          <p>* 성장동영상 : {{item.optMovie}}</p>
-          <p>* 스냅 : {{item.optSnap}}</p>
-					<p>* 기타추가옵션 : {{item.optOther}}</p>
-					<p>* 출장비 : {{item.optOutgoingFee}}</p>
-          <p>* 예약금 : {{item.deposit}}</p>
-          <p>* 잔금 : {{item.balance}}</p>
+						<span>* 행사정보 : </span>
+  					<span ng-show="item.decoLoc2">{{item.decoLoc2}}</span>
+  					<span ng-hide="item.decoLoc2">{{item.decoLoc}}</span>
+						<span>, {{item.day}}</span>
+						<span>, {{item.babyName}}</span>
+						<span>, {{item.phoneNum}}</span>
+					</p>
+          <p>
+						<span>* 장식정보 : {{item.decoType}}</span>
+						<span>, {{item.decoName}}</span>
+						<span>, {{item.decoPhoto}}</span>
+					</p>
+          <p>
+						<span>* 과일/떡/돌복 : {{item.decoFruit.toString()}}</span>
+						<span>/ {{item.decoRcake.toString()}}</span>
+						<span>/ {{item.optDress.toString()}}</span>
+					</p>
+          <p>
+						<span>* 사회/성장동영상 : {{item.optMC.toString()}}</span>
+						<span>/ {{item.optMovie}}</span>
+					</p>
+					<p ng-if='item.optOther.length > 0'>* 기타추가옵션 : {{item.optOther.toString()}}</p>
+					<p ng-if='item.optOutgoingFee > 0'>* 출장비 : {{item.optOutgoingFee}}</p>
+          <p>* 예약금/잔금 : {{item.deposit}} / {{item.balance}}</p>
+					<!--
+					<p>{{item.priceList}}</p>
+					-->
         </md-content>
       </md-tab>
     </md-tabs>
@@ -52,40 +57,91 @@
       <h2>정산내역</h2>
     </div>
 		<div layout-gt-xs="row">
-			<div flex layout-padding>
+			<div flex="40" layout-padding>
 				<table>
 					<tr>
 						<th colspan="2">수익내역</th>
 					</tr>
 					<tr>
-						<td>test1</td>
-						<td>12</td>
+						<td>장식</td>
+						<td>100</td>
 					</tr>
 					<tr>
-						<td>test2</td>
-						<td>34</td>
+						<td>생과일</td>
+						<td>60</td>
+					</tr>
+					<tr>
+						<td>떡케익</td>
+						<td>30</td>
+					</tr>
+					<tr>
+						<td>포토테이블</td>
+						<td>20</td>
 					</tr>
 				</table>
 			</div>
 			<div flex layout-padding>
 				<table>
 					<tr>
-						<th colspan="2">지출내역</th>
+						<th colspan="3">지출내역</th>
 					</tr>
 					<tr>
-						<td>test1</td>
-						<td>12</td>
+						<td rowspan="3">전속커미션</td>
+						<td>이원</td>
+						<td>2</td>
 					</tr>
 					<tr>
-						<td>test2</td>
-						<td>34</td>
+						<td>라페스타</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td>봉래헌</td>
+						<td>4</td>
+					</tr>
+					<tr>
+						<td>소품수리비</td>
+						<td>-</td>
+						<td>4</td>
+					</tr>
+					<tr>
+						<td>생과일</td>
+						<td>-</td>
+						<td>6</td>
+					</tr>
+					<tr>
+						<td>떡케익</td>
+						<td>-</td>
+						<td>5.5</td>
+					</tr>
+					<tr>
+						<td>돌복수선비</td>
+						<td>-</td>
+						<td>6.5</td>
+					</tr>
+					<tr>
+						<td rowspan="2">MC커미션</td>
+						<td>브릿지</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td>황진아</td>
+						<td>6</td>
+					</tr>
+					<tr>
+						<td rowspan="2">성장동영상</td>
+						<td>잼잼스토리</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>성장통</td>
+						<td>5</td>
 					</tr>
 				</table>
 			</div>
 		</div>
   </div>
 </div>
-<md-button class="md-fab md-primary reserv-save" aria-label="save" ng-click="$ctrl.save()">
+<md-button class="md-fab md-primary account-save" aria-label="save" ng-click="$ctrl.save()">
   <md-tooltip md-direction="top">주간 정산내역 확정</md-tooltip>
   <md-icon md-svg-src="img/svg/ic_done_white_24px.svg"></md-icon>
 </md-button>

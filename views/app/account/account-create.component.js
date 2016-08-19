@@ -64,10 +64,11 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 	}
 	function calc() {
 		if (self.list.length < 1) {
-			$mdToast.showSimple("정산내역을 산출한 예약서가 존재하지 않습니다.");
+			$mdToast.showSimple("입력된 예약서가 없습니다.");
 		}
 
-		self.account.incomeList = {};
-		self.account.outcomeList = {};
+		for (var i = 0, len = self.list.length ; i < len ; i++){ 
+		}
+
 	}
 }

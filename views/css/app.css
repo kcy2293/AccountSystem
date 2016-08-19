@@ -167,11 +167,18 @@ table.md-table thead.md-head>tr.md-row {
 }
 .account-create-body table {
 	border-collapse: collapse;
-	margin-bottom: 20px;
+	margin-bottom: 100px;
 	width: 100%;
 }
 .account-create-body th {
 	background-color: #eee;
+	color: #0C2238;
+}
+
+.account-save {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
 }
 
 /******************** Media Query *************************/
