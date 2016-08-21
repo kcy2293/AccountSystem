@@ -93,6 +93,8 @@ function addMenuTableController($scope, $mdDialog, settings) {
 function editMenuTableController($scope, $mdDialog, settings, params) {
   $scope.settings = settings;
   $scope.data = params;
+	$scope.data.decoRcake = $scope.data.decoRcake.split(',');
+	$scope.data.optDiscount = $scope.data.optDiscount.split(',');
   $scope.cancel = function() {
     $mdDialog.cancel();
   };
