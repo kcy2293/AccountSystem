@@ -308,8 +308,9 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
 			item.forEach(function(e) {
 				sell = getSettingData(group, e, "disPrice") * (-1);
 				fee = getSettingData(group, e, "repair") * (-1);
+				var discountType = getSettingData(group, e, "item");
 				self.reserv.priceList.push({
-					group: group,
+					group: discountType,
 					item: e,
 					sell: sell,
 					fee: fee
