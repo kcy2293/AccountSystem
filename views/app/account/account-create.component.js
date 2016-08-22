@@ -84,6 +84,12 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 				}
 			}
 		}
+
+		/*
+		for (var i = 0, len = self.account.expenseList.length ; i < len ; i++) {
+			console.log(self.account.expenseList[i].groupName, self.account.expenseList[i].totalFee);
+		}
+		*/
 	}
 
 	var expenseNames = {
@@ -104,7 +110,7 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 			if (Number(obj.fee) !== 0) {
 				self.account.expenseList.push({
 					group: obj.group,
-					groupName: expenseNames[obj.group],
+					groupName: expenseNames[obj.group] || "총지출",
 					itemList: [{
 						name: obj.item,
 						fee: Number(obj.fee)
@@ -127,10 +133,9 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 			} else {
 				// 5. 있으면 합산
 				itemList[itemIndex].fee = Number((Number(itemList[itemIndex].fee) + Number(obj.fee)).toFixed(1));
-				console.log(obj.item, itemList[itemIndex].fee, obj.fee)
 			}
 			// 6. 총 합산은 있으나 없으나 더함
-			self.account.expenseList[groupIndex].totalFee = Number(Number(self.account.expenseList[groupIndex].totalFee) + Number(obj.fee)).toFixed(1));
+			self.account.expenseList[groupIndex].totalFee = Number((Number(self.account.expenseList[groupIndex].totalFee) + Number(obj.fee)).toFixed(1));
 		}
 	}
 
