@@ -125,6 +125,7 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 		'decoType': '소품수리비',
 		'decoFruit': '생과일',
 		'decoRcake': '떡케익',
+		'decoPhoto': '포토수리비',
 		'optDress': '돌복수선비',
 		'optMC': 'MC커미션',
 		'optMovie': '성장동영상',

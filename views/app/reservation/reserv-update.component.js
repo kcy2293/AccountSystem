@@ -51,6 +51,7 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
   //window.DEBUG = self;
 
 	self.companyChange = companyChange;
+	self.decoTypeChange = decoTypeChange;
 	self.decoLocChange = decoLocChange;
 	self.menuTableChange = menuTableChange;
   self.decoNameChange = decoNameChange;
@@ -98,9 +99,6 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
 	/****************
 	 패키지 선택시
 	 ****************/
-	function decoLocChange() {
-		calc();
-	}
 	function menuTableChange() {
 		var item = _.findWhere(self.settings.menuTable, {name: self.reserv.menuTable});
 		self.reserv.decoType = item.decoType;
@@ -115,6 +113,12 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
       self.reserv.decoImage = item.imgName;
     }
   }
+	function decoTypeChange() {
+		calc();
+	}
+	function decoLocChange() {
+		calc();
+	}
 	function decoFruitChange() {
 		calc();
 	}
@@ -228,12 +232,15 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
 		if (item) {
 			group = "decoPhoto";
 			sell = getSettingData(group, item, "sell");
+			fee = getSettingData(group, e, "repair");
 			self.reserv.priceList.push({
 				group: group,
 				item: item,
-				sell: sell
+				sell: sell,
+				fee: fee
 			});
 			totalSell += sell;
+			totalFee += fee;
 		}
 		//optDress
 		item = self.reserv.optDress;

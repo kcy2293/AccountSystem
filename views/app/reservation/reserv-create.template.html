@@ -73,7 +73,8 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label>장식 종류</label>
-          <md-select ng-model="$ctrl.reserv.decoType">
+          <md-select ng-model="$ctrl.reserv.decoType"
+											ng-change="$ctrl.decoTypeChange()">
             <md-option ng-repeat="item in $ctrl.settings.decoType"
                       value="{{item.name}}">
               {{item.name}}

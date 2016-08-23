@@ -1,7 +1,7 @@
 <md-card>
   <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length">
     <div class="md-toolbar-tools">
-      <span>포토테이블 종류관리</span>
+      <span>포토테이블 관리</span>
       <span flex></span>
       <md-button class="md-raised"
                  ng-click="$ctrl.addItem($event);"
@@ -31,12 +31,14 @@
         <tr md-row>
           <th md-column><span>종류명</span></th>
           <th md-column><span>판매가<br>(만원)</span></th>
+          <th md-column><span>수리비<br>(만원)</span></th>
         </tr>
       </thead>
       <tbody md-body>
         <tr md-row md-select="item" md-select-id="name" md-auto-select ng-repeat="item in $ctrl.decoPhoto">
           <td md-cell>{{item.name}}</td>
           <td md-cell>{{item.sell}}</td>
+          <td md-cell>{{item.repair}}</td>
         </tr>
       </tbody>
     </table>
