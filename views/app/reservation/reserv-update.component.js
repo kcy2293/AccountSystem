@@ -341,8 +341,8 @@ function reservUpdateController($scope, $http, $mdToast, $location) {
 		// 총판매금, 총지출금 정리
 		if (totalSell != 0) {
 			self.reserv.priceList.push({
-				group: "income",
-				item: "총수익",
+				group: "revenue",
+				item: "총판매",
 				sell: totalSell.toFixed(1)
 			});
 			self.reserv.priceList.push({
