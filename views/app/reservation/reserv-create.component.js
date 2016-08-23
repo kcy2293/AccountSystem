@@ -224,7 +224,7 @@ function reservController($scope, $http, $mdToast) {
 		if (item) {
 			group = "decoPhoto";
 			sell = getSettingData(group, item, "sell");
-			fee = getSettingData(group, e, "repair");
+			fee = getSettingData(group, item, "repair");
 			self.reserv.priceList.push({
 				group: group,
 				item: item,
