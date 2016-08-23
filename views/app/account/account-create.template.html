@@ -57,85 +57,119 @@
       <h2>정산내역</h2>
     </div>
 		<div layout-gt-xs="row">
-			<div flex="40" layout-padding>
+			<div flex-gt-xs="25" layout-padding>
+				<table>
+					<tr>
+						<th colspan="2">매출내역</th>
+					</tr>
+					<tr ng-repeat="item in $ctrl.account.revenueList">
+						<td>{{item.groupName}}</td>
+						<td>{{item.totalPrice}}</td>
+					</tr>
+					<tr ng-if="$ctrl.account.revenueList.length > 0">
+						<td>총매출</td>
+						<td>{{$ctrl.account.revenueTotal}}</td>
+					<tr>
+				</table>
+			</div>
+			<div flex-gt-xs="25" layout-padding>
 				<table>
 					<tr>
 						<th colspan="2">수익내역</th>
 					</tr>
-					<tr>
-						<td>장식</td>
-						<td>100</td>
+					<tr ng-repeat="item in $ctrl.account.incomeList">
+						<td>{{item.groupName}}</td>
+						<td>{{item.totalPrice}}</td>
 					</tr>
+					<tr ng-if="$ctrl.account.incomeList.length > 0">
+						<td>총매출</td>
+						<td>{{$ctrl.account.incomeTotal}}</td>
 					<tr>
-						<td>생과일</td>
-						<td>60</td>
-					</tr>
-					<tr>
-						<td>떡케익</td>
-						<td>30</td>
-					</tr>
-					<tr>
-						<td>포토테이블</td>
-						<td>20</td>
-					</tr>
 				</table>
 			</div>
-			<div flex layout-padding>
+			<div flex-gt-xs layout-padding>
 				<table>
 					<tr>
 						<th colspan="3">지출내역</th>
 					</tr>
+					<tbody ng-repeat="el in $ctrl.account.expenseList">
+						<tr ng-if="el.detailPrint" ng-repeat="item in el.itemList">
+							<td ng-if="$first" rowspan="{{el.itemList.length}}">{{el.groupName}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.price}}</td>
+						</tr>
+						<tr ng-if="!el.detailPrint">
+							<td>{{el.groupName}}</td>
+							<td></td>
+							<td>{{el.totalPrice}}</td>
+						</tr>
+					</tbody>
+					<tr ng-if="$ctrl.account.expenseList.length > 0">
+						<td>총지출</td>
+						<td></td>
+						<td>{{$ctrl.account.expenseTotal}}</td>
 					<tr>
-						<td rowspan="3">전속커미션</td>
-						<td>이원</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>라페스타</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td>봉래헌</td>
-						<td>4</td>
-					</tr>
-					<tr>
-						<td>소품수리비</td>
-						<td>-</td>
-						<td>4</td>
-					</tr>
-					<tr>
-						<td>생과일</td>
-						<td>-</td>
-						<td>6</td>
-					</tr>
-					<tr>
-						<td>떡케익</td>
-						<td>-</td>
-						<td>5.5</td>
-					</tr>
-					<tr>
-						<td>돌복수선비</td>
-						<td>-</td>
-						<td>6.5</td>
-					</tr>
-					<tr>
-						<td rowspan="2">MC커미션</td>
-						<td>브릿지</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td>황진아</td>
-						<td>6</td>
-					</tr>
-					<tr>
-						<td rowspan="2">성장동영상</td>
-						<td>잼잼스토리</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>성장통</td>
-						<td>5</td>
-					</tr>
+					<!--
+						<tr>
+							<td>라페스타</td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td>봉래헌</td>
+							<td>4</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>소품수리비</td>
+							<td>-</td>
+							<td>4</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>생과일</td>
+							<td>-</td>
+							<td>6</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>떡케익</td>
+							<td>-</td>
+							<td>5.5</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>돌복수선비</td>
+							<td>-</td>
+							<td>6.5</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td rowspan="2">MC커미션</td>
+							<td>브릿지</td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td>황진아</td>
+							<td>6</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td rowspan="2">성장동영상</td>
+							<td>잼잼스토리</td>
+							<td>7</td>
+						</tr>
+						<tr>
+							<td>성장통</td>
+							<td>5</td>
+						</tr>
+					</tbody>
+					-->
 				</table>
 			</div>
 		</div>

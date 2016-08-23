@@ -92,7 +92,7 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 
 		/*
 		for (var i = 0, len = self.account.expenseList.length ; i < len ; i++) {
-			console.log(self.account.expenseList[i].groupName, self.account.expenseList[i].totalFee);
+			console.log(self.account.expenseList[i].groupName, self.account.expenseList[i].totalPrice);
 		}
 		*/
 	}
@@ -135,7 +135,7 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 	function buildRevenueList(obj) {
 		// 0. 총매출항목은 별도로 뺀다.
 		if (obj.group === 'revenue') {
-			self.account.revenueTotal = Number(obj.sell);
+			self.account.revenueTotal += Number(obj.sell);
 			return;
 		}
 		// 1. 그룹이 있는지 확인
@@ -176,12 +176,14 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 
 	function buildExpenseList(obj) {
 		if (obj.group === 'expense') {
-			self.account.expenseTotal = Number(obj.fee);
+			self.account.expenseTotal += Number(obj.fee);
 			return;
 		}
 		var groupIndex = _.findIndex(self.account.expenseList, {group: obj.group});
 		if (groupIndex < 0 ) {
 			if (Number(obj.fee) !== 0) {
+				var detailPrint = _.contains(['decoLoc', 'optMC', 'optMovie'], obj.group);
+				console.log(obj.group, detailPrint);
 				self.account.expenseList.push({
 					group: obj.group,
 					groupName: expenseNames[obj.group] || "지정안됨",
@@ -189,7 +191,8 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 						name: obj.item,
 						price: Number(obj.fee)
 					}],
-					totalPrice: Number(obj.fee)
+					totalPrice: Number(obj.fee),
+					detailPrint: detailPrint
 				});
 			}
 		} else {
@@ -223,13 +226,12 @@ function accountController($scope, $http, $location, $mdToast, moment) {
 		for (var i = 0, len = self.account.expenseList.length ; i < len ; i++) {
 			var expense = self.account.expenseList[i];
 			var index = _.findIndex(self.account.revenueList, {group : expense.group});
-			console.log(expense.group, index);
 			if (index < 0) {
 				self.account.incomeList.push({
 					group: expense.group,
 					groupName: incomeNames[expense.group] || "지정안됨",
 					itemList: expense.itemList,
-					totalFee: expense.totalFee
+					totalPrice: expense.totalPrice
 				});
 			} else {
 				self.account.incomeList[index].groupName = incomeNames[expense.group];
