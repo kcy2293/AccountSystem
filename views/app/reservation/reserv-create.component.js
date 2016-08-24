@@ -158,18 +158,6 @@ function reservController($scope, $http, $mdToast) {
 		*/
 
 		var group, item, sell, fee, totalSell = 0, totalFee = 0;
-		// decoLoc
-		item = self.reserv.decoLoc;
-		if (item) {
-			group = "decoLoc";
-			fee = getSettingData(group, item, "commission");
-			self.reserv.priceList.push({
-				group: group,
-				item: item,
-				fee: fee
-			});
-			totalFee += fee;
-		}
 		// decoType
 		item = self.reserv.decoType;
 		if (item) {
@@ -327,6 +315,26 @@ function reservController($scope, $http, $mdToast) {
 			});
 			totalSell += self.reserv.optOutgoingFee;
 		}
+		// decoLoc
+		item = self.reserv.decoLoc;
+		if (item) {
+			group = "decoLoc";
+			var commCalcRule = getSettingData(group, item, "commCalcRule");
+			var value = getSettingData(group, item, "commission");
+			if (commCalcRule == '총판매비') {
+				fee = totalSell * value * 0.01
+			} else if (commCalcRule == '부가세비') {
+				fee = (totalSell + totalSell * 0.1) * value * 0.01
+			} else { // '차감'
+				fee = value;
+			}
+			self.reserv.priceList.push({
+				group: group,
+				item: item,
+				fee: fee
+			});
+			totalFee += fee;
+		}
 		// 잔금 및 예약금 계산 
 		self.reserv.balance = 0;
 		for (var i = 0, data, len = self.reserv.priceList.length ; i < len ; i++) {
@@ -342,12 +350,14 @@ function reservController($scope, $http, $mdToast) {
 			self.reserv.priceList.push({
 				group: "revenue",
 				item: "총판매",
-				sell: totalSell.toFixed(1)
+				//sell: totalSell.toFixed(1)
+				sell: totalSell
 			});
 			self.reserv.priceList.push({
 				group: "expense",
 				item: "총지출",
-				fee: totalFee.toFixed(1)
+				//fee: totalFee.toFixed(1)
+				fee: totalFee
 			});
 		}
 	}
