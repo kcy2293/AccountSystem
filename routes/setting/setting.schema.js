@@ -6,6 +6,7 @@ var settingSchema = new Schema({
 	name: String,
 	isCollabor: Boolean,
 	commission: Number,
+	commCalcRule: String,
 	imgName: String,
 	buy: Number,
 	sell: Number,

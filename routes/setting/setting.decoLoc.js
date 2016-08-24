@@ -16,6 +16,7 @@ function create(req, res) {
 	item.name = req.body.name;
 	item.isCollabor = req.body.isCollabor;
 	item.commission = req.body.commission;
+	item.commCalcRule = req.body.commCalcRule;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -46,6 +47,7 @@ function update(req, res) {
 		item.name = req.body.name;
 		item.isCollabor = req.body.isCollabor;
 		item.commission = req.body.commission;
+		item.commCalcRule = req.body.commCalcRule;
 
 		item.save(function(err) {
 			if (err) res.send(err);
