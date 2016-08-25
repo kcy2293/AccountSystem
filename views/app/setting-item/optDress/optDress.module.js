@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optDress', []);
+(function() {
+	'use strict';
+	angular.module('optDress', []);
+})();

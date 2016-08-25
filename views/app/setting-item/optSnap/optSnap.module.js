@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optSnap', []);
+(function() {
+	'use strict';
+	angular.module('optSnap', []);
+})();

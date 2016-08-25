@@ -1,2 +1,4 @@
-'use strict';
-angular.module('account-create', []);
+(function() {
+	'use strict';
+	angular.module('account-create', []);
+})();

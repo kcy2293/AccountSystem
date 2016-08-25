@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optOther', []);
+(function() {
+	'use strict';
+	angular.module('optOther', []);
+})();

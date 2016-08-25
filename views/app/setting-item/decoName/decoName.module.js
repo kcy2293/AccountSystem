@@ -1,2 +1,4 @@
-'use strict';
-angular.module('decoName', []);
+(function() {
+	'use strict';
+	angular.module('decoName', []);
+})();

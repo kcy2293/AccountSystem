@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optMC', []);
+(function() {
+	'use strict';
+	angular.module('optMC', []);
+})();

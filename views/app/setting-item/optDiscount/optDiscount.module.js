@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optDiscount', []);
+(function() {
+	'use strict';
+	angular.module('optDiscount', []);
+})();

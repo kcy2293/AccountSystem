@@ -1,2 +1,4 @@
-'use strict';
-angular.module('optMovie', []);
+(function() {
+	'use strict';
+	angular.module('optMovie', []);
+})();
