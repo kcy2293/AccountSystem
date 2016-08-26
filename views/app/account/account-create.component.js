@@ -50,9 +50,17 @@
 		/***********************
 			화면 이벤트
 		 ***********************/
+		self.account = {};
+		self.account.addedExpenseList = [];
+		self.updateIndex = -1;
+
 		self.changePrevDate = changePrevDate;
 		self.changeNextDate = changeNextDate;
 		self.calc = calc;
+		self.addExpenseItem = addExpenseItem;
+		self.clickedUpdate = clickedUpdate;
+		self.updateExpenseItem = updateExpenseItem;
+		self.deleteExpenseItem = deleteExpenseItem;
 
 		function changePrevDate() {
 			var prevDateStr = new moment(dateStr).subtract(7, 'days').format('YYYYMMDD');
@@ -67,7 +75,6 @@
 				$mdToast.showSimple("입력된 예약서가 없습니다.");
 			}
 
-			self.account = {};
 			self.account.revenueList = [];
 			self.account.incomeList = [];
 			self.account.expenseList = [];
@@ -75,7 +82,7 @@
 			self.account.incomeTotal = 0;
 			self.account.expenseTotal = 0;
 
-			for (var i = 0, priceList, len = self.tabList.length ; i < len ; i++){ 
+			for (var i = 0, priceList, len = self.tabList.length ; i < len ; i++) { 
 				priceList = self.tabList[i].priceList;
 				for (var j = 0, jlen = priceList.length ; j < jlen ; j++) {
 					// revenue list
@@ -89,15 +96,11 @@
 				}
 			}
 			buildIncomeList();
-
-			/*
-			for (var i = 0, len = self.account.expenseList.length ; i < len ; i++) {
-				console.log(self.account.expenseList[i].groupName, self.account.expenseList[i].totalPrice);
-			}
-			*/
+			calcTotal();
 		}
 
 		var revenueNames = { // 매출 표기명
+			'decoLoc': '전속할인',
 			'decoType': '돌상',
 			'decoFruit': '생과일',
 			'decoRcake': '떡케익',
@@ -118,7 +121,8 @@
 			'optMC': 'MC수익',
 			'optMovie': '동영상수익',
 			'optOther': '기타수익',
-			'optOutgoingFee': '출장비수익'
+			'optOutgoingFee': '출장비수익',
+			'addExpense': '사업외지출'
 		};
 		var expenseNames = { // 지출 표기명
 			'decoLoc': '전속커미션',
@@ -129,7 +133,8 @@
 			'optDress': '돌복수선비',
 			'optMC': 'MC커미션',
 			'optMovie': '성장동영상',
-			'optOther': '기타지출'
+			'optOther': '기타지출',
+			'addExpense': '사업외지출'
 		};
 
 		function buildRevenueList(obj) {
@@ -167,10 +172,10 @@
 					}
 				} else {
 					// 5. 있으면 합산
-					itemList[itemIndex].price = Number((Number(itemList[itemIndex].price) + Number(obj.sell)).toFixed(1));
+					itemList[itemIndex].price = itemList[itemIndex].price + obj.sell;
 				}
 				// 6. 총 합산은 있으나 없으나 더함
-				self.account.revenueList[groupIndex].totalPrice = Number((Number(self.account.revenueList[groupIndex].totalPrice) + Number(obj.sell)).toFixed(1));
+				self.account.revenueList[groupIndex].totalPrice += obj.sell;
 			}
 		}
 
@@ -205,9 +210,9 @@
 						});
 					}
 				} else {
-					itemList[itemIndex].price = Number((Number(itemList[itemIndex].price) + Number(obj.fee)).toFixed(1));
+					itemList[itemIndex].price = itemList[itemIndex].price + obj.fee;
 				}
-				self.account.expenseList[groupIndex].totalPrice = Number((Number(self.account.expenseList[groupIndex].totalPrice) + Number(obj.fee)).toFixed(1));
+				self.account.expenseList[groupIndex].totalPrice += obj.fee;
 			}
 		}
 
@@ -233,7 +238,7 @@
 					self.account.incomeList[index].groupName = incomeNames[expense.group];
 					var itemList = self.account.incomeList[index].itemList;
 					for (var j = 0, jlen = expense.itemList.length ; j < jlen ; j++) {
-						var itemIndex = _.findIndex(itemList, {name: itemList[j].name});
+						var itemIndex = _.findIndex(itemList, {name: expense.itemList[j].name});
 						if (itemIndex < 0) {
 							itemList.push(expense.itemList[j]);
 						} else {
@@ -243,6 +248,126 @@
 					}
 				}
 			}
+		}
+
+		// 기존 예약서 지출 및 수익 내역에
+		// 추가된 지출항목을 포함시켜 계산한다.
+		function calcTotal() {
+
+			for (var i = 0, len = self.account.addedExpenseList.length ; i < len ; i++) {
+				var other = self.account.addedExpenseList[i];
+				var index = _.findIndex(self.account.expenseList, {group: otherGroup});
+				if (index < 0) {
+					self.account.expenseList.push({
+						group: other.group,
+						groupName: expenseNames[other.group] || "지정안됨",
+						itemList: [{
+							name: other.itemName,
+							price: other.itemPrice
+						}],
+						totalPrice: other.itemPrice,
+						detailPrint: true
+					});
+				} else {
+					var itemList = self.account.expenseList[index].itemList;
+					var itemIndex = _.findIndex(itemList, {name: other.itemName});
+					if (itemIndex < 0) {
+						if (other.itemPrice !== 0) {
+							itemList.push({
+								name: other.itemName,
+								price: other.itemPrice
+							});
+						}
+					} else {
+						itemList[itemIndex].price = other.itemPrice;
+					}
+					self.account.expenseList[index].totalPrice += other.itemPrice;
+				}
+
+				index = _.findIndex(self.account.incomeList, {group: otherGroup});
+				if (index < 0) {
+					self.account.incomeList.push({
+						group: other.group,
+						groupName: incomeNames[other.group] || "지정안됨",
+						itemList: [{
+							name: other.itemName,
+							price: other.itemPrice * (-1)
+						}],
+						totalPrice: other.itemPrice * (-1)
+					});
+				} else {
+					var itemList = self.account.incomeList[index].itemList;
+					var itemIndex = _.findIndex(itemList, {name: other.itemName});
+					if (itemIndex < 0) {
+						if (other.itemPrice !== 0) {
+							itemList.push({
+								name: other.itemName,
+								price: other.itemPrice * (-1)
+							});
+						}
+					} else {
+						itemList[itemIndex].price = other.itemPrice * (-1);
+					}
+					self.account.incomeList[index].totalPrice += (other.itemPrice * (-1));
+				}
+				self.account.expenseTotal += self.account.expenseList[groupIndex].totalPrice;
+				self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
+				self.account.incomeTotal = self.account.revenueTotal - self.account.expenseTotal;
+				self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+			}
+		}
+
+		function addCalc(item) {
+			// 1. expenseList 와 incomeList 에 item 을 추가하고, 
+			// 2. total 에 합산한다.
+		}
+		function updateCalc(item) {
+			// 1. 각 list의 item 을 변경하고,
+			// 2. total 값에서 기존값을 빼고, 신규값을 더한다.(아니면 차이값을 셈한다.)
+		}
+		function deleteCalc(item) {
+			// 1. 각 list의 item 을 삭제하고,
+			// 1-1. 삭제 후 item이 없다면, array 에서 객체를 뺀다.
+			// 2. total 값에서 기존값을 뺀다.
+		}
+
+		function addExpenseItem() {
+			var index = _.findIndex(self.account.addedExpenseList, {itemName: self.addItem});
+			if (index < 0) {
+				var item = {
+					group: "addExpense",
+					itemName: self.addItem,
+					itemPrice: Number(self.addPrice)
+				};
+				self.account.addedExpenseList.push(item);
+				addCalc(item);
+			} else {
+				self.addItem = self.account.addedExpenseList[index].itemName;
+				self.addPrice = self.account.addedExpenseList[index].itemPrice;
+				updateCalc(item);
+			}
+			self.addItem = undefined;
+			self.addPrice = undefined;
+		}
+		function clickedUpdate(index) {
+			self.updateIndex = index;
+			self.addItem = self.account.addedExpenseList[index].itemName;
+			self.addPrice = self.account.addedExpenseList[index].itemPrice;
+		}
+		function updateExpenseItem() {
+			var item = {
+				itemName: self.addItem,
+				itemPrice: Number(self.addPrice)
+			};
+			self.account.addedExpenseList[self.updateIndex] = item;
+			updateCalc(item);
+			self.addItem = undefined;
+			self.addPrice = undefined;
+			self.updateIndex = -1;
+		}
+		function deleteExpenseItem(index) {
+			var item = self.account.addedExpenseList.splice(index, 1);
+			deleteCalc(item);
 		}
 	}
 })();

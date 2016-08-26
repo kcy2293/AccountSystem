@@ -52,7 +52,7 @@
   <div class='account-create-middle'>
     <md-button ng-click="$ctrl.calc()" class="md-raised md-warn">정산내역 산출하기</md-button>
   </div>
-  <div class='account-create-body'>
+  <div ng-if="$ctrl.account.expenseList.length > 0" class='account-create-body'>
     <div style="text-align: center;">
       <h2>정산내역</h2>
     </div>
@@ -66,7 +66,7 @@
 						<td>{{item.groupName}}</td>
 						<td>{{item.totalPrice}}</td>
 					</tr>
-					<tr ng-if="$ctrl.account.revenueList.length > 0">
+					<tr>
 						<td>총매출</td>
 						<td>{{$ctrl.account.revenueTotal}}</td>
 					<tr>
@@ -81,7 +81,7 @@
 						<td>{{item.groupName}}</td>
 						<td>{{item.totalPrice}}</td>
 					</tr>
-					<tr ng-if="$ctrl.account.incomeList.length > 0">
+					<tr>
 						<td>총매출</td>
 						<td>{{$ctrl.account.incomeTotal}}</td>
 					<tr>
@@ -104,76 +104,51 @@
 							<td>{{el.totalPrice}}</td>
 						</tr>
 					</tbody>
-					<tr ng-if="$ctrl.account.expenseList.length > 0">
+					<tr>
 						<td>총지출</td>
 						<td></td>
 						<td>{{$ctrl.account.expenseTotal}}</td>
 					<tr>
-					<!--
-						<tr>
-							<td>라페스타</td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td>봉래헌</td>
-							<td>4</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>소품수리비</td>
-							<td>-</td>
-							<td>4</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>생과일</td>
-							<td>-</td>
-							<td>6</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>떡케익</td>
-							<td>-</td>
-							<td>5.5</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>돌복수선비</td>
-							<td>-</td>
-							<td>6.5</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td rowspan="2">MC커미션</td>
-							<td>브릿지</td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td>황진아</td>
-							<td>6</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td rowspan="2">성장동영상</td>
-							<td>잼잼스토리</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>성장통</td>
-							<td>5</td>
-						</tr>
-					</tbody>
-					-->
 				</table>
 			</div>
 		</div>
   </div>
+  <div ng-if="$ctrl.account.expenseList.length > 0" class='account-create-footer'>
+		<h2>추가지출항목</h2>
+		<div layout-padding>
+			<table>
+				<tr>
+					<th>항목명</th>
+					<th>금액(만원)</th>
+					<th>수정/삭제</th>
+				</tr>
+				<tr ng-repeat="item in $ctrl.account.addedExpenseList">
+					<td>{{item.itemName}}</td>
+					<td>{{item.itemPrice}}</td>
+					<td>
+						<md-icon md-svg-icon="/img/svg/ic_create_black_24px.svg" ng-click="$ctrl.clickedUpdate($index)" aria-label="수정" style="margin-right:10px;"></md-icon>
+						<md-icon md-svg-icon="/img/svg/ic_delete_black_24px.svg" ng-click="$ctrl.deleteExpenseItem($index)" aria-label="삭제"></md-icon>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div layout="row">
+			<div layout="row" layout-padding>
+				<md-input-container class="md-block">
+					<label>항목명</label>
+					<input name="addItem" ng-model="$ctrl.addItem">
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>금액(만원)</label>
+					<input name="addPrice" ng-model="$ctrl.addPrice">
+				</md-input-container>
+			</div>
+			<div style="margin-top: 20px">
+					<md-button ng-hide="$ctrl.updateIndex > -1" ng-click="$ctrl.addExpenseItem()" class="md-raised md-warn">추가</md-button>
+					<md-button ng-show="$ctrl.updateIndex > -1" ng-click="$ctrl.updateExpenseItem()" class="md-raised md-warn">수정</md-button>
+			</div>
+		</div>
+	</div>
 </div>
 <md-button class="md-fab md-primary account-save" aria-label="save" ng-click="$ctrl.save()">
   <md-tooltip md-direction="top">주간 정산내역 확정</md-tooltip>
