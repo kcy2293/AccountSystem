@@ -2,14 +2,14 @@ global.env = process.env.NODE_ENV || 'production';
 /*******************
  * modules
  *******************/
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var http = require('http');
-var multer = require('multer');
+var express = require('express'),
+		path = require('path'),
+		favicon = require('serve-favicon'),
+		logger = require('morgan'),
+		cookieParser = require('cookie-parser'),
+		bodyParser = require('body-parser'),
+		http = require('http'),
+		multer = require('multer');
 
 /*******************
  * setup express
@@ -28,9 +28,10 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 /*******************
  * routing
  *******************/
-var userRouter = require('./routes/users/users.router');
-var reservRouter = require('./routes/reservation/reserv.router');
-var settingRouter = require('./routes/setting/setting.router');
+var userRouter = require('./routes/users/users.router'),
+		reservRouter = require('./routes/reservation/reserv.router'),
+		accountRouter = require('./routes/account/account.router'),
+		settingRouter = require('./routes/setting/setting.router');
 
 app.get('/', function(req, res) {
   res.redirect('/index.html');
@@ -39,6 +40,7 @@ app.get('/', function(req, res) {
 
 app.use('/api/users', userRouter);
 app.use('/api/reservation', reservRouter);
+app.use('/api/account', accountRouter);
 app.use('/api/setting', settingRouter);
 
 /*******************

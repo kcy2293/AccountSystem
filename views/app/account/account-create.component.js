@@ -13,10 +13,21 @@
 		self.account = {};
 
 		var paths = $location.path().split('/');
+		var year = paths[paths.length - 3];
+		var month = paths[paths.length - 2];
 		var dateStr = paths[paths.length - 1];
 		var accountDate = new moment(dateStr);
 		var accountStartDate = new moment(dateStr).subtract(6,'days').set('hour', 0).set('minute', 0);
 		var accountEndDate = new moment(dateStr).add(1,'days').set('hour', 0).set('minute', 0);
+
+		/***********************
+			저장된 정산서 조회
+		 ***********************/
+		$http.get('/api/account/'+year+'/'+month+'/'+dateStr).then(function(res) {
+			if (res.data.length > 0) {
+				self.account = res.data[0];
+			}
+		});
 
 		/***********************
 			setting item 조회
@@ -65,11 +76,11 @@
 
 		function changePrevDate() {
 			var prevDateStr = new moment(dateStr).subtract(7, 'days').format('YYYYMMDD');
-			$location.url('/account-create/'+ prevDateStr);
+			$location.url('/account/'+year+'/'+month+'/'+ prevDateStr);
 		}
 		function changeNextDate() {
 			var nextDateStr = new moment(dateStr).add(7, 'days').format('YYYYMMDD');
-			$location.url('/account-create/'+ nextDateStr);
+			$location.url('/account/'+year+'/'+month+'/'+ nextDateStr);
 		}
 		function calc() {
 			if (self.tabList.length < 1) {
@@ -440,9 +451,18 @@
 		}
 
 		function save() {
-			self.account.accountDate = accountDate.toDate();
-			self.account.dateStr = dateStr;
-			console.log(self.account);
+			if (!self.account.hasOwnProperty('expenseList')) {
+				$mdToast.showSimple('저장할 내용이 없습니다.');
+			} else {
+				self.account.accountDate = accountDate.toDate();
+				self.account.dateStr = dateStr;
+
+				$http.post('/api/account/' + year + '/' + month + '/' + dateStr + '/', self.account).then(function(res) {
+					if (res.status == 200) {
+						$mdToast.showSimple('정산서가 저장되었습니다.');
+					}
+				});
+			}
 		}
 	}
 })();

@@ -27,7 +27,7 @@ function SidenavController($mdSidenav, $location) {
       'route': '/setting/3/'
     },{
       'name': '정산서 작성',
-      'route': '/account-create/'
+      'route': '/account/'
     }
   ];
   self.selected = self.menus[0];
