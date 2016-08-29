@@ -10,6 +10,7 @@
 
 	function accountController($scope, $http, $location, $mdToast, moment) {
 		var self = this;
+		self.account = {};
 
 		var paths = $location.path().split('/');
 		var dateStr = paths[paths.length - 1];
@@ -45,12 +46,11 @@
 		/***********************
 			정산서 타이틀 기간 입력
 		 ***********************/
-		self.period = accountStartDate.format("M/D(dd)") + " ~ " + accountDate.format("M/D(dd)");
+		self.account.period = accountStartDate.format("M/D(dd)") + " ~ " + accountDate.format("M/D(dd)");
 
 		/***********************
 			화면 이벤트
 		 ***********************/
-		self.account = {};
 		self.account.addedExpenseList = [];
 		self.updateIndex = -1;
 
@@ -61,6 +61,7 @@
 		self.clickedUpdate = clickedUpdate;
 		self.updateExpenseItem = updateExpenseItem;
 		self.deleteExpenseItem = deleteExpenseItem;
+		self.save = save;
 
 		function changePrevDate() {
 			var prevDateStr = new moment(dateStr).subtract(7, 'days').format('YYYYMMDD');
@@ -253,82 +254,143 @@
 		// 기존 예약서 지출 및 수익 내역에
 		// 추가된 지출항목을 포함시켜 계산한다.
 		function calcTotal() {
-
 			for (var i = 0, len = self.account.addedExpenseList.length ; i < len ; i++) {
-				var other = self.account.addedExpenseList[i];
-				var index = _.findIndex(self.account.expenseList, {group: otherGroup});
-				if (index < 0) {
-					self.account.expenseList.push({
-						group: other.group,
-						groupName: expenseNames[other.group] || "지정안됨",
-						itemList: [{
-							name: other.itemName,
-							price: other.itemPrice
-						}],
-						totalPrice: other.itemPrice,
-						detailPrint: true
-					});
-				} else {
-					var itemList = self.account.expenseList[index].itemList;
-					var itemIndex = _.findIndex(itemList, {name: other.itemName});
-					if (itemIndex < 0) {
-						if (other.itemPrice !== 0) {
-							itemList.push({
-								name: other.itemName,
-								price: other.itemPrice
-							});
-						}
-					} else {
-						itemList[itemIndex].price = other.itemPrice;
-					}
-					self.account.expenseList[index].totalPrice += other.itemPrice;
-				}
-
-				index = _.findIndex(self.account.incomeList, {group: otherGroup});
-				if (index < 0) {
-					self.account.incomeList.push({
-						group: other.group,
-						groupName: incomeNames[other.group] || "지정안됨",
-						itemList: [{
-							name: other.itemName,
-							price: other.itemPrice * (-1)
-						}],
-						totalPrice: other.itemPrice * (-1)
-					});
-				} else {
-					var itemList = self.account.incomeList[index].itemList;
-					var itemIndex = _.findIndex(itemList, {name: other.itemName});
-					if (itemIndex < 0) {
-						if (other.itemPrice !== 0) {
-							itemList.push({
-								name: other.itemName,
-								price: other.itemPrice * (-1)
-							});
-						}
-					} else {
-						itemList[itemIndex].price = other.itemPrice * (-1);
-					}
-					self.account.incomeList[index].totalPrice += (other.itemPrice * (-1));
-				}
-				self.account.expenseTotal += self.account.expenseList[groupIndex].totalPrice;
-				self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
-				self.account.incomeTotal = self.account.revenueTotal - self.account.expenseTotal;
-				self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+				var item = self.account.addedExpenseList[i];
+				addExpenseList(item);
+				addIncomeList(item);
 			}
 		}
 
-		function addCalc(item) {
-			// 1. expenseList 와 incomeList 에 item 을 추가하고, 
-			// 2. total 에 합산한다.
+		// 지출리스트에 항목추가 또는 변경하고 총계 합산하는 기능
+		function addExpenseList(item) {
+			var index = _.findIndex(self.account.expenseList, {group: item.group});
+			if (index < 0) {
+				self.account.expenseList.push({
+					group: item.group,
+					groupName: expenseNames[item.group] || "지정안됨",
+					itemList: [{
+						name: item.itemName,
+						price: item.itemPrice
+					}],
+					totalPrice: item.itemPrice,
+					detailPrint: true
+				});
+				self.account.expenseTotal += item.itemPrice;
+				self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
+			} else {
+				var itemList = self.account.expenseList[index].itemList;
+				var itemIndex = _.findIndex(itemList, {name: item.itemName});
+				if (itemIndex < 0) {
+					if (item.itemPrice !== 0) {
+						itemList.push({
+							name: item.itemName,
+							price: item.itemPrice
+						});
+
+						self.account.expenseList[index].totalPrice += item.itemPrice;
+						self.account.expenseList[index].totalPrice = Number(self.account.expenseList[index].totalPrice.toFixed(3));
+						self.account.expenseTotal += item.itemPrice;
+						self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
+					}
+				} else {
+					var diff = item.itemPrice - itemList[itemIndex].price;
+					itemList[itemIndex].price = item.itemPrice;
+					self.account.expenseList[index].totalPrice += diff;
+					self.account.expenseList[index].totalPrice = Number(self.account.expenseList[index].totalPrice.toFixed(3));
+					self.account.expenseTotal += diff;
+					self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
+				}
+			}
 		}
-		function updateCalc(item) {
-			// 1. 각 list의 item 을 변경하고,
-			// 2. total 값에서 기존값을 빼고, 신규값을 더한다.(아니면 차이값을 셈한다.)
+
+		// 수익리스트에 항목추가 또는 변경하고 총계 합산하는 기능
+		function addIncomeList(item) {
+			var index = _.findIndex(self.account.incomeList, {group: item.group});
+			if (index < 0) {
+				self.account.incomeList.push({
+					group: item.group,
+					groupName: incomeNames[item.group] || "지정안됨",
+					itemList: [{
+						name: item.itemName,
+						price: item.itemPrice
+					}],
+					totalPrice: item.itemPrice,
+					detailPrint: true
+				});
+				self.account.incomeTotal += item.itemPrice;
+				self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+			} else {
+				var itemList = self.account.incomeList[index].itemList;
+				var itemIndex = _.findIndex(itemList, {name: item.itemName});
+				if (itemIndex < 0) {
+					if (item.itemPrice !== 0) {
+						itemList.push({
+							name: item.itemName,
+							price: item.itemPrice
+						});
+
+						self.account.incomeList[index].totalPrice += item.itemPrice;
+						self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
+						self.account.incomeTotal += item.itemPrice;
+						self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+					}
+				} else {
+					var diff = item.itemPrice - itemList[itemIndex].price;
+					itemList[itemIndex].price = item.itemPrice;
+					self.account.incomeList[index].totalPrice += diff;
+					self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
+					self.account.incomeTotal += diff;
+					self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+				}
+			}
 		}
+
 		function deleteCalc(item) {
-			// 1. 각 list의 item 을 삭제하고,
-			// 1-1. 삭제 후 item이 없다면, array 에서 객체를 뺀다.
-			// 2. total 값에서 기존값을 뺀다.
+			var index = _.findIndex(self.account.expenseList, {group: item.group});
+			if (index < 0) {
+				console.log(item.group + " 이 리스트에 존재하지 않습니다.");
+				return;
+			} else {
+				var itemList = self.account.expenseList[index].itemList;
+				var itemIndex = _.findIndex(itemList, {name: item.itemName});
+				if (itemIndex < 0) {
+					console.log(item.itemName + " 이 리스트에 존재하지 않습니다.");
+					return;
+				} else {
+					var el = itemList.splice(itemIndex, 1);
+					self.account.expenseList[index].totalPrice -= el[0].price;
+					self.account.expenseList[index].totalPrice = Number(self.account.expenseList[index].totalPrice.toFixed(3));
+					self.account.expenseTotal -= el[0].price;
+					self.account.expenseTotal = Number(self.account.expenseTotal.toFixed(3));
+
+					if (itemList.length == 0) {
+						self.account.expenseList.splice(index, 1);
+					}
+				}
+			}
+
+			index = _.findIndex(self.account.incomeList, {group: item.group});
+			if (index < 0) {
+				console.log(item.group + " 이 그룹에 존재하지 않습니다.");
+				return;
+			} else {
+				var itemList = self.account.incomeList[index].itemList;
+				var itemIndex = _.findIndex(itemList, {name: item.itemName});
+				if (itemIndex < 0) {
+					console.log(item.itemName + " 이 리스트에 존재하지 않습니다.");
+					return;
+				} else {
+					var item = itemList.splice(itemIndex, 1);
+					self.account.incomeList[index].totalPrice -= item[0].price;
+					self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
+					self.account.incomeTotal -= item[0].price;
+					self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
+
+					if (itemList.length == 0) {
+						self.account.incomeList.splice(index, 1);
+					}
+				}
+			}
 		}
 
 		function addExpenseItem() {
@@ -340,12 +402,16 @@
 					itemPrice: Number(self.addPrice)
 				};
 				self.account.addedExpenseList.push(item);
-				addCalc(item);
+				addExpenseList(item);
+				addIncomeList(item);
 			} else {
-				self.addItem = self.account.addedExpenseList[index].itemName;
-				self.addPrice = self.account.addedExpenseList[index].itemPrice;
-				updateCalc(item);
+				var item = self.account.addedExpenseList[index];
+				item.itemName = self.addItem;
+				item.itemPrice = self.addPrice;
+				addExpenseList(item);
+				addIncomeList(item);
 			}
+
 			self.addItem = undefined;
 			self.addPrice = undefined;
 		}
@@ -356,18 +422,27 @@
 		}
 		function updateExpenseItem() {
 			var item = {
+				group: "addExpense",
 				itemName: self.addItem,
 				itemPrice: Number(self.addPrice)
 			};
 			self.account.addedExpenseList[self.updateIndex] = item;
-			updateCalc(item);
+			addExpenseList(item);
+			addIncomeList(item);
+
 			self.addItem = undefined;
 			self.addPrice = undefined;
 			self.updateIndex = -1;
 		}
 		function deleteExpenseItem(index) {
 			var item = self.account.addedExpenseList.splice(index, 1);
-			deleteCalc(item);
+			deleteCalc(item[0]);
+		}
+
+		function save() {
+			self.account.accountDate = accountDate.toDate();
+			self.account.dateStr = dateStr;
+			console.log(self.account);
 		}
 	}
 })();
