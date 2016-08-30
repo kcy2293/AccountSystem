@@ -45,7 +45,7 @@
 					when('/account/:year/:month/:date', {
 						template: '<account-create></account-create>'
 					}).
-					otherwise('/reservation/');
+					otherwise('/reserv-create/');
 			}
 		]);
 
