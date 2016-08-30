@@ -134,7 +134,8 @@
 			'optMovie': '동영상수익',
 			'optOther': '기타수익',
 			'optOutgoingFee': '출장비수익',
-			'addExpense': '사업외지출'
+			'addExpense': '사업외지출',
+			'pay': '페이'
 		};
 		var expenseNames = { // 지출 표기명
 			'decoLoc': '전속커미션',
@@ -146,7 +147,8 @@
 			'optMC': 'MC커미션',
 			'optMovie': '성장동영상',
 			'optOther': '기타지출',
-			'addExpense': '사업외지출'
+			'addExpense': '사업외지출',
+			'pay': '페이'
 		};
 
 		function buildRevenueList(obj) {
@@ -185,9 +187,11 @@
 				} else {
 					// 5. 있으면 합산
 					itemList[itemIndex].price = itemList[itemIndex].price + obj.sell;
+					itemList[itemIndex].price = Number(itemList[itemIndex].price.toFixed(3));
 				}
 				// 6. 총 합산은 있으나 없으나 더함
 				self.account.revenueList[groupIndex].totalPrice += obj.sell;
+				self.account.revenueList[groupIndex].totalPrice = Number(self.account.revenueList[groupIndex].totalPrice.toFixed(3));
 			}
 		}
 
@@ -199,7 +203,7 @@
 			var groupIndex = _.findIndex(self.account.expenseList, {group: obj.group});
 			if (groupIndex < 0 ) {
 				if (Number(obj.fee) !== 0) {
-					var detailPrint = _.contains(['decoLoc', 'optMC', 'optMovie'], obj.group);
+					var detailPrint = _.contains(['decoLoc', 'optMC', 'optMovie', 'pay'], obj.group);
 					self.account.expenseList.push({
 						group: obj.group,
 						groupName: expenseNames[obj.group] || "지정안됨",
@@ -223,8 +227,10 @@
 					}
 				} else {
 					itemList[itemIndex].price = itemList[itemIndex].price + obj.fee;
+					itemList[itemIndex].price = Number(itemList[itemIndex].price.toFixed(3));
 				}
 				self.account.expenseList[groupIndex].totalPrice += obj.fee;
+				self.account.expenseList[groupIndex].totalPrice = Number(self.account.expenseList[groupIndex].totalPrice.toFixed(3));
 			}
 		}
 
@@ -244,7 +250,7 @@
 						group: expense.group,
 						groupName: incomeNames[expense.group] || "지정안됨",
 						itemList: expense.itemList,
-						totalPrice: expense.totalPrice
+						totalPrice: expense.totalPrice * (-1)
 					});
 				} else {
 					self.account.incomeList[index].groupName = incomeNames[expense.group];
@@ -255,8 +261,10 @@
 							itemList.push(expense.itemList[j]);
 						} else {
 							itemList[itemIndex].price = itemList[itemIndex].price - expense.itemList[j].price;
+							itemList[itemIndex].price = Number(itemList[itemIndex].price.toFixed(3));
 						}
 						self.account.incomeList[index].totalPrice -= expense.itemList[j].price;
+						self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
 					}
 				}
 			}
@@ -323,12 +331,12 @@
 					groupName: incomeNames[item.group] || "지정안됨",
 					itemList: [{
 						name: item.itemName,
-						price: item.itemPrice
+						price: item.itemPrice * (-1)
 					}],
-					totalPrice: item.itemPrice,
+					totalPrice: item.itemPrice * (-1),
 					detailPrint: true
 				});
-				self.account.incomeTotal += item.itemPrice;
+				self.account.incomeTotal -= item.itemPrice;
 				self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
 			} else {
 				var itemList = self.account.incomeList[index].itemList;
@@ -337,17 +345,17 @@
 					if (item.itemPrice !== 0) {
 						itemList.push({
 							name: item.itemName,
-							price: item.itemPrice
+							price: item.itemPrice * (-1)
 						});
 
-						self.account.incomeList[index].totalPrice += item.itemPrice;
+						self.account.incomeList[index].totalPrice -= item.itemPrice;
 						self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
-						self.account.incomeTotal += item.itemPrice;
+						self.account.incomeTotal -= item.itemPrice;
 						self.account.incomeTotal = Number(self.account.incomeTotal.toFixed(3));
 					}
 				} else {
-					var diff = item.itemPrice - itemList[itemIndex].price;
-					itemList[itemIndex].price = item.itemPrice;
+					var diff = (item.itemPrice * -1) - itemList[itemIndex].price;
+					itemList[itemIndex].price = (item.itemPrice * -1);
 					self.account.incomeList[index].totalPrice += diff;
 					self.account.incomeList[index].totalPrice = Number(self.account.incomeList[index].totalPrice.toFixed(3));
 					self.account.incomeTotal += diff;

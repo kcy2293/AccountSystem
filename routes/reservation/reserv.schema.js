@@ -33,6 +33,10 @@ var reservSchema = new Schema({
 	role: Array,
 	deposit: Number,
 	balance: Number,
+	mainManager: String,
+	mainManagerPay: Number,
+	subManager: String,
+	subManagerPay: Number,
 	priceList: [Schema.Types.Mixed],
 	consultList: [Schema.Types.Mixed]
 });

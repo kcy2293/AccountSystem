@@ -207,7 +207,7 @@
   		<div layout="column">
         <md-input-container class="md-block">
           <label>메인담당자</label>
-          <md-select ng-change="$ctrl.mainManagerChange()" ng-model="$ctrl.reserv.mainManager">
+          <md-select ng-model="$ctrl.reserv.manager">
             <md-option ng-repeat="item in $ctrl.users"
                       value="{{item.name}}">
               {{item.name}}
@@ -215,24 +215,20 @@
           </md-select>
         </md-input-container>
 				<md-input-container class="md-block">
-					<label>메인담당자 페이</label>
-					<input ng-disabled="!($ctrl.reserv.mainManager)" type="number" ng-change="$ctrl.mainPayChange()" ng-model="$ctrl.reserv.mainManagerPay" class="ng-pristine ng-untouched">
+					<label>출장비</label>
+					<input type="number" ng-change="$ctrl.optOutgoingFeeChange()" ng-model="$ctrl.reserv.optOutgoingFee" class="ng-pristine ng-untouched">
 				</md-input-container>
-  		</div>
-  		<div layout="column">
+				<!--
         <md-input-container class="md-block">
-          <label>보조담당자</label>
-          <md-select ng-change="$ctrl.subManagerChange()" ng-model="$ctrl.reserv.subManager">
-            <md-option ng-repeat="item in $ctrl.users"
-                      value="{{item.name}}">
-              {{item.name}}
+          <label>역할</label>
+          <md-select ng-model="$ctrl.reserv.role">
+            <md-option ng-repeat="item in $ctrl.role"
+                      value="{{item}}">
+              {{item}}
             </md-option>
           </md-select>
         </md-input-container>
-				<md-input-container class="md-block">
-					<label>보조담당자 페이</label>
-					<input ng-disabled="!($ctrl.reserv.subManager)" type="number" ng-change="$ctrl.subPayChange()" ng-model="$ctrl.reserv.subManagerPay" class="ng-pristine ng-untouched">
-				</md-input-container>
+				-->
   		</div>
   	</md-content>
   </div>
@@ -277,7 +273,6 @@
 				</div>
   		</div>
   	</md-content>
-		<br><br><br><br><br>
   </div>
 </div>
 

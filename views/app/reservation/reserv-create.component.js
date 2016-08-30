@@ -15,29 +15,10 @@
 		$http.get('/api/setting/').then(function(res) {
 			self.settings = res.data;
 
-			var pays = self.settings.pay;
-			if (pays) {
-				var role = [];
-				for (var i = 0, len = pays.length ; i < len ; i++) {
-					if (role.indexOf(pays[i].role) < 0) {
-						role.push(pays[i].role);
-					}
-				}
-				self.role = role;
-			}
 		});
 
 		$http.get('/api/users/').then(function(res) {
 			self.users = res.data;
-			/*
-			var ranks = [];
-			for (var i = 0, len = self.users.length ; i < len ; i++) {
-				if (ranks.indexOf(self.users[i].rank) < 0) {
-					ranks.push(self.users[i].rank);
-				}
-			}
-			self.ranks = ranks;
-			*/
 		});
 
 		//window.DEBUG = self;
@@ -57,6 +38,10 @@
 		self.optOutgoingFeeChange = optOutgoingFeeChange;
 		self.optDiscountChange = optDiscountChange;
 		self.depositChange = depositChange;
+		self.mainManagerChange = mainManagerChange;
+		self.subManagerChange = subManagerChange;
+		self.mainPayChange = mainPayChange;
+		self.subPayChange = subPayChange;
 		self.save = save;
 
 		self.getJsonLen = function(json) {
@@ -140,6 +125,18 @@
 			calc();
 		}
 		function depositChange() {
+			calc();
+		}
+		function mainManagerChange() {
+			calc();
+		}
+		function subManagerChange() {
+			calc();
+		}
+		function mainPayChange() {
+			calc();
+		}
+		function subPayChange() {
 			calc();
 		}
 
@@ -307,15 +304,6 @@
 					totalFee += fee;
 				});
 			}
-			//optOutgoingFee
-			if (self.reserv.optOutgoingFee) {
-				self.reserv.priceList.push({
-					group: "optOutgoingFee",
-					item: "출장비",
-					sell: self.reserv.optOutgoingFee
-				});
-				totalSell += self.reserv.optOutgoingFee;
-			}
 			// decoLoc
 			item = self.reserv.decoLoc;
 			if (item) {
@@ -335,6 +323,33 @@
 					fee: fee
 				});
 				totalFee += fee;
+			}
+			//optOutgoingFee
+			if (self.reserv.optOutgoingFee) {
+				self.reserv.priceList.push({
+					group: "optOutgoingFee",
+					item: "출장비",
+					sell: self.reserv.optOutgoingFee
+				});
+				totalSell += self.reserv.optOutgoingFee;
+			}
+			//mainManagerPay
+			if (self.reserv.mainManagerPay) {
+				self.reserv.priceList.push({
+					group: "pay",
+					item: "페이-" + self.reserv.mainManager,
+					fee: self.reserv.mainManagerPay
+				});
+				totalFee += self.reserv.mainManagerPay;
+			}
+			//subManagerPay
+			if (self.reserv.subManagerPay) {
+				self.reserv.priceList.push({
+					group: "pay",
+					item: "페이-" + self.reserv.subManager,
+					fee: self.reserv.subManagerPay
+				});
+				totalFee += self.reserv.subManagerPay;
 			}
 			// 잔금 및 예약금 계산 
 			self.reserv.balance = 0;

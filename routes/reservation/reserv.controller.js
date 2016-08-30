@@ -45,6 +45,10 @@ function create(req, res) {
 	item.deposit = req.body.deposit;
 	item.balance = req.body.balance;
 	item.priceList = req.body.priceList;
+	item.mainManager = req.body.mainManager;
+	item.mainManagerPay = req.body.mainManagerPay;
+	item.subManager = req.body.subManager;
+	item.subManagerPay = req.body.subManagerPay;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -113,6 +117,10 @@ function update(req, res) {
 		item.deposit = req.body.deposit;
 		item.balance = req.body.balance;
 		item.priceList = req.body.priceList;
+		item.mainManager = req.body.mainManager;
+		item.mainManagerPay = req.body.mainManagerPay;
+		item.subManager = req.body.subManager;
+		item.subManagerPay = req.body.subManagerPay;
 
 		item.save(function(err) {
 			if (err) res.send(err);

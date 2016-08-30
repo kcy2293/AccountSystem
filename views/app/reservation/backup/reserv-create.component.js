@@ -1,24 +1,21 @@
 (function() {
 	'use strict';
 	angular
-		.module('reserv-update', [
+		.module('reserv-create', [
 		])
-		.component('reservUpdate', {
+		.component('reservCreate', {
 			templateUrl: 'app/reservation/reserv-create.template.html',
-			controller: reservUpdateController
+			controller: reservController
 		});
 
-	function reservUpdateController($scope, $http, $mdToast, $location) {
+	function reservController($scope, $http, $mdToast) {
 		var self = this;
-		var paths = $location.path().split('/');
-		var id = paths[paths.length - 1];
-		var year = paths[paths.length - 2];
-
 		initReserv();
 
 		$http.get('/api/setting/').then(function(res) {
 			self.settings = res.data;
 
+			/*
 			var pays = self.settings.pay;
 			if (pays) {
 				var role = [];
@@ -29,11 +26,7 @@
 				}
 				self.role = role;
 			}
-			$http.get('/api/reservation/' + year + '/' + id).then(function(res) {
-				self.reserv = res.data;
-				self.reserv.decoDate = new Date(self.reserv.decoDate);
-				self.reserv.decoTime = new Date(self.reserv.decoTime);
-			});
+			*/
 		});
 
 		$http.get('/api/users/').then(function(res) {
@@ -66,15 +59,11 @@
 		self.optOutgoingFeeChange = optOutgoingFeeChange;
 		self.optDiscountChange = optDiscountChange;
 		self.depositChange = depositChange;
-		self.mainManagerChange = mainManagerChange;
-		self.subManagerChange = subManagerChange;
-		self.mainPayChange = mainPayChange;
-		self.subPayChange = subPayChange;
 		self.save = save;
 
 		self.getJsonLen = function(json) {
 			if (json) {
-				return Object.keys(json).length;
+				return Object.items(json).length;
 			} else {
 				return 0;
 			}
@@ -110,6 +99,7 @@
 			self.reserv.decoFruit = [item.decoFruit];
 			self.reserv.decoRcake = (item.decoRcake).split(',');
 			self.reserv.optDiscount = (item.optDiscount).split(',');
+
 			calc();
 		}
 		function decoNameChange() {
@@ -152,18 +142,6 @@
 			calc();
 		}
 		function depositChange() {
-			calc();
-		}
-		function mainManagerChange() {
-			calc();
-		}
-		function subManagerChange() {
-			calc();
-		}
-		function mainPayChange() {
-			calc();
-		}
-		function subPayChange() {
 			calc();
 		}
 
@@ -237,7 +215,7 @@
 			if (item) {
 				group = "decoPhoto";
 				sell = getSettingData(group, item, "sell");
-				fee = getSettingData(group, e, "repair");
+				fee = getSettingData(group, item, "repair");
 				self.reserv.priceList.push({
 					group: group,
 					item: item,
@@ -331,6 +309,15 @@
 					totalFee += fee;
 				});
 			}
+			//optOutgoingFee
+			if (self.reserv.optOutgoingFee) {
+				self.reserv.priceList.push({
+					group: "optOutgoingFee",
+					item: "출장비",
+					sell: self.reserv.optOutgoingFee
+				});
+				totalSell += self.reserv.optOutgoingFee;
+			}
 			// decoLoc
 			item = self.reserv.decoLoc;
 			if (item) {
@@ -351,33 +338,6 @@
 				});
 				totalFee += fee;
 			}
-			//optOutgoingFee
-			if (self.reserv.optOutgoingFee) {
-				self.reserv.priceList.push({
-					group: "optOutgoingFee",
-					item: "출장비",
-					sell: self.reserv.optOutgoingFee
-				});
-				totalSell += self.reserv.optOutgoingFee;
-			}
-			//mainManagerPay
-			if (self.reserv.mainManagerPay) {
-				self.reserv.priceList.push({
-					group: "pay",
-					item: "페이-" + self.reserv.mainManager,
-					fee: self.reserv.mainManagerPay
-				});
-				totalFee += self.reserv.mainManagerPay;
-			}
-			//subManagerPay
-			if (self.reserv.subManagerPay) {
-				self.reserv.priceList.push({
-					group: "pay",
-					item: "페이-" + self.reserv.subManager,
-					fee: self.reserv.subManagerPay
-				});
-				totalFee += self.reserv.subManagerPay;
-			}
 			// 잔금 및 예약금 계산 
 			self.reserv.balance = 0;
 			for (var i = 0, data, len = self.reserv.priceList.length ; i < len ; i++) {
@@ -393,12 +353,14 @@
 				self.reserv.priceList.push({
 					group: "revenue",
 					item: "총판매",
-					sell: totalSell.toFixed(1)
+					//sell: totalSell.toFixed(1)
+					sell: totalSell
 				});
 				self.reserv.priceList.push({
 					group: "expense",
 					item: "총지출",
-					fee: totalFee.toFixed(1)
+					//fee: totalFee.toFixed(1)
+					fee: totalFee
 				});
 			}
 		}
@@ -419,7 +381,7 @@
 				decoDate.setMinutes(decoTime.getMinutes());
 			}
 
-			$http.put('/api/reservation/' + year + '/' + id, self.reserv).then(function(res) {
+			$http.post('/api/reservation/', self.reserv).then(function(res) {
 				if (res.status == 200) {
 					initReserv();
 					$mdToast.showSimple('예약서가 저장되었습니다.');
