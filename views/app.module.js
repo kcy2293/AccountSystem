@@ -10,6 +10,7 @@ angular.
     'settingPay',
     'reserv-create',
 		'reserv-list',
+		'reserv-week-list',
     'reserv-view',
     'reserv-update',
     'account-create'

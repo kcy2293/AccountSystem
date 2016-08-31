@@ -29,6 +29,12 @@
 					when('/reservation/:year/:id', {
 						template: '<reserv-view></reserv-view>'
 					}).
+					when('/reserv-week-list/', {
+						redirectTo: '/reserv-week-list/' + thisYear
+					}).
+					when('/reserv-week-list/:year', {
+						template: '<reserv-week-list></reserv-week-list>'
+					}).
 					when('/reserv-create/', {
 						template: '<reserv-create></reserv-create>'
 					}).
