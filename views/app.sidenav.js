@@ -11,8 +11,12 @@ function SidenavController($mdSidenav, $location) {
 
   self.menus = [
 		{
-      'name': '예약서 리스트',
+      'name': '전체 예약서 목록',
       'route': '/reservation/'
+		},
+		{
+      'name': '이번주 예약서 목록',
+      'route': '/reserv-week-list/'
 		},
 		{
       'name': '예약서 입력',
@@ -37,7 +41,7 @@ function SidenavController($mdSidenav, $location) {
       'route': '/account/'
     }
   ];
-  self.selected = self.menus[1];
+  self.selected = self.menus[2];
   self.selectMenu = selectMenu;
   self.toggleSidenav = toggleSidenav;
 
