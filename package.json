@@ -7,12 +7,22 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-uglify": "^2.0.0",
     "mongoose": "^4.5.5",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "serve-favicon": "^2.3.0",
     "underscore": "^1.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kcy2293/AccountSystem.git"
   }
 }

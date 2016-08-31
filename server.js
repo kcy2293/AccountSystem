@@ -9,6 +9,7 @@ var express = require('express'),
 		cookieParser = require('cookie-parser'),
 		bodyParser = require('body-parser'),
 		http = require('http'),
+		compression = require('compression'),
 		multer = require('multer');
 
 /*******************
@@ -23,8 +24,9 @@ app.use(favicon(path.join(__dirname, 'views', 'favicon.ico')));
 //app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'views')));
-app.use(express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, 'bower_components'), {maxAge: 365*24*60*60*1000}));
 /*******************
  * routing
  *******************/
