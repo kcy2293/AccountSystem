@@ -31,7 +31,9 @@
         <tr md-row>
           <th md-column><span>패키지명</span></th>
           <th md-column><span>패키지 구성</span></th>
+					<!--
           <th md-column><span>판매가(만원)</span></th>
+					-->
         </tr>
       </thead>
       <tbody md-body>
@@ -40,10 +42,12 @@
           <td md-cell>
             {{item.decoType}}
             <span ng-show="item.decoFruit">+</span> {{item.decoFruit}}
-            <span ng-show="item.decoRcake">+</span> {{item.decoRcake}}
-            <span ng-show="item.optDress">+</span> {{item.optDress}}
+            <span ng-show="item.decoRcake">+</span> {{item.decoRcake.toString()}}
+            <span ng-show="item.optDiscount">+</span> {{item.optDiscount.toString()}}
           </td>
+					<!--
           <td md-cell>{{item.sell}}</td>
+					-->
         </tr>
       </tbody>
     </table>

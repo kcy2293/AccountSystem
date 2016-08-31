@@ -15,6 +15,7 @@ function create(req, res) {
 	item.group = groupName;
 	item.name = req.body.name;
 	item.sell = req.body.sell;
+	item.repair = req.body.repair;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -41,6 +42,7 @@ function update(req, res) {
 
 		item.name = req.body.name;
 		item.sell = req.body.sell;
+		item.repair = req.body.repair;
 
 		item.save(function(err) {
 			if (err) res.send(err);

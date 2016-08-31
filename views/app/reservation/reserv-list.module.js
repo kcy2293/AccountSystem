@@ -1,2 +1,4 @@
-'use strict';
-angular.module('reserv-list', []);
+(function() {
+	'use strict';
+	angular.module('reserv-list', []);
+})();

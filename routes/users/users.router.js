@@ -29,13 +29,18 @@ router.route('/').get(function(req, res) {
 			isManager: true
 		},
 		{
-			name: "선하쌤",
+			name: "이선하",
 			rank: "실장",
 			isManager: false
 		},
 		{
-			name: "원이알바",
+			name: "이원이",
 			rank: "알바",
+			isManager: false
+		},
+		{
+			name: "하경애",
+			rank: "초보실장",
 			isManager: false
 		}
 	]);

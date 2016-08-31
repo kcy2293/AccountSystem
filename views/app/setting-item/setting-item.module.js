@@ -1,2 +1,4 @@
-'use strict';
-angular.module('settingItem', []);
+(function() {
+	'use strict';
+	angular.module('settingItem', []);
+})();

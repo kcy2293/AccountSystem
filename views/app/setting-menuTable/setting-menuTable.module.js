@@ -1,2 +1,4 @@
-'use strict';
-angular.module('settingMenuTable', []);
+(function() {
+	'use strict';
+	angular.module('settingMenuTable', []);
+})();

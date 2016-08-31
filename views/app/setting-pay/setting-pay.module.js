@@ -1,2 +1,4 @@
-'use strict';
-angular.module('settingPay', []);
+(function() {
+	'use strict';
+	angular.module('settingPay', []);
+})();

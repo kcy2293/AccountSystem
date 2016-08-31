@@ -2,7 +2,7 @@
   <form>
     <md-dialog-content class="md-dialog-content">
       <h2 class="md-title">협력업체 추가</h2>
-      <div layout="row" class="input-row layout-row">
+      <div layout="column">
         <md-input-container flex="" class="flex">
           <label>행사장소</label>
           <input ng-model="data.name">
@@ -15,9 +15,17 @@
           </md-select>
         </md-input-container>
         <md-input-container flex="" class="flex">
-          <label>커미션(단위:만원)</label>
-          <input name="calories" type="number" min="0" max="20" ng-model="data.commission" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required">
+          <label>커미션(만원/%)</label>
+          <input name="commission" type="number" min="-20" max="20" ng-model="data.commission" class="ng-pristine ng-untouched md-input">
         </md-input-container>
+				<md-input-container flex="" class="flex">
+					<label>커미션계산법</label>
+					<md-select ng-model="data.commCalcRule">
+						<md-option value='차감'>단순차감</md-option>
+						<md-option value='총판매비'>총판매대비</md-option>
+						<md-option value='부가세비'>부가세포함총판매대비</md-option>
+					</md-select>
+				</md-input-container>
       </div>
 
       <md-dialog-actions>

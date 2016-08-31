@@ -1,2 +1,4 @@
-'use strict';
-angular.module('decoLoc', []);
+(function() {
+	'use strict';
+	angular.module('decoLoc', []);
+})();

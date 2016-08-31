@@ -4,7 +4,6 @@ html, body {
 	margin: 0px;
 	padding: 0px;
 }
-
 /**********
  Side nav
 ***********/
@@ -12,13 +11,6 @@ md-sidenav {
 	background-color: rgb(255,255,255) !important;
 	width: 270px;
 }
-/*
-.menu {
-	background-color: transparent;
-	border: none;
-	margin: 0;
-}
-*/
 md-list-item > button {
 	width: 100%;
 	text-align: left !important;
@@ -26,7 +18,6 @@ md-list-item > button {
 .md-button.selected {
 	color: #03a9f4;
 }
-
 /**********
  Top toolbar
 ***********/
@@ -35,32 +26,42 @@ md-list-item > button {
 	color: #202020 !important;
 	z-index: 3;
 }
-
 .md-toolbar-tools .md-button md-icon {
 	color: #666 !important;
 	fill: #666 !important;
 }
-
 /**********
  contents
 ***********/
-.site-content-box {
-	/*
-	padding: 5px 40px 0 40px;
-	*/
-}
 .setting-tool-box {
 	font-size: 16px;
 	height: 45px;
 	max-height: 45px;
 }
-
+/*
 md-input-container {
 	min-width: 120px !important;
 }
-
+*/
 .package-dialog md-input-container {
 	margin: 5px 0;
+}
+/**************
+ 예약서항목설정
+***************/
+table.md-table.md-row-select td.md-cell:first-child, table.md-table.md-row-select th.md-column:first-child {
+	padding: 0 0 0 12px;
+}
+md-checkbox .md-container {
+	width: 15px;
+	height: 15px;
+}
+md-checkbox .md-icon {
+	width: 15px;
+	height: 15px;
+}
+table.md-table thead.md-head>tr.md-row {
+	height: 40px;
 }
 
 /*************
@@ -70,29 +71,146 @@ md-input-container {
 	margin: 16px;
 	padding: 0;
 }
-
 .doc-content .md-subheader .md-subheader-inner {
 	padding: 0;
 }
-
 .doc-content md-input-container {
 	margin-top: 0px;
 	min-width: 120px !important;
 }
-
 .reserv-save {
 	position: fixed;
 	bottom: 5%;
 	right: 5%;
 }
+.doc-content .sellList, 
+.doc-content th,
+.doc-content td {
+	border: 1px solid;
+	text-align: center;
+}
+
+.doc-content .sellList {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.doc-content th {
+	background-color: #eee;
+}
 
 /*************
  reserv-list
 **************/
-
+.reserv-list .md-toolbar-tools {
+	padding-top: 20px;
+}
+.reserv-list .md-input-container {
+	margin: 0px;
+	padding: 0px;
+}
+.reserv-list md-input-container {
+	width: 150px !important;
+}
+.reserv-list input {
+	color: white;
+}
+.reserv-list input::-webkit-input-placeholder {
+	color: white;
+}
 /*************
  reserv-view
 **************/
 .reserv-view md-card-title {
 	padding: 0px 10px 10px 10px;
+}
+.reserv-view-img {
+	padding: 0 20px;
+}
+.reserv-view-consult md-icon {
+	cursor: pointer;
+}
+.reserv-view-consult .consult-form{
+	padding-top: 20px;
+}
+.reserv-view-consult md-input-container,
+.reserv-view-consult input {
+	width: 100%;
+}
+.reserv-view-consult p {
+	white-space: pre-line;
+}
+/*************
+ account-create
+**************/
+.account-create-header {
+	text-align: center;
+}
+.account-create-header .next > md-icon {
+		transform: rotate(180deg);
+}
+.account-create-middle {
+	padding: 20px 0;
+	text-align: center;
+}
+.account-create-body {
+	background-color: #0C2238;
+	color: white;
+}
+
+.account-create-body table,
+.account-create-body th,
+.account-create-body td {
+	border: 1px solid white;
+	text-align: center;
+	font-size: 13px;
+}
+.account-create-body table {
+	border-collapse: collapse;
+	margin-bottom: 100px;
+	width: 100%;
+}
+.account-create-body th {
+	background-color: #eee;
+	color: #0C2238;
+}
+.account-create-footer {
+	margin-bottom: 50px;
+}
+.account-create-footer table,
+.account-create-footer th,
+.account-create-footer td {
+	border: 1px solid black;
+	text-align: center;
+}
+.account-create-footer table {
+	border-collapse: collapse;
+	width: 100%;
+}
+/*
+.account-create-footer th:nth-child(1) {
+	width: 40%;
+}
+.account-create-footer th:nth-child(3) {
+	width: 20%;
+}
+*/
+.account-create-footer md-icon {
+	cursor: pointer;
+}
+
+.account-save {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+}
+
+/******************** Media Query *************************/
+/*************
+ reserv-view
+**************/
+@media screen and (min-width: 1024px) {
+	.reserv-view-img {
+		width: 50%;
+	}
 }

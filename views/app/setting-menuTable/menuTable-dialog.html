@@ -10,7 +10,7 @@
       </div>
       <div layout="row" class="input-row layout-row">
         <md-input-container flex="" class="flex">
-          <label>장식구분</label>
+          <label>장식종류</label>
           <md-select ng-model="data.decoType">
             <md-option ng-repeat="item in settings.decoType"
                        value="{{item.name}}">
@@ -31,7 +31,7 @@
       <div layout="row" class="input-row layout-row">
         <md-input-container flex="" class="flex">
           <label>떡케익종류</label>
-          <md-select ng-model="data.decoRcake">
+          <md-select multiple ng-model="data.decoRcake">
             <md-option ng-repeat="item in settings.decoRcake"
                       value="{{item.name}}">
               {{item.name}}
@@ -39,21 +39,23 @@
           </md-select>
         </md-input-container>
         <md-input-container flex="" class="flex">
-          <label>드레스종류</label>
-          <md-select ng-model="data.optDress">
-            <md-option ng-repeat="item in settings.optDress"
+          <label>할인옵션</label>
+          <md-select multiple ng-model="data.optDiscount">
+            <md-option ng-repeat="item in settings.optDiscount"
                       value="{{item.name}}">
               {{item.name}}
             </md-option>
           </md-select>
+        </md-input-container>
       </div>
+			<!--
       <div layout="row" class="input-row layout-row">
         <md-input-container flex="" class="flex">
           <label>판매가(단위:만원)</label>
-          <input name="sell" type="number" min="0" max="100" ng-model="data.sell" class="ng-pristine ng-untouched md-input ng-valid-min ng-valid-max ng-invalid ng-invalid-required" />
+          <input name="sell" type="number" min="0" max="100" ng-model="data.sell" class="ng-pristine ng-untouched md-input" />
         </md-input-container>
       </div>
-
+			-->
       <md-dialog-actions>
         <button class="md-primary md-button md-ink-ripple" type="button" ng-click="addItem()" aria-label="Add Item"><span>저장</span></button>
         <button class="md-primary md-button md-ink-ripple" type="button" ng-click="cancel()" aria-label="Cancel"><span>취소</span></button>

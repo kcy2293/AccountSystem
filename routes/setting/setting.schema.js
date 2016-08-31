@@ -6,6 +6,7 @@ var settingSchema = new Schema({
 	name: String,
 	isCollabor: Boolean,
 	commission: Number,
+	commCalcRule: String,
 	imgName: String,
 	buy: Number,
 	sell: Number,
@@ -17,7 +18,10 @@ var settingSchema = new Schema({
 	other: String,
 	rank: String,
 	role: String,
-	pay: Number
+	pay: Number,
+	optDiscount: String,
+	item: String,
+	disPrice: Number
 });
 
 module.exports = mg.model('setting', settingSchema);

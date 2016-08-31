@@ -1,2 +1,4 @@
-'use strict';
-angular.module('decoFruit', []);
+(function() {
+	'use strict';
+	angular.module('decoFruit', []);
+})();

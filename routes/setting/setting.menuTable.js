@@ -14,11 +14,10 @@ function create(req, res) {
 	var item = new setting();
 	item.group = groupName;
 	item.name = req.body.name;
-	item.sell = req.body.sell;
 	item.decoType = req.body.decoType;
 	item.decoFruit = req.body.decoFruit;
 	item.decoRcake = req.body.decoRcake;
-	item.optDress = req.body.optDress;
+	item.optDiscount = req.body.optDiscount;
 
 	item.save(function(err) {
 		if (err) res.send(err);
@@ -44,11 +43,10 @@ function update(req, res) {
 		if (err) res.send(err);
 
 		item.name = req.body.name;
-		item.sell = req.body.sell;
 		item.decoType = req.body.decoType;
 		item.decoFruit = req.body.decoFruit;
 		item.decoRcake = req.body.decoRcake;
-		item.optDress = req.body.optDress;
+		item.optDiscount = req.body.optDiscount;
 
 		item.save(function(err) {
 			if (err) res.send(err);

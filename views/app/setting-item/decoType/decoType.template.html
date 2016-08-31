@@ -30,11 +30,15 @@
       <thead md-head>
         <tr md-row>
           <th md-column><span>장식구분명</span></th>
+          <th md-column><span>판매가<br>(만원)</span></th>
+          <th md-column><span>수리비<br>(만원)</span></th>
         </tr>
       </thead>
       <tbody md-body>
         <tr md-row md-select="item" md-select-id="name" md-auto-select ng-repeat="item in $ctrl.decoType">
           <td md-cell>{{item.name}}</td>
+          <td md-cell>{{item.sell}}</td>
+          <td md-cell>{{item.repair}}</td>
         </tr>
       </tbody>
     </table>

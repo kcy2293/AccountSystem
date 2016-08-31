@@ -1,2 +1,4 @@
-'use strict';
-angular.module('reserv-update', []);
+(function() {
+	'use strict';
+	angular.module('reserv-update', []);
+})();
