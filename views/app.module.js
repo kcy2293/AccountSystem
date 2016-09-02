@@ -4,6 +4,7 @@ angular.
   module('myApp', [
     'ngRoute',
     'ngMaterial',
+		'ngMessages',
     'mdPickers',
     'settingItem',
     'settingMenuTable',
@@ -13,5 +14,6 @@ angular.
 		'reserv-week-list',
     'reserv-view',
     'reserv-update',
-    'account-create'
+    'account-create',
+		'login'
   ]);

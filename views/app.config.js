@@ -11,6 +11,9 @@
 				var accountDate = getLastAccountDate();
 
 				$routeProvider.
+					when('/login', {
+						template: '<login></login>'
+					}).
 					when('/setting/1/', {
 						template: '<setting-item></setting-item>'
 					}).

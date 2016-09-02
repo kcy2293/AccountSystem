@@ -1,0 +1,24 @@
+<div layout="row" layout-align="center">
+	<div class="login md-whiteframe-z1">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h3>로그인</h3>
+			</div>
+		</md-toolbar>
+		<md-content layout-padding>
+			<form name="loginForm" novalidate>
+				<md-input-container class="md-block">
+					<label>이메일</label>
+					<input name="email" type="email" required
+								ng-model="$ctrl.user.email"
+								minlength="10" maxlength="50" ng-pattern="/^.+@.+\..+$/" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>비밀번호</label>
+					<input name="password" type="password" required
+								ng-model="$ctrl.user.password" />
+				</md-input-container>
+			</form>
+		</md-content>
+	</div>
+</div>

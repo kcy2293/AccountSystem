@@ -4,6 +4,9 @@ html, body {
 	margin: 0px;
 	padding: 0px;
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	  display: none !important;
+}
 /**********
  Side nav
 ***********/
@@ -203,6 +206,14 @@ table.md-table thead.md-head>tr.md-row {
 	position: fixed;
 	bottom: 5%;
 	right: 5%;
+}
+
+/*************
+ login
+**************/
+.login {
+	margin-top: 200px;
+	width: 500px;
 }
 
 /******************** Media Query *************************/
