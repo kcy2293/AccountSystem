@@ -6,7 +6,8 @@
 			</div>
 		</md-toolbar>
 		<md-content layout-padding>
-			<form name="loginForm" novalidate>
+			<form name="loginForm" novalidate
+						ng-submit="loginForm.$valid && $ctrl.doLogin()">
 				<md-input-container class="md-block">
 					<label>이메일</label>
 					<input name="email" type="email" required
@@ -18,6 +19,9 @@
 					<input name="password" type="password" required
 								ng-model="$ctrl.user.password" />
 				</md-input-container>
+				<div class="loginAction">
+					<md-button type="submit" class="md-raised md-warn">로그인</md-button>
+				<div>
 			</form>
 		</md-content>
 	</div>

@@ -212,8 +212,11 @@ table.md-table thead.md-head>tr.md-row {
  login
 **************/
 .login {
-	margin-top: 200px;
-	width: 500px;
+	margin-top: 100px;
+	width: 80%;
+}
+.login .loginAction {
+	text-align: right;
 }
 
 /******************** Media Query *************************/
@@ -222,6 +225,11 @@ table.md-table thead.md-head>tr.md-row {
 **************/
 @media screen and (min-width: 1024px) {
 	.reserv-view-img {
+		width: 50%;
+	}
+
+	.login {
+		margin-top: 200px;
 		width: 50%;
 	}
 }

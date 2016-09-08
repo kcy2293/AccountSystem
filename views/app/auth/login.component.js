@@ -10,6 +10,13 @@
 
 	function loginController($scope, $http) {
 		var self = this;
+
+		self.user = {};
+		self.doLogin = doLogin;
+
+		function doLogin() {
+			console.log("doLogin");
+		}
 	}
 
 })();
