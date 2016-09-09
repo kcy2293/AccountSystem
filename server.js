@@ -1,4 +1,5 @@
 global.env = process.env.NODE_ENV || 'production';
+global.__base = __dirname + '/';
 /*******************
  * modules
  *******************/
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'bower_components'), {maxAge: 365*24
  * routing
  *******************/
 var userRouter = require('./routes/users/users.router'),
+		authRouter = require('./routes/auth/auth.router'),
 		reservRouter = require('./routes/reservation/reserv.router'),
 		accountRouter = require('./routes/account/account.router'),
 		settingRouter = require('./routes/setting/setting.router');
@@ -40,6 +42,7 @@ app.get('/', function(req, res) {
   //res.redirect('/test.html');
 });
 
+app.use('/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/reservation', reservRouter);
 app.use('/api/account', accountRouter);
