@@ -17,3 +17,4 @@ angular.
     'account-create',
 		'login'
   ]);
+

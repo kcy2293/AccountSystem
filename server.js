@@ -43,6 +43,7 @@ app.get('/', function(req, res) {
 });
 
 app.use('/auth', authRouter);
+app.all('/api/*', [require('./routes/auth/validateRequest')]);
 app.use('/api/users', userRouter);
 app.use('/api/reservation', reservRouter);
 app.use('/api/account', accountRouter);

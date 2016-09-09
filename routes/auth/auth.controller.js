@@ -3,7 +3,8 @@ var jwt = require('jwt-simple'),
 
 module.exports = {
 	login: login,
-	validate: validate
+	validate: validate,
+	validateUser: validateUser
 };
 
 function login(req, res) {
@@ -36,6 +37,9 @@ function validate(email, password, callback) {
 								{password: 0, isMember: 0}, function(err, user) {
 			callback(user);
 	});
+}
+
+function validateUser(email, callback) {
 }
 
 function genToken(user) {

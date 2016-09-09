@@ -7,6 +7,7 @@ var nodemon = require('gulp-nodemon');
 gulp.task('js', function() {
 	gulp.src([
 		'views/app.module.js', 
+		'views/app.factory.js',
 		'views/app.sidenav.js', 
 		'views/app.config.js', 
 		'views/app/**/*.module.js', 
